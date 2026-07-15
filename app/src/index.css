@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Neutral background/surfaces mapped to SAC snow/gray-light */
+    --background: 0 0% 98%; /* ~ #F9F9F9 snow */
+    --foreground: 0 0% 20%; /* #333333 sac-black */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 20%;
+
+    /* Primary = SAC red #E30613 (action color, CTA "Details anzeigen") */
+    --primary: 356 95% 46%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary/muted = SAC gray-light */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 20%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 44%; /* #706F6F gray-dark-ish */
+
+    --accent: 0 0% 91%; /* #E9E9E9 sac-gray */
+    --accent-foreground: 0 0% 20%;
+
+    /* Destructive = SAC red #E30613 */
+    --destructive: 356 96% 45%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 356 95% 46%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+}

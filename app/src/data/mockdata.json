@@ -1,0 +1,1294 @@
+{
+  "section": "Bern",
+  "filters": {
+    "onlyCurrent": true,
+    "dateFrom": "2026-07-11",
+    "dateTo": "2026-07-24",
+    "registrationOpen": false
+  },
+  "sorting": [
+    "Datum"
+  ],
+  "pagination": {
+    "pageSize": 25,
+    "page": 1,
+    "total": 25
+  },
+  "grouping": "none",
+  "exports": [
+    "RSS"
+  ],
+  "tours": [
+    {
+      "id": "bern-2026-0001",
+      "url": "https://touren.sac-bern.ch/tours/view/a116ba1e-57c3-45bc-a2ad-99b309378a30",
+      "title": "Hangendgletscherhorn 3291 m (über Chammligrat)",
+      "startDate": "2026-07-11",
+      "endDate": "2026-07-13",
+      "durationDays": 3,
+      "weekdaySpan": "Sa.-Mo.",
+      "registrationDeadline": "2026-06-22",
+      "tourType": [
+        "Klettern Alpin",
+        "Hochtour"
+      ],
+      "tourTypeAbbr": "HT",
+      "technicalDifficulty": "WS+",
+      "physicalDifficulty": "A-B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive"
+      ],
+      "leaders": [
+        {
+          "name": "Viviane Fischer",
+          "role": "TL"
+        },
+        {
+          "name": "Gerhard Schuwerk",
+          "role": "Co-TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 4,
+        "max": 6,
+        "display": "4/6"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [],
+      "signature": "K Alp, HT/A-B/WS+",
+      "destination": {
+        "name": "Hangendgletscherhorn",
+        "elevation": 3291,
+        "url": "https://www.hikr.org/tour/tour.php?i=hangendgletscherhorn",
+        "type": "summit"
+      },
+      "disciplineColor": "#662D91",
+      "detail": {
+        "pace": "normal",
+        "description": "1. Tag: Urbachtal - Gaulihütte 2205 m (+1440 m, 4.5 h).\n2. Tag: Chammligrat - Hangendgletscherhorn (+/-1150 m, 8-9 h).\n3. Tag: Tälligrat Kletterlehrpfad: 5 Einstiegseillängen 3a-4b, am Grat 2-2c, 5 h) - Urbachtal.",
+        "additionalText": "Chammligrat: Langer Klettergrat mit Hochalpincharakter. Abstieg zur Hütte über Normalroute (Gletscher)\nVoraussetzungen: Erste Hochtouren-Erfahrungen, sehr gute Kondition \nhttps://www.sac-cas.ch/de/huetten-und-touren/sac-tourenportal/hangendgletscherhorn-896/hochtouren/ueber-den-chammligrat-1187/",
+        "maxParticipants": 6,
+        "transport": "öV",
+        "travelCosts": 40,
+        "tourCosts": 216,
+        "costsInfo": "Reise Halbtax: 40.-\nTaxi: 30.-\nSektionsbeitrag: 30.-\nHütte (+ Kurtaxe): 156.-"
+      }
+    },
+    {
+      "id": "bern-2026-0002",
+      "url": "https://touren.sac-bern.ch/tours/view/228b13a8-17fe-42bb-8816-1af71fb08d02",
+      "title": "Nordrampe - Gehrihorn - Ramslauenen",
+      "startDate": "2026-07-12",
+      "endDate": "2026-07-13",
+      "durationDays": 2,
+      "weekdaySpan": "So.-Mo.",
+      "registrationDeadline": "2026-07-06",
+      "tourType": [
+        "Bergwandern"
+      ],
+      "tourTypeAbbr": "BW",
+      "technicalDifficulty": "T3",
+      "physicalDifficulty": "B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive (Senior:innen)"
+      ],
+      "leaders": [
+        {
+          "name": "Dora Wandfluh-Rösti",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 5,
+        "max": 8,
+        "display": "5/8"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W-B/B/T3",
+      "destination": {
+        "name": "Gehrihorn",
+        "elevation": 2130,
+        "type": "summit"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "pace": "moderat",
+        "description": "1.Tag: Kandersteg - Schlafegg 1430m (+500/-350 m, 3 h, 7.5 km), Übernachtung in der Sennhütte. 2.Tag: Gehrihorn 2130 m - Ramslauenen -(LSB) - Kiental (+750/-800 m, 4 h, 9 km).",
+        "additionalText": "Nur Gehrihorn T3, sonst T2, Gehrihorn ist freiwillig, aber lohnend!\nSAC-Spesenbeitrag: Sektionsmitglieder CHF 20.00 (in den Tourenkosten enthalten), andere Sektionen CHF 30.00, Gäste CHF 40.00.",
+        "maxParticipants": 5,
+        "transport": "öV",
+        "travelCosts": 44,
+        "tourCosts": 60
+      }
+    },
+    {
+      "id": "bern-2026-0003",
+      "url": "https://touren.sac-bern.ch/tours/view/d14b8b9f-6619-4505-80e9-9088d582be44",
+      "title": "Gletschhorn 3304 m / Dammazwillinge 3274 m",
+      "startDate": "2026-07-12",
+      "endDate": "2026-07-15",
+      "durationDays": 4,
+      "weekdaySpan": "So.-Mi.",
+      "registrationDeadline": "2026-06-12",
+      "tourType": [
+        "Klettern Alpin",
+        "Hochtour"
+      ],
+      "tourTypeAbbr": "HT",
+      "technicalDifficulty": "ZS",
+      "physicalDifficulty": "B",
+      "experienceLevel": "Sehr erfahren",
+      "groups": [
+        "Aktive",
+        "JO"
+      ],
+      "leaders": [
+        {
+          "name": "Dominik Berger",
+          "role": "TL"
+        },
+        {
+          "name": "Sarah Wermelinger",
+          "role": "Co-TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 3,
+        "max": 4,
+        "display": "3/4"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [],
+      "signature": "K Alp, HT/B/ZS, 6a",
+      "destination": {
+        "name": "Gletschhorn",
+        "elevation": 3304,
+        "type": "summit"
+      },
+      "disciplineColor": "#662D91",
+      "detail": {
+        "pace": "sportlich",
+        "description": "1.Tag: Aufstieg Albert-Heim-Hütte (+450 m, 1.5 h). Repetition Gehen am kurzen Seil, Sichern am Grat. Einsatz mobiler Sicherungsmittel.\n2.Tag: Gletschhorn über S-Grat (+802/-802 m, 9 h).\n3.Tag. Dammazwillinge SW Pfeiler (+750/-750 m, 10 h).\n4.Tag: Ev. kurze Kletterei aufs kleine Kamel, Abstieg und Rückreise nach Bern.",
+        "additionalText": "Schöne Kletterei in bestem Fels. Gute Trittsicherheit, 6a im Vorstieg und Erfahrung mit mobilen Sicherungsmittel erforderlich.\nBereits gemachte, ähnliche Touren bei der Anmeldung angeben.",
+        "maxParticipants": 4,
+        "transport": "öV",
+        "travelCosts": 100,
+        "tourCosts": 295,
+        "costsInfo": "Die Kosten für die An- und Rückreise müssen individuell übernommen werden. Tourenkosten sind Hütten inkl. Halbpension. Die Kosten sind Richtpreise und können abweichen.",
+        "equipment": "Hochtourenausrüstung. Details folgen spätestens 1 Woche vor der Tour."
+      }
+    },
+    {
+      "id": "bern-2026-0004",
+      "url": "https://touren.sac-bern.ch/tours/view/e3144e2c-894f-40b7-b4b1-bc35a86b192b",
+      "title": "La Rosablanche 3335 m",
+      "startDate": "2026-07-12",
+      "endDate": "2026-07-13",
+      "durationDays": 2,
+      "weekdaySpan": "So.-Mo.",
+      "registrationDeadline": "2026-05-28",
+      "tourType": [
+        "Hochtour"
+      ],
+      "tourTypeAbbr": "HT",
+      "technicalDifficulty": "L",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Aktive (Senior:innen)",
+        "Aktive"
+      ],
+      "leaders": [
+        {
+          "name": "Christian Knechtli",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 6,
+        "max": 6,
+        "display": "6/6"
+      },
+      "status": "ausgebucht",
+      "flags": [],
+      "signature": "HT/A/L",
+      "destination": {
+        "name": "La Rosablanche",
+        "elevation": 3335,
+        "type": "summit"
+      },
+      "disciplineColor": "#662D91",
+      "detail": {
+        "pace": "moderat",
+        "description": "1. Tag: Grande Dixence - Col des Roux - Cabane de Prafleuri (+700/-180 m, 2.5 h).\n2. Tag: La Rosablanche - Col de Momin - Lac de Louvie - Fionnay (+730/-1870 m, 7 h).",
+        "additionalText": "Zusammen mit zusätzlichen Teilnehmenden der Sektion Weissenstein",
+        "maxParticipants": 5,
+        "transport": "öV",
+        "travelCosts": 85,
+        "tourCosts": 80,
+        "costsInfo": "Hüttenübernachtung mit Halbpension",
+        "equipment": "Sommerhochtourenausrüstung mit Steigeisen, Pickel und Klettergurt, Seil, usw. \nDetails folgen"
+      }
+    },
+    {
+      "id": "bern-2026-0005",
+      "url": "https://touren.sac-bern.ch/tours/view/ad4e0278-c137-407e-89af-b0f0ab0ffd53",
+      "title": "Kletterlager in der Windegghütte",
+      "startDate": "2026-07-13",
+      "endDate": "2026-07-17",
+      "durationDays": 5,
+      "weekdaySpan": "Mo.-Fr.",
+      "registrationDeadline": "2026-04-01",
+      "tourType": [
+        "Klettern Klettergarten",
+        "Klettern Mehrseillängen"
+      ],
+      "tourTypeAbbr": "K",
+      "technicalDifficulty": "3a - 5c",
+      "physicalDifficulty": "A-B",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "FaBe"
+      ],
+      "leaders": [
+        {
+          "name": "Rhea Fay",
+          "role": "TL"
+        },
+        {
+          "name": "Celina Schlapbach",
+          "role": "Co-TL"
+        }
+      ],
+      "withMountainGuide": true,
+      "participants": {
+        "current": 8,
+        "max": 10,
+        "display": "8/10"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [
+        "MitBF",
+        "Tourenwoche"
+      ],
+      "signature": "K KG, K MSL/A-B/3a - 5c",
+      "destination": {
+        "name": "Windegghütte",
+        "elevation": 1887,
+        "url": "https://www.windegghuette.ch",
+        "type": "hut"
+      },
+      "disciplineColor": "#FF3D12",
+      "detail": {
+        "additionalInfo": "Mit BF",
+        "description": "Ca. 50 Routen in Hüttennähe zw. 3a und 5c und 3 Routen am Kleinen Windegghorn machen die Windegghütte zum idealen Ausgangspunkt fürs FaBe. Klettern im Klettergarten, Einführung ins Mehrseillängenklettern, Abseilen, Techniktraining, Tyrolienne, Hängebrücke, Geschichten und geniessen auf der Windegghütte. Diese Woche eignet sich für Kinder ab ca. 7 Jahren und Begleitung mit/ohne Klettererfahrung.",
+        "additionalText": "Genauere Informationen werden ca. 2 Monate vor dem Lager gesendet.\nLink zum Klettern bei der Windegghütte: https://www.windegghuette.ch/tourenklettern/klettern",
+        "maxParticipants": 15,
+        "transport": "öV",
+        "travelCosts": 81,
+        "tourCosts": 600,
+        "costsInfo": "Zug-Billett Bern-Nessental,Triftbahn retour = CHF 51.-\nBahnbillett Triftbahn retour = CHF 30.- (Erwachsene) / CHF 15.- (Kinder)\nKosten für SAC Mitglieder (exkl Reise, inkl Unterkunft, inkl. Führerbeitrag): 1. Kind CHF 200.– / 2. Kind CHF 180.– / Erwachsene CHF 600.– Nichtmitglieder CHF 700.– (inkl FKA).",
+        "equipment": "Klettermaterial, pro Person:\no Helm (ein Velohelm genügt)\no Kletterfinken (oder gute Turnschuhe)\no Klettergurt\no 3-4 Schraubkarabiner\no ev. Sicherungsgerät (Tube, SMART, MegaJul...)\no 1 Selbstsicherungsschlinge (Standschlinge) oder 1 Bandschlinge (90 cm Länge)\no 1 Abseilgerät (Körbli/Tuber/Achter)\no Prusikschlinge (4-5 mm Durchmesser)\n\nAusrüstung pro Familie:\n50m Seil und 12 Expressen\n\nMaterial kann auch ausgeliehen werden."
+      }
+    },
+    {
+      "id": "bern-2026-0006",
+      "url": "https://touren.sac-bern.ch/tours/view/d7bbdb6b-1509-4fa6-b2e4-0b5286752aa2",
+      "title": "Sommerklettertag: \"Les Fourches\" bei St. Blaise",
+      "startDate": "2026-07-13",
+      "endDate": "2026-07-17",
+      "durationDays": 5,
+      "weekdaySpan": "Mo.-Fr.",
+      "registrationDeadline": "2026-04-01",
+      "tourType": [
+        "Klettern Klettergarten"
+      ],
+      "tourTypeAbbr": "K",
+      "technicalDifficulty": "4a - 6a",
+      "physicalDifficulty": "A-B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "FaBe"
+      ],
+      "leaders": [
+        {
+          "name": "Rhea Fay",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": true,
+      "participants": {
+        "current": 5,
+        "max": 8,
+        "display": "5/8"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [
+        "MitBF"
+      ],
+      "signature": "K KG/A-B/4a - 6a",
+      "destination": {
+        "name": "Les Fourches, St. Blaise",
+        "type": "climbing_area"
+      },
+      "disciplineColor": "#FF3D12",
+      "detail": {
+        "additionalInfo": "Mit BF",
+        "pace": "normal",
+        "description": "Wir erlernen und festigen die richtige Klettertechnik, das Sichern und eventuell Fädeln und Abseilen am Felsen. Es gibt eine grosse Wiese zum Spielen und fast neben dem Wandfuss einen geschützten Picknickplatz inkl. Feuerstelle. Dieser Tag ist perfekt für Kinder und Eltern als (Wieder-) Einstieg ins Klettern. Kletteranfänger sind willkommen!",
+        "additionalText": "Das Material und die genaue Planung werden 7-10 Tage im Voraus in einem Detailprogramm per Email kommuniziert.",
+        "maxParticipants": 12,
+        "transport": "öV",
+        "travelCosts": 24,
+        "tourCosts": 40,
+        "costsInfo": "Kosten für SAC-Mitglieder (ohne Reise): gratis für Kinder und CHF 35.- Erwachsene. (Inkl. FKA). Kosten für Nicht SAC Mitglieder (ohne Reise): gratis für Kinder und CHF 40.– für Erwachsene. (Inkl. FKA).",
+        "equipment": "o Helm (ein Velohelm genügt)\no Kletterfinken (oder gute Turnschuhe)\no Klettergurt\no 1-3 Schraubkarabiner\no Trekking- oder Wanderschuhe für den Zustieg\no Outdoor-/Klettertaugliche Körperbekleidung\no Sonnenschutz\no Trinkflasche\no Mittags- und Zwischenverpflegung bei Interesse, etwas zum Bräteln\nWer hat: Sicherungs-, Abseilgerät, Prusik-, Selbstsicherungsschlinge\nPro Familie: Seil (50-70m), 10-12 Express-Schlingen\n\nFehlendes Material kann gemietet werden."
+      }
+    },
+    {
+      "id": "bern-2026-0007",
+      "url": "https://touren.sac-bern.ch/tours/view/01804092-c5e5-498f-ac3c-6649c1072ca8",
+      "title": "Wanderung Alp Fräche Diemtigtal - wo es den besten Alpkäse gibt",
+      "startDate": "2026-07-14",
+      "endDate": "2026-07-14",
+      "durationDays": 1,
+      "weekdaySpan": "Di.",
+      "registrationDeadline": "2026-07-08",
+      "tourType": [
+        "Wandern"
+      ],
+      "tourTypeAbbr": "W",
+      "technicalDifficulty": "T2",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Veteranen Gängige"
+      ],
+      "leaders": [
+        {
+          "name": "Helmut Salzgeber",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 10,
+        "max": 15,
+        "display": "10/15"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W/T2",
+      "destination": {
+        "name": "Alp Fräche, Diemtigtal",
+        "type": "marking_point"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "ascentMeters": 800,
+        "pace": "moderat",
+        "description": "Diemtigen 810 - Vorders Bergli 991 - Ägelsee 988 - Oberhag - Feldmöser 1341 - Fräche -Tschugge - Chilchflue 1170 - Riedli - Talstation Wiriehorn 984",
+        "maxParticipants": 15,
+        "transport": "öV",
+        "travelCosts": 30,
+        "equipment": "Stöcke empfohlen"
+      }
+    },
+    {
+      "id": "bern-2026-0008",
+      "url": "https://touren.sac-bern.ch/tours/view/33f60f5d-30dc-4c66-8066-ec49bb5550a2",
+      "title": "Pas de Cheville 2038 m",
+      "startDate": "2026-07-15",
+      "endDate": "2026-07-15",
+      "durationDays": 1,
+      "weekdaySpan": "Mi.",
+      "registrationDeadline": "2026-07-08",
+      "tourType": [
+        "Bergwandern"
+      ],
+      "tourTypeAbbr": "BW",
+      "technicalDifficulty": "T3",
+      "physicalDifficulty": "B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive (Senior:innen)"
+      ],
+      "leaders": [
+        {
+          "name": "Dorothea Koelbing",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 7,
+        "max": 10,
+        "display": "7/10"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W-B/B/T3",
+      "destination": {
+        "name": "Pas de Cheville",
+        "elevation": 2038,
+        "type": "marking_point"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "pace": "normal",
+        "description": "Gryon Solalex - Anzeinde - Pas de Cheville 2038 m - Lac de Derborence (+600/-600 m, 3.5 h, 8,5 km).",
+        "additionalText": "ACHTUNG: Start um 6 Uhr! Abfahrt Zug 06:04 Uhr. Startkaffe im Restaurant Miroir d'Argentine/Gryon Solalex. Schlusskaffe im Restaurant Refuge du Lac Derborence. Ein alter Saumpfad verbindet die Gegend des Chablais mit dem Bergsturzgebiet von Derborence (1749) am Fusse des imposanten Diableretsmassivs. Wenn die Zeit reicht, werden wir noch die eindrückliche Umgebung des Lac de Derborence und des Föhren-Urwalds erkunden können (Naturschutzgebiet).",
+        "maxParticipants": 11,
+        "transport": "öV",
+        "travelCosts": 78
+      }
+    },
+    {
+      "id": "bern-2026-0009",
+      "url": "https://touren.sac-bern.ch/tours/view/55a755c5-474d-476e-af09-2d16e462004f",
+      "title": "Riedbach - Gäbelbach - Eymatt",
+      "startDate": "2026-07-16",
+      "endDate": "2026-07-16",
+      "durationDays": 1,
+      "weekdaySpan": "Do.",
+      "registrationDeadline": "2026-07-14",
+      "tourType": [
+        "Wandern"
+      ],
+      "tourTypeAbbr": "W",
+      "technicalDifficulty": "T1",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Veteranen Bären"
+      ],
+      "leaders": [
+        {
+          "name": "Ursula Kissing",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 12,
+        "max": 20,
+        "display": "12/20"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W/T1",
+      "destination": {
+        "name": "Riedbach - Eymatt"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "ascentMeters": 72,
+        "pace": "gemütlich",
+        "description": "Riedbach 555 - Gäbelbach 509 - Eymatt 489: schattiges Gäbelbachtäli (+72m - 154 m 02.30 Std. 8km)",
+        "additionalText": "Startkaffee Bümpliz, Eymatt Camping Schlusstrunk \nhttps://schweizmobil.ch/de/tour/176984970?layers=trackLayer%2Cwanderland&E=2593969&N=1200301&resolution=5.76&bgLayer=pk&detours=yes&shooting=yes&logos=yes&photos=yes&season=summer",
+        "maxParticipants": 15,
+        "transport": "öV",
+        "travelCosts": 6,
+        "equipment": "Stöcke"
+      }
+    },
+    {
+      "id": "bern-2026-0010",
+      "url": "https://touren.sac-bern.ch/tours/view/97904cee-8466-4d93-a9ec-18dc5e3f5e73",
+      "title": "Flügenspitz, 1'702 m",
+      "startDate": "2026-07-16",
+      "endDate": "2026-07-16",
+      "durationDays": 1,
+      "weekdaySpan": "Do.",
+      "registrationDeadline": "2026-07-12",
+      "tourType": [
+        "Bergwandern"
+      ],
+      "tourTypeAbbr": "BW",
+      "technicalDifficulty": "T2",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Veteranen Gängige"
+      ],
+      "leaders": [
+        {
+          "name": "Christian Indermaur",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 8,
+        "max": 15,
+        "display": "8/15"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W-B/A/T2",
+      "destination": {
+        "name": "Flügenspitz",
+        "elevation": 1702,
+        "type": "summit"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "pace": "moderat",
+        "description": "Amden Arvenbüel 1272 - Looch 1535 - Flügenspitz süd 1671 - Flügenspitz 1702 - Altschen 1388 - Amden Arvenbüel 1272 (580/580 m, 4 h 30, 10 km)",
+        "additionalText": "Auf dem Flügenspitz grossartige Sicht zu den Glarner Alpen, das Toggenburg, den Alpstein, bis zum Bodensee",
+        "maxParticipants": 10,
+        "transport": "öV",
+        "travelCosts": 75,
+        "equipment": "Stöcke"
+      }
+    },
+    {
+      "id": "bern-2026-0011",
+      "url": "https://touren.sac-bern.ch/tours/view/eb80d838-94a5-41da-ac33-fc775fd528a0",
+      "title": "Pointe de Drône 2949 m",
+      "startDate": "2026-07-16",
+      "endDate": "2026-07-17",
+      "durationDays": 2,
+      "weekdaySpan": "Do.-Fr.",
+      "registrationDeadline": "2026-07-06",
+      "tourType": [
+        "Bergwandern",
+        "Alpinwandern"
+      ],
+      "tourTypeAbbr": "BW",
+      "technicalDifficulty": "T3 - T4",
+      "physicalDifficulty": "B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive (Senior:innen)"
+      ],
+      "leaders": [
+        {
+          "name": "Daniel Keller",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 6,
+        "max": 8,
+        "display": "6/8"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W-Alp/B/T3 - T4",
+      "destination": {
+        "name": "Pointe de Drône",
+        "elevation": 2949,
+        "type": "summit"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "pace": "normal",
+        "description": "1. Tag: Bourg-St-Pierre, Commune - La des Toules - Combe des Morts - l’Hospice du\nGrand-Saint-Bernard (+1050/-200 m, 4.5 h, 12 km). 2. Tag: Grande Chenalette - Pointe de Drône - Lacs de Fenêtre - Ferret (+550/-1300 m, 5 h, 10.5 km).",
+        "additionalText": "Vom Val d'Entremont ins Val Feret, eine Pilgerwanderung zu den Lacs de Fenêtre mit Überschreitung der Pointe de Drône, ein Gipfel mit attraktiver Rundsicht.\nL’Hospice du Grand-Saint-Bernard: https://gsbernard.com/\nLacs de Fenêtre: https://www.sac-cas.ch/de/die-alpen/drei-perlen-am-grand-saint-bernard-23752/\nSAC-Spesenbeitrag: Sektionsmitglieder CHF 20.00 (in den Tourenkosten enthalten), andere Sektionen CHF 30.00, Gäste CHF 40.00",
+        "maxParticipants": 9,
+        "transport": "öV",
+        "travelCosts": 85,
+        "tourCosts": 90
+      }
+    },
+    {
+      "id": "bern-2026-0012",
+      "url": "https://touren.sac-bern.ch/tours/view/2d0ea86f-9cd3-4eaf-beec-bd973c03fe16",
+      "title": "Hüttenwandern im Saanenland",
+      "startDate": "2026-07-17",
+      "endDate": "2026-07-18",
+      "durationDays": 2,
+      "weekdaySpan": "Fr.-Sa.",
+      "registrationDeadline": "2026-06-28",
+      "tourType": [
+        "Bergwandern"
+      ],
+      "tourTypeAbbr": "BW",
+      "technicalDifficulty": "T3",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive (Senior:innen)"
+      ],
+      "leaders": [
+        {
+          "name": "Christine Gehlken",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 9,
+        "max": 12,
+        "display": "9/12"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [],
+      "signature": "W-B/A/T3",
+      "destination": {
+        "name": "Saanenland"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "pace": "normal",
+        "description": "1. Tag: Lauenen - Lauenensee - Gälteschutz - Geltenhütte SAC (+800/-30 m, 3.5 h, 8.5 km). \n2. Tag: Usseri Gälte - Almenegg - Tungelpass - Trütlisbergpass - Lenk (+600/-1500 m, 6 h, 19 km) .",
+        "maxParticipants": 10,
+        "transport": "öV",
+        "travelCosts": 50,
+        "tourCosts": 95
+      }
+    },
+    {
+      "id": "bern-2026-0013",
+      "url": "https://touren.sac-bern.ch/tours/view/faec8a1c-2be4-418f-909b-03a0df84f55e",
+      "title": "Überschreitung Piz Medel 3211 m",
+      "startDate": "2026-07-17",
+      "endDate": "2026-07-18",
+      "durationDays": 2,
+      "weekdaySpan": "Fr.-Sa.",
+      "registrationDeadline": "2026-06-30",
+      "tourType": [
+        "Hochtour"
+      ],
+      "tourTypeAbbr": "HT",
+      "technicalDifficulty": "L",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Aktive"
+      ],
+      "leaders": [
+        {
+          "name": "Didier Plaschy",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 4,
+        "max": 6,
+        "display": "4/6"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [],
+      "signature": "HT/A/L",
+      "destination": {
+        "name": "Piz Medel",
+        "elevation": 3211,
+        "type": "summit"
+      },
+      "disciplineColor": "#662D91",
+      "detail": {
+        "pace": "normal",
+        "description": "1. Tag: Curaglia - Camona da Medel (+1180 m, 5 h).\n2. Tag: Piz Medel (+700 m, 3 h) - Capanna Scaletta (-1000 m, 2.5 h) - Pian Geirett - (Taxi) - Biasca.",
+        "maxParticipants": 4,
+        "transport": "öV",
+        "travelCosts": 120,
+        "tourCosts": 79,
+        "costsInfo": "öV, Taxi, Hütte/HP",
+        "equipment": "Komplette Ausrüstung Sommerhochtouren"
+      }
+    },
+    {
+      "id": "bern-2026-0014",
+      "url": "https://touren.sac-bern.ch/tours/view/5ff8656d-0b28-453a-bd6f-d13054e71acd",
+      "title": "Diechterhorn 3389 m",
+      "startDate": "2026-07-18",
+      "endDate": "2026-07-19",
+      "durationDays": 2,
+      "weekdaySpan": "Sa.-So.",
+      "registrationDeadline": "2026-07-15",
+      "tourType": [
+        "Klettern Alpin",
+        "Hochtour"
+      ],
+      "tourTypeAbbr": "HT",
+      "technicalDifficulty": "WS",
+      "physicalDifficulty": "B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive",
+        "Aktive (Senior:innen)"
+      ],
+      "leaders": [
+        {
+          "name": "David Hausammann",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 5,
+        "max": 8,
+        "display": "5/8"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "K Alp, HT/B/WS, 2b",
+      "destination": {
+        "name": "Diechterhorn",
+        "elevation": 3389,
+        "type": "summit"
+      },
+      "disciplineColor": "#662D91",
+      "detail": {
+        "pace": "normal",
+        "description": "1. Tag: Handegg - Gelmerbahn - Gelmerhütte (+650 m, 2.5 h).\n2. Tag: Diechtergletscher - Diechterlimmi - Diechterhorn - Abstieg über Gelmerhütte - Gelmerbahn - Handegg (+1000/-1600 m, 8 h).",
+        "maxParticipants": 5,
+        "transport": "öV",
+        "travelCosts": 60,
+        "tourCosts": 160,
+        "equipment": "Hochtourenausrüstung komplett"
+      }
+    },
+    {
+      "id": "bern-2026-0015",
+      "url": "https://touren.sac-bern.ch/tours/view/62dd3c6a-5017-4bcc-ae82-48bbd7171d4b",
+      "title": "NATURKURS - Gletschervorfeld - Was blüht da?",
+      "startDate": "2026-07-18",
+      "endDate": "2026-07-19",
+      "durationDays": 2,
+      "weekdaySpan": "Sa.-So.",
+      "registrationDeadline": "2026-07-13",
+      "tourType": [
+        "Alpinwandern",
+        "Umwelttour"
+      ],
+      "tourTypeAbbr": "UW",
+      "technicalDifficulty": "T4",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive",
+        "Aktive (Senior:innen)"
+      ],
+      "leaders": [
+        {
+          "name": "Yvonne Stampfli",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 7,
+        "max": 12,
+        "display": "7/12"
+      },
+      "status": "anmeldung_offen",
+      "flags": [
+        "Umwelttour"
+      ],
+      "signature": "W-Alp, UW/A/T4",
+      "destination": {
+        "name": "Gletschervorfeld Rhonegletscher"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "description": "Eine Umweltfachfrau erklärt uns viel Wissenswertes zu den Lebensbedingungen im Gletschervorfeld.\n1. Tag: Stechelberg/Trachsellauenen - Berghotel Obersteinberg (kein Strom!) 1780 m (+900 m).\n2. Tag: Aufstieg zum Gletschervorfeld (z.T. weglos) und Entdecken des besonderen Lebensraumes beim Breithorngletscher (ca. +500 m). Langer Abstieg nach Stechelberg (4 h).",
+        "additionalText": "Kurs mit Umweltfachfrau\n\nKurskosten Fr. 30.- (abhängig von Anz. TN), Sektionsbeitrag Fr. 20, Halbpension Obersteinberg Fr. 75.-, evt. Alpentaxi Fr. 20.- \nUnbedingt Bargeld mitnehmen!",
+        "maxParticipants": 10,
+        "transport": "öV",
+        "travelCosts": 45,
+        "tourCosts": 145,
+        "equipment": "Feste hohe Wanderschuhe (Geröll), evt Wanderstöcke, Sonnenbrille, Sonnenschutzmittel, passende Tourenbekleidung, Stirnlampe, Thermosflasche, Lunch,\nBestimmungsliteratur oder APP"
+      }
+    },
+    {
+      "id": "bern-2026-0016",
+      "url": "https://touren.sac-bern.ch/tours/view/86885b67-3f3e-49c9-b111-6f47af88d260",
+      "title": "Einfache Mehrseillängen in Alpinen Gelände um die Sewenhütte",
+      "startDate": "2026-07-18",
+      "endDate": "2026-07-19",
+      "durationDays": 2,
+      "weekdaySpan": "Sa.-So.",
+      "registrationDeadline": "2026-07-03",
+      "tourType": [
+        "Klettern Mehrseillängen",
+        "Klettern Alpin"
+      ],
+      "tourTypeAbbr": "K",
+      "technicalDifficulty": "4c - 5a",
+      "physicalDifficulty": "A-B",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "JO"
+      ],
+      "leaders": [
+        {
+          "name": "Lucie Eberhard",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 6,
+        "max": 8,
+        "display": "6/8"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [],
+      "signature": "K MSL, K Alp/A-B/4c - 5a",
+      "destination": {
+        "name": "Sewenhütte",
+        "elevation": 2088,
+        "type": "hut"
+      },
+      "disciplineColor": "#FF3D12",
+      "detail": {
+        "pace": "normal",
+        "description": "Wir gehen in die Sewenhütte und profitieren von den zahlreichen einfachen Mehrseillängen rund um die Hütte.",
+        "maxParticipants": 8,
+        "transport": "öV",
+        "travelCosts": 90,
+        "tourCosts": 60,
+        "costsInfo": "Die Kosten für die An- und Rückreise müssen individuell übernommen werden. Tourenkosten sind Hütten inkl. Halbpension. Die Kosten sind Richtpreise und können abweichen.",
+        "equipment": "Details folgen spätestens 1 Woche vor der Tour. Das meiste Material kann bei der JO ausgeliehen werden."
+      }
+    },
+    {
+      "id": "bern-2026-0017",
+      "url": "https://touren.sac-bern.ch/tours/view/22a76a99-7379-41cb-b358-f575e9859e7e",
+      "title": "Gurtenhöck",
+      "startDate": "2026-07-20",
+      "endDate": "2026-07-20",
+      "durationDays": 1,
+      "weekdaySpan": "Mo.",
+      "registrationDeadline": null,
+      "tourType": [
+        "Anlass"
+      ],
+      "tourTypeAbbr": "V",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Veteranen"
+      ],
+      "leaders": [
+        {
+          "name": "Peter Reubi",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "display": ""
+      },
+      "status": "veroeffentlicht",
+      "registrationOpensAt": "2026-06-15T10:00:00+02:00",
+      "flags": [],
+      "signature": "Anl",
+      "destination": {
+        "name": "Gurten, Bern",
+        "elevation": 858,
+        "type": "summit"
+      },
+      "disciplineColor": "#FFCC00",
+      "detail": {
+        "description": "Monatliches Treffen auf dem Gurten. Aufstieg zu Fuss oder mit der Bahn. Der Höck wird abwechslungsweise durch Ueli Mühlemann, Hans Rohner und Peter Reubi geleitet.",
+        "maxParticipants": 50,
+        "transport": "öV"
+      }
+    },
+    {
+      "id": "bern-2026-0018",
+      "url": "https://touren.sac-bern.ch/tours/view/c31d68b4-fd39-4072-bc2e-bbaceb5b24ac",
+      "title": "SfS-Kurs Hochtouren 1 (Firn, Fels und Eis) - Turtmann",
+      "startDate": "2026-07-20",
+      "endDate": "2026-07-24",
+      "durationDays": 5,
+      "weekdaySpan": "Mo.-Fr.",
+      "registrationDeadline": "2026-06-20",
+      "tourType": [
+        "Hochtour",
+        "Kurs"
+      ],
+      "tourTypeAbbr": "HT",
+      "technicalDifficulty": "WS+",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Aktive (Senior:innen)"
+      ],
+      "leaders": [
+        {
+          "name": "Martin Gerber",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": true,
+      "participants": {
+        "current": 6,
+        "max": 6,
+        "display": "6/6"
+      },
+      "status": "ausgebucht",
+      "flags": [
+        "MitBF"
+      ],
+      "signature": "HT, Kurs/A/WS+",
+      "destination": {
+        "name": "Turtmannhütte",
+        "elevation": 2519,
+        "type": "hut"
+      },
+      "disciplineColor": "#662D91",
+      "detail": {
+        "additionalInfo": "Mit BF",
+        "description": "Sicheres Gehen auch abseits der Wege und eine Grundkondition für Aufstiege von 5 h. Einfache Hochtouren über Gletscher richtig durchführen können und die richtige Handhabung im Klettergarten erlernen und anwenden. Wir erlernen diese Fertigkeiten im Unterwallis (Turtmannhütte).",
+        "maxParticipants": 6,
+        "transport": "öV",
+        "travelCosts": 90,
+        "tourCosts": 900
+      }
+    },
+    {
+      "id": "bern-2026-0019",
+      "url": "https://touren.sac-bern.ch/tours/view/20a2528a-eb99-49a5-b20d-4be0c076d8d7",
+      "title": "Tosende Wasser, Pochtechessel, Cholereloch, Entschligefäll, Engstligenalp 1962m",
+      "startDate": "2026-07-21",
+      "endDate": "2026-07-21",
+      "durationDays": 1,
+      "weekdaySpan": "Di.",
+      "registrationDeadline": "2026-07-17",
+      "tourType": [
+        "Wandern"
+      ],
+      "tourTypeAbbr": "W",
+      "technicalDifficulty": "T1 - T2",
+      "physicalDifficulty": "A-B",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Veteranen Gängige"
+      ],
+      "leaders": [
+        {
+          "name": "Urs Stettler",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 11,
+        "max": 20,
+        "display": "11/20"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W/A-B/T1 - T2",
+      "destination": {
+        "name": "Engstligenalp",
+        "elevation": 1962,
+        "type": "marking_point"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "ascentMeters": 860,
+        "pace": "moderat",
+        "description": "Achseten, Tregel - Pochtechessel 1107 - Cholereloch 1195 - Ausserschwand 1313 - Bus Unter dem Birg 1399 - Entschigefäll 1800 - Engstligenalp 1962 , LSB Engstligenalp Birg",
+        "maxParticipants": 12,
+        "transport": "öV",
+        "travelCosts": 60
+      }
+    },
+    {
+      "id": "bern-2026-0020",
+      "url": "https://touren.sac-bern.ch/tours/view/5fcd101b-8c29-4a1c-a9a2-9f6a05fdbe36",
+      "title": "Jaunbachschlucht",
+      "startDate": "2026-07-21",
+      "endDate": "2026-07-21",
+      "durationDays": 1,
+      "weekdaySpan": "Di.",
+      "registrationDeadline": "2026-07-15",
+      "tourType": [
+        "Wandern"
+      ],
+      "tourTypeAbbr": "W",
+      "technicalDifficulty": "T1",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Aktive (Senior:innen)",
+        "Veteranen Gängige"
+      ],
+      "leaders": [
+        {
+          "name": "Renate Sütterlin",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 6,
+        "max": 15,
+        "display": "6/15"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W/A/T1",
+      "destination": {
+        "name": "Jaunbachschlucht"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "pace": "moderat",
+        "description": "Charmey - Lac de Montsalves - Jaunbach-Schlucht - Broc - Gruyères (+350/-400 m, 3.5 h, 11 km).",
+        "maxParticipants": 8,
+        "transport": "öV",
+        "travelCosts": 40
+      }
+    },
+    {
+      "id": "bern-2026-0021",
+      "url": "https://touren.sac-bern.ch/tours/view/6f903b4f-3a37-4cad-be31-0a1fc6aff62d",
+      "title": "Feierabend-Biken",
+      "startDate": "2026-07-21",
+      "endDate": "2026-07-21",
+      "durationDays": 1,
+      "weekdaySpan": "Di.",
+      "registrationDeadline": "2026-07-20",
+      "tourType": [
+        "Mountain-Bike"
+      ],
+      "tourTypeAbbr": "MTB",
+      "technicalDifficulty": "1 - 2",
+      "physicalDifficulty": "A-B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive"
+      ],
+      "leaders": [
+        {
+          "name": "Gerhard Röthlin",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 4,
+        "max": 10,
+        "display": "4/10"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "MTB/A-B/1 - 2",
+      "destination": {
+        "name": "Bern und Umgebung"
+      },
+      "disciplineColor": "#FFCC00",
+      "detail": {
+        "pace": "normal",
+        "description": "Feierabendtouren rund um Bern.",
+        "additionalText": "Start jeweils um 18:15. Der Treffpunkt und die Tour werden jeweils spätestens am Vorabend bekannt gegeben.\nDie Schwierigkeit der Tour wird dem Können der TeilnehmerInnen angepasst.",
+        "maxParticipants": 8,
+        "transport": "Velo",
+        "equipment": "Mountainbike, Helm obligatorisch"
+      }
+    },
+    {
+      "id": "bern-2026-0022",
+      "url": "https://touren.sac-bern.ch/tours/view/74280c62-6487-4f8f-8b68-110262d79567",
+      "title": "Aussichtsturm Mont Pèlerin 1079 m",
+      "startDate": "2026-07-21",
+      "endDate": "2026-07-21",
+      "durationDays": 1,
+      "weekdaySpan": "Di.",
+      "registrationDeadline": "2026-07-18",
+      "tourType": [
+        "Wandern"
+      ],
+      "tourTypeAbbr": "W",
+      "technicalDifficulty": "T1",
+      "physicalDifficulty": "A",
+      "experienceLevel": "Einsteiger",
+      "groups": [
+        "Aktive (Senior:innen)",
+        "Veteranen Gängige"
+      ],
+      "leaders": [
+        {
+          "name": "Karl Vogel",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 9,
+        "max": 15,
+        "display": "9/15"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W/A/T1",
+      "destination": {
+        "name": "Mont Pèlerin",
+        "elevation": 1079,
+        "type": "summit"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "pace": "moderat",
+        "description": "Granges - Mont Chesau - Aussichtsturm - Bergstation Funi (+500/-350 m, 3.5 h, 8 km).",
+        "additionalText": "freiwillige Fahrt (Fr. 6.00) auf den Aussichtsturm +63 Meter in 45 Sekunden kein Startkaffee Abschlusstrunk ob Vevey Bahnhof ab 14.07 oder 15.07 Uhr",
+        "maxParticipants": 9,
+        "transport": "öV",
+        "travelCosts": 34,
+        "tourCosts": 6,
+        "equipment": "Stöcke, essen aus dem Rucksack ev. auf dem Turm"
+      }
+    },
+    {
+      "id": "bern-2026-0023",
+      "url": "https://touren.sac-bern.ch/tours/view/369ae2c3-c7c5-40dd-9093-5078adfe00af",
+      "title": "MTB Trails im Vinschgau",
+      "startDate": "2026-07-23",
+      "endDate": "2026-07-26",
+      "durationDays": 4,
+      "weekdaySpan": "Do.-So.",
+      "registrationDeadline": "2026-07-01",
+      "tourType": [
+        "Mountain-Bike"
+      ],
+      "tourTypeAbbr": "MTB",
+      "technicalDifficulty": "2 - 3",
+      "physicalDifficulty": "B-C",
+      "experienceLevel": "Sehr erfahren",
+      "groups": [
+        "Aktive"
+      ],
+      "leaders": [
+        {
+          "name": "Gerhard Röthlin",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 6,
+        "max": 8,
+        "display": "6/8"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [],
+      "signature": "MTB/B-C/2 - 3",
+      "destination": {
+        "name": "Vinschgau, Südtirol"
+      },
+      "disciplineColor": "#FFCC00",
+      "detail": {
+        "pace": "normal",
+        "description": "1. Tag: Sunny Benny oder ähnliches (ca. -1200 m 2 h)\n2. Tag: Goldseetrail ca. 30 km (+630/-2900 m, 6 h)\n3. Tag: Madritschjoch ca. 33 km (+630/-2500 m, 6 h)\n4. Tag: kurze Trails vom Hotel aus (+500/-500 m, 2 h)\nUnterkunft Hotel in Goldrain.",
+        "maxParticipants": 6,
+        "transport": "öV",
+        "travelCosts": 140,
+        "tourCosts": 540,
+        "costsInfo": "Hotel mit Halbpension ca. 400\nBike Shuttel ca. 100\n4 x Mehrtagestour Gebühr SAC 40",
+        "equipment": "Mountainbike\nHelm\nKnieschoner\nHandschuhe"
+      }
+    },
+    {
+      "id": "bern-2026-0024",
+      "url": "https://touren.sac-bern.ch/tours/view/eda0a725-3ee0-4b0d-8420-9bf6d0e96aac",
+      "title": "Weissmies 4017 m (Überschreitung)",
+      "startDate": "2026-07-23",
+      "endDate": "2026-07-24",
+      "durationDays": 2,
+      "weekdaySpan": "Do.-Fr.",
+      "registrationDeadline": "2026-07-01",
+      "tourType": [
+        "Hochtour"
+      ],
+      "tourTypeAbbr": "HT",
+      "technicalDifficulty": "WS+",
+      "physicalDifficulty": "A-B",
+      "experienceLevel": "Sehr erfahren",
+      "groups": [
+        "Aktive"
+      ],
+      "leaders": [
+        {
+          "name": "Heinz Kasper",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 5,
+        "max": 6,
+        "display": "5/6"
+      },
+      "status": "anmeldung_geschlossen",
+      "flags": [],
+      "signature": "HT/A-B/WS+",
+      "destination": {
+        "name": "Weissmies",
+        "elevation": 4017,
+        "type": "summit"
+      },
+      "disciplineColor": "#662D91",
+      "detail": {
+        "description": "1. Tag: Saas Almagell - Almagellerhütte (+1225 m, 4 h), Ausbildung. \n2. Tag: SSE-Grat - Weissmies 4017 m - Abstieg WNW-Flanke (+1140/-920 m, 6.5 h).",
+        "maxParticipants": 5,
+        "transport": "öV",
+        "travelCosts": 75,
+        "tourCosts": 120
+      }
+    },
+    {
+      "id": "bern-2026-0025",
+      "url": "https://touren.sac-bern.ch/tours/view/205f2c48-38f5-4bec-a31c-6226146f06e1",
+      "title": "Aufs Tanzbedeli 2133 m von Stechelberg über Obersteinberg nach Gimmelwald",
+      "startDate": "2026-07-24",
+      "endDate": "2026-07-24",
+      "durationDays": 1,
+      "weekdaySpan": "Fr.",
+      "registrationDeadline": "2026-07-21",
+      "tourType": [
+        "Bergwandern"
+      ],
+      "tourTypeAbbr": "BW",
+      "technicalDifficulty": "T3",
+      "physicalDifficulty": "B",
+      "experienceLevel": "Erfahren",
+      "groups": [
+        "Aktive (Senior:innen)",
+        "Aktive"
+      ],
+      "leaders": [
+        {
+          "name": "Martin Sedlmayer",
+          "role": "TL"
+        }
+      ],
+      "withMountainGuide": false,
+      "participants": {
+        "current": 3,
+        "max": 12,
+        "display": "3/12"
+      },
+      "status": "anmeldung_offen",
+      "flags": [],
+      "signature": "W-B/B/T3",
+      "destination": {
+        "name": "Tanzbedeli",
+        "elevation": 2133,
+        "type": "summit"
+      },
+      "disciplineColor": "#237100",
+      "detail": {
+        "ascentMeters": 1430,
+        "pace": "normal",
+        "description": "Stechelberg, Hotel - Wildi Egg - Obersteinberg - Tanzbedeli 2133 m - Gimmelwald - (LSB) - Stechelberg (+1430 m/-980 m, 6 h, 12 km).",
+        "additionalText": "Der Weg führt über den Übergang ins Sefinental auf 1'977 m, Abstecher auf Tanzbedeli unterhalb des Spitzhorn (2'211 ) möglich. In diesem Gebiet blüht auf über 2’000 Meter die winzige Alpenzwergorchis, die keinen Schneedruck erträgt!",
+        "maxParticipants": 8,
+        "transport": "öV",
+        "travelCosts": 35
+      }
+    }
+  ]
+}

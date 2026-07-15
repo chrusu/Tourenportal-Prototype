@@ -1,0 +1,359 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SAC Tourenportal – gemeinsame Struktur einer Tourenliste",
+  "description": "Aggregierte Datenstruktur einer Tourenliste, abgeleitet aus den Frontends von SAC Biel, SAC Bern (climbIT) und dem SAC CAS Frontend-Prototyp.",
+  "type": "object",
+  "properties": {
+    "section": {
+      "type": "string",
+      "description": "SAC-Sektion, z. B. 'Biel', 'Bern'."
+    },
+    "filters": {
+      "type": "object",
+      "description": "Verfügbare Filterparameter der Tourenliste.",
+      "properties": {
+        "year": {
+          "type": "integer",
+          "description": "Jahr (z. B. 2024–2027). Nur Biel als eigener Filter.",
+          "examples": [2025, 2026, 2027]
+        },
+        "dateFrom": { "type": "string", "format": "date" },
+        "dateTo":   { "type": "string", "format": "date" },
+        "onlyCurrent": {
+          "type": "boolean",
+          "description": "Bern: 'Nur aktuelle Touren' vs. 'Alle Touren'."
+        },
+        "tourType": {
+          "type": "array",
+          "description": "Tourtyp / Disziplin. Vereinigung beider Sektionen.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Ausbildung",
+              "Bergwandern",
+              "Wandern",
+              "Alpinwandern",
+              "Hochtour",
+              "Skitour",
+              "Ski-Hochtour",
+              "Skihochtour",
+              "Snowboard-Tour",
+              "Schneeschuh-Wanderung",
+              "Schneeschuh-Hochtour",
+              "Klettern",
+              "Klettern Halle",
+              "Klettern Klettergarten",
+              "Klettern Mehrseillängen",
+              "Klettern Alpin",
+              "Bouldern",
+              "Eisklettern",
+              "Klettersteig",
+              "Mountain-Bike",
+              "Hütten",
+              "Kurs",
+              "Anlass",
+              "Versammlung",
+              "Diverses",
+              "Sonstiges",
+              "Umwelttour"
+            ]
+          }
+        },
+        "tourTypeAbbr": {
+          "type": "string",
+          "description": "Kürzel für Tourtyp wie in Biel verwendet.",
+          "enum": ["A", "BW", "D", "HT", "H", "K", "KA", "KS", "SHT", "S", "V", "W", "MTB", "UW"]
+        },
+        "group": {
+          "type": "array",
+          "description": "Tourengruppe(n) der Sektion.",
+          "items": {
+            "type": "string",
+            "examples": [
+              "Biel-Aktive", "Bueren-Aktive", "Biel-Jorat", "JO-Biel", "Biel-Senioren",
+              "JO", "FaBe", "Aktive", "Aktive (Senior:innen)",
+              "TL, J+S-L, Aspi",
+              "Veteranen", "Veteranen Gängige", "Veteranen Bären"
+            ]
+          }
+        },
+        "leader": {
+          "type": "string",
+          "description": "Tourenleiter*in (Bern: Auswahlliste)."
+        },
+        "technicalDifficulty": {
+          "type": "string",
+          "description": "Technische Schwierigkeit gemäss SAC-Skalen.",
+          "oneOf": [
+            { "description": "Hochtour/Alpin",  "enum": ["L", "WS-", "WS", "WS+", "ZS-", "ZS", "ZS+", "S-", "S", "S+", "SS-", "SS", "SS+", "AS", "ES"] },
+            { "description": "Wandern",         "enum": ["T1", "T2", "T3", "T4", "T5", "T6"] },
+            { "description": "Schneeschuh",     "enum": ["WT1", "WT2", "WT3", "WT4", "WT5", "WT6"] },
+            { "description": "Klettersteig",    "enum": ["K1", "K2", "K3", "K4", "K5", "K6", "KSI", "KSII"] },
+            { "description": "Sportklettern",   "enum": ["2a","2b","2c","3a","3b","3c","4a","4b","4c","5a","5b","5c","5c+","6a-","6a","6a+","6b","6b+","6c","6c+","7a"] },
+            { "description": "UIAA Klettern",   "enum": ["II","III-","III","III+","IV-","IV","IV+","V-","V"] },
+            { "description": "Eisklettern",     "enum": ["Wi1","Wi2","Wi3-","Wi3","Wi3+","Wi4-","Wi4","Wi4+","Wi5-","Wi5"] },
+            { "description": "Skitour",         "enum": ["S0","S1","S2","S3","S4","S5"] },
+            { "description": "MTB",             "enum": ["1","2","3","4"] },
+            { "description": "Winter alt",      "enum": ["Wi1-I","Wi2-I"] }
+          ]
+        },
+        "physicalDifficulty": {
+          "type": "string",
+          "description": "Konditionelle Anforderung (Biel-Skala).",
+          "enum": ["A", "B", "C", "D"]
+        },
+        "requirementLevel": {
+          "type": "string",
+          "description": "Bern: allgemeine Anforderung.",
+          "enum": ["Anfänger", "Fortgeschritten", "Könner"]
+        },
+        "experienceLevel": {
+          "type": "array",
+          "description": "Prototyp V0.2: nutzerzentrierte Erfahrungsstufe.",
+          "items": { "enum": ["Einsteiger", "Erfahren", "Sehr erfahren"] }
+        },
+        "registrationOpen": {
+          "type": "boolean",
+          "description": "Prototyp V0.2: Toggle 'Anmeldung offen'."
+        },
+        "fullTextSearch": {
+          "type": "string",
+          "description": "Freitext-Suche über Titel, Beschreibung, Typ, etc."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Fixiert", "Veröffentlicht", "Abgesagt", "Anmeldung geschlossen", "Durchgeführt", "Nicht durchgeführt"]
+        },
+        "extras": {
+          "type": "array",
+          "description": "Biel-spezifische Zusatzattribute.",
+          "items": { "enum": ["Geführt", "Kristall", "ÖV", "Sünneli"] }
+        }
+      }
+    },
+
+    "sorting": {
+      "type": "array",
+      "description": "Sortiermöglichkeiten der Liste (Bern).",
+      "items": { "enum": ["Datum", "Titel", "TourenleiterIn", "Tourengruppe"] }
+    },
+
+    "pagination": {
+      "type": "object",
+      "properties": {
+        "pageSize": { "type": "integer", "examples": [50, 25] },
+        "page":     { "type": "integer" },
+        "total":    { "type": "integer" }
+      }
+    },
+
+    "grouping": {
+      "type": "string",
+      "description": "Optionale Gruppierung (Biel: nach Monat).",
+      "enum": ["month", "none"]
+    },
+
+    "tours": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/Tour" }
+    },
+
+    "exports": {
+      "type": "array",
+      "description": "Angebotene Export-/Abo-Formate.",
+      "items": { "enum": ["ICS", "RSS", "Print"] }
+    }
+  },
+
+  "$defs": {
+    "Tour": {
+      "type": "object",
+      "required": ["id", "title", "startDate", "tourType"],
+      "properties": {
+        "id":    { "type": "string" },
+        "url":   { "type": "string", "format": "uri", "description": "Link zur Detailseite." },
+        "title": { "type": "string" },
+
+        "startDate": { "type": "string", "format": "date" },
+        "endDate":   { "type": "string", "format": "date" },
+        "durationDays": {
+          "type": "integer",
+          "description": "Dauer in Tagen (Biel: '1 Tag', '2 Tage', ...)."
+        },
+        "weekdaySpan": {
+          "type": "string",
+          "description": "Anzeige des Wochentagsbereichs, z. B. 'Sa.-Mo.'."
+        },
+        "registrationDeadline": { "type": "string", "format": "date" },
+
+        "tourType": {
+          "type": "array",
+          "description": "Eine oder mehrere Disziplinen, z. B. ['K Alp', 'HT'].",
+          "items": { "type": "string" }
+        },
+        "tourTypeAbbr": { "type": "string", "examples": ["HT", "BW", "K", "KA", "KS", "S", "SHT", "W", "A", "D", "V", "H"] },
+
+        "technicalDifficulty": { "type": "string", "examples": ["T3", "WS+", "5b", "K4", "WT2"] },
+        "physicalDifficulty":  { "type": "string", "examples": ["A", "B", "A-B", "B-C"] },
+        "requirementLevel":    { "type": "string", "enum": ["Anfänger", "Fortgeschritten", "Könner"] },
+
+        "groups": {
+          "type": "array",
+          "description": "Tourengruppen (Mehrfachauswahl möglich, in Biel per '|' getrennt).",
+          "items": { "type": "string" }
+        },
+
+        "leaders": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name":   { "type": "string" },
+              "role":   { "type": "string", "examples": ["TL", "Co-TL", "BF"] },
+              "profileUrl": { "type": "string", "format": "uri" }
+            }
+          }
+        },
+        "withMountainGuide": {
+          "type": "boolean",
+          "description": "Bern-Badge 'Mit BF'."
+        },
+
+        "participants": {
+          "type": "object",
+          "properties": {
+            "current": { "type": "integer" },
+            "max":     { "type": "integer" },
+            "display": { "type": "string", "examples": ["5/8", "0", "7"] }
+          }
+        },
+
+        "status": {
+          "type": "string",
+          "enum": [
+            "geplant",
+            "fixiert",
+            "veroeffentlicht",
+            "anmeldung_offen",
+            "anmeldung_geschlossen",
+            "ausgebucht",
+            "abgesagt",
+            "durchgefuehrt",
+            "nicht_durchgefuehrt"
+          ],
+          "description": "Prototyp V0.2 zeigt drei sichtbare Zustände: 'Anmeldung offen' (grün), 'Anmeldung geschlossen' (orange), 'Veröffentlicht' (grau, Anmeldung noch nicht offen)."
+        },
+        "statusNote": {
+          "type": "string",
+          "description": "Freitext-Suffix am Titel, z. B. '/ausgebucht', '/abgesagt', '/neues Datum'."
+        },
+
+        "flags": {
+          "type": "array",
+          "description": "Zusatzattribute wie in Biel: Geführt, ÖV, Kristall, Sünneli; Bern: Tourenwoche, Mit BF.",
+          "items": {
+            "enum": ["Geführt", "ÖV", "Kristall", "Sünneli", "Tourenwoche", "MitBF", "Umwelttour"]
+          }
+        },
+
+        "signature": {
+          "type": "string",
+          "description": "Kompakte Signatur wie in Bern angezeigt, z. B. 'K Alp, HT/A-B/WS+'."
+        },
+        "destination": {
+          "type": "object",
+          "description": "Prototyp V0.2: prominent angezeigtes Tourenziel (Berg/Region) mit optionalem externen Link. 'type' gemäss offiziellem SAC-Zieltypmodell (siehe styleguide.md / estatico.data.global.translations.types).",
+          "properties": {
+            "name":      { "type": "string", "examples": ["Piz Badile", "Mönch", "Aletschgletscher"] },
+            "elevation": { "type": "integer", "description": "Höhe in Metern ü. M.", "examples": [3308, 4107] },
+            "url":       { "type": "string", "format": "uri", "description": "Externer Link, z. B. auf SAC-Tourenportal, Wikipedia oder map.geo.admin.ch." },
+            "type": {
+              "type": "string",
+              "description": "Zieltyp gemäss offiziellem SAC-Datenmodell.",
+              "enum": ["summit", "hut", "traverse", "marking_point", "departure_arrival", "climbing_area"]
+            }
+          }
+        },
+        "registrationOpensAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Prototyp V0.2: Zeitpunkt, ab dem die Online-Anmeldung geöffnet wird (Status 'Veröffentlicht' zeigt 'Anmeldung ab: TT.MM.JJJJ, HH:MM')."
+        },
+        "experienceLevel": {
+          "type": "string",
+          "description": "Prototyp V0.2: nutzerzentrierte Erfahrungsstufe.",
+          "enum": ["Einsteiger", "Erfahren", "Sehr erfahren"]
+        },
+        "disciplineColor": {
+          "type": "string",
+          "description": "Themenfarbe der Karte (linker Balken, Chip). Hex-Werte gemäss offiziellem SAC-Styleguide ('color-discipline-*', siehe styleguide.md), ableitbar aus 'tourType'.",
+          "examples": ["#237100", "#662D91", "#FF3D12", "#FF8800", "#0033FF", "#008A79"]
+        },
+        "detail": { "$ref": "#/$defs/TourDetail" }
+      }
+    },
+
+    "TourDetail": {
+      "type": "object",
+      "description": "Zusätzliche Felder für die Detailansicht, erhoben von den echten SAC-Bern-Tourenseiten (climbIT 'Tourendetails', z. B. touren.sac-bern.ch/tours/view/{uuid}).",
+      "properties": {
+        "pace": {
+          "type": "string",
+          "description": "Tempo, z. B. 'normal', 'gemütlich', 'zügig'."
+        },
+        "ascentMeters": {
+          "type": "integer",
+          "description": "Aufstieg in Höhenmetern (hm)."
+        },
+        "descentMeters": {
+          "type": "integer",
+          "description": "Abstieg in Höhenmetern (hm)."
+        },
+        "description": {
+          "type": "string",
+          "description": "Beschrieb / Programm der Tour (mehrzeilig)."
+        },
+        "additionalText": {
+          "type": "string",
+          "description": "Zusatztext (Voraussetzungen, Hinweise, Links)."
+        },
+        "additionalInfo": {
+          "type": "string",
+          "description": "Weitere Angaben (z. B. 'Tourenwoche')."
+        },
+        "maxParticipants": {
+          "type": "integer",
+          "description": "Maximale Teilnehmerzahl (max. TN-Zahl)."
+        },
+        "transport": {
+          "type": "string",
+          "description": "Verkehrsmittel, z. B. 'öV', 'PW', 'Car'."
+        },
+        "travelCosts": {
+          "type": "integer",
+          "description": "Reisekosten in CHF (1/2Tax / PW)."
+        },
+        "tourCosts": {
+          "type": "integer",
+          "description": "übrige Tourenkosten in CHF (Hütten, Bergführer etc.)."
+        },
+        "costsInfo": {
+          "type": "string",
+          "description": "Erläuterung der Kosten (mehrzeilig)."
+        },
+        "equipment": {
+          "type": "string",
+          "description": "Benötigte Ausrüstung (mehrzeilig)."
+        },
+        "meetingPoint": {
+          "type": "string",
+          "description": "Treffpunkt."
+        },
+        "route": {
+          "type": "string",
+          "description": "Routenbeschreibung."
+        }
+      }
+    }
+  }
+}
