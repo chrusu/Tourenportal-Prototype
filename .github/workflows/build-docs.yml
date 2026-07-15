@@ -1,0 +1,50 @@
+name: Build to /docs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-docs
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Build
+        working-directory: app
+        run: npm run build
+
+      - name: Disable Jekyll processing
+        run: touch docs/.nojekyll
+
+      - name: Commit and push /docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --force docs
+          if git diff --cached --quiet; then
+            echo "No changes in /docs — nothing to commit."
+          else
+            git commit -m "chore: build site into /docs [skip ci]"
+            git push origin HEAD:${{ github.ref_name }}
+          fi

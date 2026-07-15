@@ -29,14 +29,6 @@ export function formatDuration(days?: number): string {
   return days === 1 ? "1 Tag" : `${days} Tage`;
 }
 
-export function monthLabel(iso: string): string {
-  try {
-    return format(parseISO(iso), "LLLL yyyy", { locale: de });
-  } catch {
-    return iso;
-  }
-}
-
 /** Splits a difficulty range string like "A-B" into its endpoints. */
 export function expandRange(value?: string): string[] {
   if (!value) return [];

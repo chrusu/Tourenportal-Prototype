@@ -63,7 +63,7 @@ export function TourDetailCardView({
             {/* Colored header (like the detail view) */}
             <div className="px-5 py-3" style={{ backgroundColor: color }}>
               <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
                     <span className="truncate text-xs font-bold uppercase tracking-wider text-white">
                       {tour.tourType.join(" · ")}
@@ -82,11 +82,13 @@ export function TourDetailCardView({
                   )}
                 </div>
                 {leaderNames && (
-                  <div className="shrink-0 text-right">
+                  <div className="min-w-0 max-w-[45%] shrink text-right">
                     <div className="text-xs uppercase tracking-wider text-white/70">
                       Leitung
                     </div>
-                    <div className="text-sm font-bold text-white">{leaderNames}</div>
+                    <div className="break-words text-sm font-bold text-white">
+                      {leaderNames}
+                    </div>
                   </div>
                 )}
               </div>
