@@ -54,12 +54,12 @@ describe("tourMatchesFilters", () => {
         tourTypes: ["Hochtour"],
       })
     ).toBe(true);
-    // matching type + matching grade
+    // matching type + matching grade (per sub-type)
     expect(
       tourMatchesFilters(baseTour, {
         ...emptyFilterState,
         tourTypes: ["Hochtour"],
-        difficultiesByDiscipline: { Hochtouren: ["WS+"] },
+        difficultiesBySubType: { Hochtour: ["WS+"] },
       })
     ).toBe(true);
     // matching type + non-matching grade
@@ -67,7 +67,7 @@ describe("tourMatchesFilters", () => {
       tourMatchesFilters(baseTour, {
         ...emptyFilterState,
         tourTypes: ["Hochtour"],
-        difficultiesByDiscipline: { Hochtouren: ["L"] },
+        difficultiesBySubType: { Hochtour: ["L"] },
       })
     ).toBe(false);
   });

@@ -13,8 +13,8 @@ export interface TourFilterState {
   fullTextSearch: string;
   groups: string[];
   tourTypes: string[];
-  /** discipline label -> selected difficulty grades */
-  difficultiesByDiscipline: Record<string, string[]>;
+  /** sub-type (Unterkategorie) -> selected difficulty grades */
+  difficultiesBySubType: Record<string, string[]>;
   experienceLevels: ExperienceLevel[];
   physicalDifficulties: PhysicalDifficulty[];
   leader?: string;
@@ -25,7 +25,7 @@ export const emptyFilterState: TourFilterState = {
   fullTextSearch: "",
   groups: [],
   tourTypes: [],
-  difficultiesByDiscipline: {},
+  difficultiesBySubType: {},
   experienceLevels: [],
   physicalDifficulties: [],
   registrationStatuses: [],
@@ -62,27 +62,24 @@ function matchesText(tour: Tour, query: string): boolean {
   return haystack.includes(q);
 }
 
-/** Tour type + cascading difficulty check (see umsetzungsplan.md). */
+/** Tour type + per-sub-type cascading difficulty check. */
 function matchesTourType(
   tour: Tour,
   selectedTypes: string[],
-  difficultiesByDiscipline: Record<string, string[]>
+  difficultiesBySubType: Record<string, string[]>
 ): boolean {
   if (selectedTypes.length === 0) return true;
-  const hasMatchingType = tour.tourType.some((t) => selectedTypes.includes(t));
-  if (!hasMatchingType) return false;
+  const matchingTypes = tour.tourType.filter((t) => selectedTypes.includes(t));
+  if (matchingTypes.length === 0) return false;
 
-  // If any difficulty grades were selected for the matched disciplines,
-  // the tour must also match at least one of them.
-  const relevantGrades = Object.entries(difficultiesByDiscipline)
-    .filter(([, grades]) => grades.length > 0)
-    .flatMap(([, grades]) => grades);
-
-  if (relevantGrades.length === 0) return true;
-
+  // Tour matches if at least one of its selected types either has no
+  // difficulty filter, or has a filter the tour's difficulty satisfies.
   const tourGrades = expandRange(tour.technicalDifficulty);
-  if (tourGrades.length === 0) return false;
-  return tourGrades.some((g) => relevantGrades.includes(g));
+  return matchingTypes.some((t) => {
+    const grades = difficultiesBySubType[t] ?? [];
+    if (grades.length === 0) return true;
+    return tourGrades.some((g) => grades.includes(g));
+  });
 }
 
 function matchesPhysical(
@@ -103,7 +100,7 @@ export function tourMatchesFilters(tour: Tour, f: TourFilterState): boolean {
     return false;
   }
 
-  if (!matchesTourType(tour, f.tourTypes, f.difficultiesByDiscipline)) return false;
+  if (!matchesTourType(tour, f.tourTypes, f.difficultiesBySubType)) return false;
 
   if (
     f.experienceLevels.length > 0 &&

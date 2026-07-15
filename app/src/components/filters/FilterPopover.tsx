@@ -33,7 +33,11 @@ export function FilterPopover({
     <Popover>
       <PopoverTrigger
         className={cn(
-          "inline-flex h-10 items-center gap-2 rounded-lg border border-input bg-background px-3 text-sm transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 data-[state=open]:border-primary",
+          // SAC: flat, square buttons; border-color changes on open/hover
+          "inline-flex h-10 items-center gap-2 border border-sac-gray bg-white px-3 text-sm",
+          "transition-[border-color,background-color] duration-[180ms] ease-[cubic-bezier(0,0,0.2,1)]",
+          "hover:border-sac-gray-dark focus-visible:outline-none focus-visible:border-sac-gray-dark",
+          "data-[state=open]:border-sac-red",
           className
         )}
         aria-label={label}

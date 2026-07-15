@@ -56,9 +56,9 @@ export function FilterBar(props: FilterBarProps) {
       />
       <TourTypeFilter
         selectedTypes={filters.tourTypes}
-        difficultiesByDiscipline={filters.difficultiesByDiscipline}
+        difficultiesBySubType={filters.difficultiesBySubType}
         onChangeTypes={(v) => update("tourTypes", v)}
-        onChangeDifficulties={(v) => update("difficultiesByDiscipline", v)}
+        onChangeDifficulties={(v) => update("difficultiesBySubType", v)}
       />
       <MultiSelectFilter
         label="Anforderung"
@@ -90,7 +90,7 @@ export function FilterBar(props: FilterBarProps) {
   );
 
   return (
-    <div className="rounded-2xl border bg-white p-4 shadow-sm sm:p-5">
+    <div className="border border-sac-gray bg-white p-4 shadow-sm sm:p-5">
       {/* Row 1: date range + search */}
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <DateRangeFilter

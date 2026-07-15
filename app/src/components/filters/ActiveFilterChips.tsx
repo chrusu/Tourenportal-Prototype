@@ -50,11 +50,14 @@ export function ActiveFilterChips({ filters, setFilters }: ActiveFilterChipsProp
     chips.push({
       key: `t-${t}`,
       label: t,
-      onRemove: () =>
+      onRemove: () => {
+        const { [t]: _removed, ...rest } = filters.difficultiesBySubType;
         setFilters((p) => ({
           ...p,
           tourTypes: p.tourTypes.filter((x) => x !== t),
-        })),
+          difficultiesBySubType: rest,
+        }));
+      },
     })
   );
   filters.experienceLevels.forEach((e) =>

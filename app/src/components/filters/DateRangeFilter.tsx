@@ -10,7 +10,7 @@ export function DateRangeFilter({ from, to, onChange }: DateRangeFilterProps) {
   return (
     <div className="flex flex-wrap items-end gap-3">
       <div className="flex flex-col gap-1">
-        <label htmlFor="date-from" className="text-xs text-muted-foreground">
+        <label htmlFor="date-from" className="text-xs font-bold text-sac-black">
           Von
         </label>
         <Input
@@ -22,7 +22,7 @@ export function DateRangeFilter({ from, to, onChange }: DateRangeFilterProps) {
         />
       </div>
       <div className="flex flex-col gap-1">
-        <label htmlFor="date-to" className="text-xs text-muted-foreground">
+        <label htmlFor="date-to" className="text-xs font-bold text-sac-black">
           Bis
         </label>
         <Input
