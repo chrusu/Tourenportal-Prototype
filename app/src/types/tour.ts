@@ -30,10 +30,21 @@ export interface Destination {
   type?: DestinationType;
 }
 
+export interface SocialLink {
+  platform: "website" | "facebook" | "instagram" | "linkedin";
+  url: string;
+}
+
 export interface Leader {
   name: string;
   role?: string;
   profileUrl?: string;
+  /** Contact / profile details (shown in the detail view, all optional). */
+  photoUrl?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+  social?: SocialLink[];
 }
 
 export interface Participants {
@@ -78,6 +89,8 @@ export interface Tour {
   leaders: Leader[];
   withMountainGuide?: boolean;
   participants?: Participants;
+  /** Whether the occupied/available places are shown for this tour (configurable). */
+  showParticipants?: boolean;
   status: TourStatus;
   statusNote?: string;
   flags?: string[];

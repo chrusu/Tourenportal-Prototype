@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
-import type { TourStatus } from "@/types/tour";
-import { statusLabel, statusVariant } from "@/lib/status";
+import type { Tour } from "@/types/tour";
+import { registrationStatus, regStatusLabel } from "@/lib/status";
 
-export function TourStatusBadge({ status }: { status: TourStatus }) {
-  const variant = statusVariant(status);
-  return <Badge variant={variant}>{statusLabel(status)}</Badge>;
+export function TourStatusBadge({ tour }: { tour: Tour }) {
+  const status = registrationStatus(tour);
+  return <Badge variant={status}>{regStatusLabel(status)}</Badge>;
 }

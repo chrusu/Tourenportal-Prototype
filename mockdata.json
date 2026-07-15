@@ -42,11 +42,43 @@
       "leaders": [
         {
           "name": "Viviane Fischer",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=viviane.fischer",
+          "address": "Marktgasse 55, 3011 Bern",
+          "phone": "+41 76 278 46 61",
+          "email": "viviane.fischer@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/viviane.fischer"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/viviane_fischer"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://linkedin.com/in/viviane.fischer"
+            }
+          ]
         },
         {
           "name": "Gerhard Schuwerk",
-          "role": "Co-TL"
+          "role": "Co-TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=gerhard.schuwerk",
+          "address": "Gerechtigkeitsgasse 12, 3011 Bern",
+          "phone": "+41 77 892 45 52",
+          "email": "gerhard.schuwerk@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/gerhard.schuwerk"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/gerhard_schuwerk"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -74,7 +106,8 @@
         "travelCosts": 40,
         "tourCosts": 216,
         "costsInfo": "Reise Halbtax: 40.-\nTaxi: 30.-\nSektionsbeitrag: 30.-\nHütte (+ Kurtaxe): 156.-"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0002",
@@ -98,7 +131,11 @@
       "leaders": [
         {
           "name": "Dora Wandfluh-Rösti",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=dora.wandfluh.roesti",
+          "address": "Kirchenfeldstrasse 8, 3005 Bern",
+          "phone": "+41 79 760 87 76",
+          "email": "dora.wandfluh.roesti@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -124,7 +161,8 @@
         "transport": "öV",
         "travelCosts": 44,
         "tourCosts": 60
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0003",
@@ -150,11 +188,38 @@
       "leaders": [
         {
           "name": "Dominik Berger",
-          "role": "TL"
+          "role": "TL",
+          "address": "Nydeggstalden 6, 3011 Bern",
+          "phone": "+41 77 356 05 24",
+          "email": "dominik.berger@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/dominik.berger"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/dominik_berger"
+            }
+          ]
         },
         {
           "name": "Sarah Wermelinger",
-          "role": "Co-TL"
+          "role": "Co-TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=sarah.wermelinger",
+          "address": "Junkerngasse 3, 3011 Bern",
+          "phone": "+41 78 308 06 23",
+          "email": "sarah.wermelinger@sac-bern.ch",
+          "social": [
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/sarah_wermelinger"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://linkedin.com/in/sarah.wermelinger"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -182,7 +247,8 @@
         "tourCosts": 295,
         "costsInfo": "Die Kosten für die An- und Rückreise müssen individuell übernommen werden. Tourenkosten sind Hütten inkl. Halbpension. Die Kosten sind Richtpreise und können abweichen.",
         "equipment": "Hochtourenausrüstung. Details folgen spätestens 1 Woche vor der Tour."
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0004",
@@ -207,7 +273,10 @@
       "leaders": [
         {
           "name": "Christian Knechtli",
-          "role": "TL"
+          "role": "TL",
+          "address": "Kramgasse 44, 3011 Bern",
+          "phone": "+41 79 918 72 86",
+          "email": "christian.knechtli@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -235,7 +304,8 @@
         "tourCosts": 80,
         "costsInfo": "Hüttenübernachtung mit Halbpension",
         "equipment": "Sommerhochtourenausrüstung mit Steigeisen, Pickel und Klettergurt, Seil, usw. \nDetails folgen"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0005",
@@ -260,11 +330,28 @@
       "leaders": [
         {
           "name": "Rhea Fay",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=rhea.fay",
+          "address": "Speichergasse 7, 3011 Bern",
+          "phone": "+41 79 748 82 63",
+          "email": "rhea.fay@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/rhea.fay"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/rhea_fay"
+            }
+          ]
         },
         {
           "name": "Celina Schlapbach",
-          "role": "Co-TL"
+          "role": "Co-TL",
+          "address": "Speichergasse 7, 3011 Bern",
+          "phone": "+41 78 340 32 06",
+          "email": "celina.schlapbach@sac-bern.ch"
         }
       ],
       "withMountainGuide": true,
@@ -296,7 +383,8 @@
         "tourCosts": 600,
         "costsInfo": "Zug-Billett Bern-Nessental,Triftbahn retour = CHF 51.-\nBahnbillett Triftbahn retour = CHF 30.- (Erwachsene) / CHF 15.- (Kinder)\nKosten für SAC Mitglieder (exkl Reise, inkl Unterkunft, inkl. Führerbeitrag): 1. Kind CHF 200.– / 2. Kind CHF 180.– / Erwachsene CHF 600.– Nichtmitglieder CHF 700.– (inkl FKA).",
         "equipment": "Klettermaterial, pro Person:\no Helm (ein Velohelm genügt)\no Kletterfinken (oder gute Turnschuhe)\no Klettergurt\no 3-4 Schraubkarabiner\no ev. Sicherungsgerät (Tube, SMART, MegaJul...)\no 1 Selbstsicherungsschlinge (Standschlinge) oder 1 Bandschlinge (90 cm Länge)\no 1 Abseilgerät (Körbli/Tuber/Achter)\no Prusikschlinge (4-5 mm Durchmesser)\n\nAusrüstung pro Familie:\n50m Seil und 12 Expressen\n\nMaterial kann auch ausgeliehen werden."
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0006",
@@ -350,7 +438,8 @@
         "tourCosts": 40,
         "costsInfo": "Kosten für SAC-Mitglieder (ohne Reise): gratis für Kinder und CHF 35.- Erwachsene. (Inkl. FKA). Kosten für Nicht SAC Mitglieder (ohne Reise): gratis für Kinder und CHF 40.– für Erwachsene. (Inkl. FKA).",
         "equipment": "o Helm (ein Velohelm genügt)\no Kletterfinken (oder gute Turnschuhe)\no Klettergurt\no 1-3 Schraubkarabiner\no Trekking- oder Wanderschuhe für den Zustieg\no Outdoor-/Klettertaugliche Körperbekleidung\no Sonnenschutz\no Trinkflasche\no Mittags- und Zwischenverpflegung bei Interesse, etwas zum Bräteln\nWer hat: Sicherungs-, Abseilgerät, Prusik-, Selbstsicherungsschlinge\nPro Familie: Seil (50-70m), 10-12 Express-Schlingen\n\nFehlendes Material kann gemietet werden."
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0007",
@@ -373,7 +462,17 @@
       "leaders": [
         {
           "name": "Helmut Salzgeber",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=helmut.salzgeber",
+          "address": "Längassstrasse 20, 3012 Bern",
+          "phone": "+41 77 771 36 97",
+          "email": "helmut.salzgeber@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/helmut.salzgeber"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -398,7 +497,8 @@
         "transport": "öV",
         "travelCosts": 30,
         "equipment": "Stöcke empfohlen"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0008",
@@ -422,7 +522,11 @@
       "leaders": [
         {
           "name": "Dorothea Koelbing",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=dorothea.koelbing",
+          "address": "Thunstrasse 38, 3005 Bern",
+          "phone": "+41 77 195 08 82",
+          "email": "dorothea.koelbing@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -447,7 +551,8 @@
         "maxParticipants": 11,
         "transport": "öV",
         "travelCosts": 78
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0009",
@@ -470,7 +575,17 @@
       "leaders": [
         {
           "name": "Ursula Kissing",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=ursula.kissing",
+          "address": "Kramgasse 44, 3011 Bern",
+          "phone": "+41 78 488 57 09",
+          "email": "ursula.kissing@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/ursula.kissing"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -495,7 +610,8 @@
         "transport": "öV",
         "travelCosts": 6,
         "equipment": "Stöcke"
-      }
+      },
+      "showParticipants": false
     },
     {
       "id": "bern-2026-0010",
@@ -519,7 +635,10 @@
       "leaders": [
         {
           "name": "Christian Indermaur",
-          "role": "TL"
+          "role": "TL",
+          "address": "Kramgasse 44, 3011 Bern",
+          "phone": "+41 77 719 42 52",
+          "email": "christian.indermaur@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -545,7 +664,8 @@
         "transport": "öV",
         "travelCosts": 75,
         "equipment": "Stöcke"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0011",
@@ -570,7 +690,11 @@
       "leaders": [
         {
           "name": "Daniel Keller",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=daniel.keller",
+          "address": "Effingerstrasse 50, 3008 Bern",
+          "phone": "+41 78 006 75 26",
+          "email": "daniel.keller@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -596,7 +720,8 @@
         "transport": "öV",
         "travelCosts": 85,
         "tourCosts": 90
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0012",
@@ -620,7 +745,20 @@
       "leaders": [
         {
           "name": "Christine Gehlken",
-          "role": "TL"
+          "role": "TL",
+          "address": "Längassstrasse 20, 3012 Bern",
+          "phone": "+41 78 573 53 78",
+          "email": "christine.gehlken@sac-bern.ch",
+          "social": [
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/christine_gehlken"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://linkedin.com/in/christine.gehlken"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -643,7 +781,8 @@
         "transport": "öV",
         "travelCosts": 50,
         "tourCosts": 95
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0013",
@@ -667,7 +806,11 @@
       "leaders": [
         {
           "name": "Didier Plaschy",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=didier.plaschy",
+          "address": "Kirchenfeldstrasse 8, 3005 Bern",
+          "phone": "+41 79 500 32 43",
+          "email": "didier.plaschy@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -694,7 +837,8 @@
         "tourCosts": 79,
         "costsInfo": "öV, Taxi, Hütte/HP",
         "equipment": "Komplette Ausrüstung Sommerhochtouren"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0014",
@@ -720,7 +864,17 @@
       "leaders": [
         {
           "name": "David Hausammann",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=david.hausammann",
+          "address": "Kirchenfeldstrasse 8, 3005 Bern",
+          "phone": "+41 79 369 76 19",
+          "email": "david.hausammann@sac-bern.ch",
+          "social": [
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/david_hausammann"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -746,7 +900,8 @@
         "travelCosts": 60,
         "tourCosts": 160,
         "equipment": "Hochtourenausrüstung komplett"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0015",
@@ -772,7 +927,17 @@
       "leaders": [
         {
           "name": "Yvonne Stampfli",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=yvonne.stampfli",
+          "address": "Nydeggstalden 6, 3011 Bern",
+          "phone": "+41 76 856 87 14",
+          "email": "yvonne.stampfli@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/yvonne.stampfli"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -798,7 +963,8 @@
         "travelCosts": 45,
         "tourCosts": 145,
         "equipment": "Feste hohe Wanderschuhe (Geröll), evt Wanderstöcke, Sonnenbrille, Sonnenschutzmittel, passende Tourenbekleidung, Stirnlampe, Thermosflasche, Lunch,\nBestimmungsliteratur oder APP"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0016",
@@ -823,7 +989,17 @@
       "leaders": [
         {
           "name": "Lucie Eberhard",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=lucie.eberhard",
+          "address": "Junkerngasse 3, 3011 Bern",
+          "phone": "+41 79 143 78 30",
+          "email": "lucie.eberhard@sac-bern.ch",
+          "social": [
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/lucie_eberhard"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -850,7 +1026,8 @@
         "tourCosts": 60,
         "costsInfo": "Die Kosten für die An- und Rückreise müssen individuell übernommen werden. Tourenkosten sind Hütten inkl. Halbpension. Die Kosten sind Richtpreise und können abweichen.",
         "equipment": "Details folgen spätestens 1 Woche vor der Tour. Das meiste Material kann bei der JO ausgeliehen werden."
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0017",
@@ -872,7 +1049,16 @@
       "leaders": [
         {
           "name": "Peter Reubi",
-          "role": "TL"
+          "role": "TL",
+          "address": "Längassstrasse 20, 3012 Bern",
+          "phone": "+41 78 391 08 62",
+          "email": "peter.reubi@sac-bern.ch",
+          "social": [
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/peter_reubi"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -893,7 +1079,8 @@
         "description": "Monatliches Treffen auf dem Gurten. Aufstieg zu Fuss oder mit der Bahn. Der Höck wird abwechslungsweise durch Ueli Mühlemann, Hans Rohner und Peter Reubi geleitet.",
         "maxParticipants": 50,
         "transport": "öV"
-      }
+      },
+      "showParticipants": false
     },
     {
       "id": "bern-2026-0018",
@@ -918,7 +1105,21 @@
       "leaders": [
         {
           "name": "Martin Gerber",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=martin.gerber",
+          "address": "Speichergasse 7, 3011 Bern",
+          "phone": "+41 77 439 45 45",
+          "email": "martin.gerber@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/martin.gerber"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/martin_gerber"
+            }
+          ]
         }
       ],
       "withMountainGuide": true,
@@ -945,7 +1146,8 @@
         "transport": "öV",
         "travelCosts": 90,
         "tourCosts": 900
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0019",
@@ -969,7 +1171,11 @@
       "leaders": [
         {
           "name": "Urs Stettler",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=urs.stettler",
+          "address": "Speichergasse 7, 3011 Bern",
+          "phone": "+41 77 306 84 63",
+          "email": "urs.stettler@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -994,7 +1200,8 @@
         "maxParticipants": 12,
         "transport": "öV",
         "travelCosts": 60
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0020",
@@ -1019,7 +1226,25 @@
       "leaders": [
         {
           "name": "Renate Sütterlin",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=renate.suetterlin",
+          "address": "Kramgasse 44, 3011 Bern",
+          "phone": "+41 78 858 78 95",
+          "email": "renate.suetterlin@sac-bern.ch",
+          "social": [
+            {
+              "platform": "website",
+              "url": "https://www.sac-bern.ch/leiter/renate.suetterlin"
+            },
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/renate_suetterlin"
+            },
+            {
+              "platform": "linkedin",
+              "url": "https://linkedin.com/in/renate.suetterlin"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -1041,7 +1266,8 @@
         "maxParticipants": 8,
         "transport": "öV",
         "travelCosts": 40
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0021",
@@ -1065,7 +1291,11 @@
       "leaders": [
         {
           "name": "Gerhard Röthlin",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=gerhard.roethlin",
+          "address": "Junkerngasse 3, 3011 Bern",
+          "phone": "+41 76 365 64 13",
+          "email": "gerhard.roethlin@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -1088,7 +1318,8 @@
         "maxParticipants": 8,
         "transport": "Velo",
         "equipment": "Mountainbike, Helm obligatorisch"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0022",
@@ -1113,7 +1344,16 @@
       "leaders": [
         {
           "name": "Karl Vogel",
-          "role": "TL"
+          "role": "TL",
+          "address": "Kirchenfeldstrasse 8, 3005 Bern",
+          "phone": "+41 76 846 08 24",
+          "email": "karl.vogel@sac-bern.ch",
+          "social": [
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/karl_vogel"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -1140,7 +1380,8 @@
         "travelCosts": 34,
         "tourCosts": 6,
         "equipment": "Stöcke, essen aus dem Rucksack ev. auf dem Turm"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0023",
@@ -1189,7 +1430,8 @@
         "tourCosts": 540,
         "costsInfo": "Hotel mit Halbpension ca. 400\nBike Shuttel ca. 100\n4 x Mehrtagestour Gebühr SAC 40",
         "equipment": "Mountainbike\nHelm\nKnieschoner\nHandschuhe"
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0024",
@@ -1213,7 +1455,17 @@
       "leaders": [
         {
           "name": "Heinz Kasper",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=heinz.kasper",
+          "address": "Effingerstrasse 50, 3008 Bern",
+          "phone": "+41 78 058 08 54",
+          "email": "heinz.kasper@sac-bern.ch",
+          "social": [
+            {
+              "platform": "instagram",
+              "url": "https://instagram.com/heinz_kasper"
+            }
+          ]
         }
       ],
       "withMountainGuide": false,
@@ -1237,7 +1489,8 @@
         "transport": "öV",
         "travelCosts": 75,
         "tourCosts": 120
-      }
+      },
+      "showParticipants": true
     },
     {
       "id": "bern-2026-0025",
@@ -1262,7 +1515,11 @@
       "leaders": [
         {
           "name": "Martin Sedlmayer",
-          "role": "TL"
+          "role": "TL",
+          "photoUrl": "https://i.pravatar.cc/160?u=martin.sedlmayer",
+          "address": "Helvetiastrasse 9, 3005 Bern",
+          "phone": "+41 79 381 57 73",
+          "email": "martin.sedlmayer@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -1288,7 +1545,8 @@
         "maxParticipants": 8,
         "transport": "öV",
         "travelCosts": 35
-      }
+      },
+      "showParticipants": true
     }
   ]
 }

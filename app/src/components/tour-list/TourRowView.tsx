@@ -1,12 +1,13 @@
-import { Calendar, Clock, MapPin, User, Users, BadgeCheck } from "lucide-react";
+import { Calendar, Clock, User, Users, TrendingUp, BadgeCheck } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TourStatusBadge } from "./TourStatusBadge";
 import { EmptyState } from "./EmptyState";
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
-import { statusVariant } from "@/lib/status";
+import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
+import { participantsText, conditionText, ascentDescentText } from "@/lib/tour-display";
 
 interface TourRowViewProps {
   tours: Tour[];
@@ -21,8 +22,11 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
     <div className="flex flex-col gap-3">
       {tours.map((tour) => {
         const color = tourColor(tour.tourType, tour.disciplineColor);
-        const variant = statusVariant(tour.status);
-        const isOpen = variant === "open";
+        const status = registrationStatus(tour);
+        const canRegister = status === "open" || status === "full";
+        const places = participantsText(tour);
+        const condition = conditionText(tour);
+        const elevation = ascentDescentText(tour);
 
         return (
           <article
@@ -30,7 +34,7 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
             className="overflow-hidden rounded-2xl border bg-white shadow-sm transition-shadow hover:shadow-md"
           >
             <div className="flex flex-col lg:flex-row lg:items-stretch">
-              {/* LEFT: discipline, difficulty, title, tags */}
+              {/* LEFT: discipline, difficulty, tour-id, title, tags */}
               <div className="min-w-0 flex-1 p-4 lg:p-5">
                 <div className="mb-1.5 flex items-center gap-2">
                   <span
@@ -52,9 +56,15 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                       {tour.technicalDifficulty}
                     </span>
                   )}
+                  <span className="ml-auto shrink-0 font-mono text-xs text-muted-foreground">
+                    {tour.id}
+                  </span>
                 </div>
 
-                <h3 className="text-base font-bold leading-snug text-foreground">
+                <h3
+                  className="cursor-pointer text-base font-bold leading-snug text-foreground underline-offset-2 hover:underline hover:text-sac-red"
+                  onClick={() => onShowDetails(tour)}
+                >
                   {tour.title}
                 </h3>
 
@@ -64,6 +74,7 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                       {g}
                     </Badge>
                   ))}
+                  {condition && <Badge variant="outline">Kondition {condition}</Badge>}
                   {tour.withMountainGuide && (
                     <Badge variant="outline" className="gap-1">
                       <BadgeCheck className="h-3 w-3" /> Mit BF
@@ -75,7 +86,7 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                 </div>
               </div>
 
-              {/* CENTER: date, duration, location */}
+              {/* CENTER: date, duration, elevation, location */}
               <div className="flex flex-col justify-center gap-1.5 border-t px-4 py-3 text-sm text-muted-foreground lg:w-56 lg:shrink-0 lg:border-l lg:border-t-0 lg:px-5 lg:py-5">
                 <span className="inline-flex items-center gap-2">
                   <Calendar className="h-4 w-4 shrink-0" />
@@ -90,20 +101,15 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                     {formatDuration(tour.durationDays)}
                   </span>
                 )}
-                {tour.destination?.name && (
+                {elevation && (
                   <span className="inline-flex items-center gap-2">
-                    <MapPin className="h-4 w-4 shrink-0" />
-                    <span className="truncate">
-                      {tour.destination.name}
-                      {tour.destination.elevation
-                        ? ` ${tour.destination.elevation} m`
-                        : ""}
-                    </span>
+                    <TrendingUp className="h-4 w-4 shrink-0" />
+                    {elevation}
                   </span>
                 )}
               </div>
 
-              {/* CENTER-RIGHT: leader, participants */}
+              {/* CENTER-RIGHT: contact person, participants */}
               <div className="flex flex-col justify-center gap-1.5 border-t px-4 py-3 text-sm text-muted-foreground lg:w-52 lg:shrink-0 lg:border-l lg:border-t-0 lg:px-5 lg:py-5">
                 {tour.leaders.length > 0 && (
                   <span className="inline-flex items-center gap-2">
@@ -113,25 +119,20 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                     </span>
                   </span>
                 )}
-                <span className="inline-flex items-center gap-2">
-                  <Users className="h-4 w-4 shrink-0" />
-                  {tour.participants?.display ? (
+                {places && (
+                  <span className="inline-flex items-center gap-2">
+                    <Users className="h-4 w-4 shrink-0" />
                     <span>
-                      <span className="text-foreground">
-                        {tour.participants.display}
-                      </span>{" "}
-                      Anmeldungen
+                      <span className="text-foreground">{places}</span> Plätze
                     </span>
-                  ) : (
-                    <span>Keine Angabe</span>
-                  )}
-                </span>
+                  </span>
+                )}
               </div>
 
               {/* RIGHT: status + actions */}
               <div className="flex flex-col justify-center gap-2 border-t px-4 py-3 lg:w-48 lg:shrink-0 lg:items-end lg:border-l lg:border-t-0 lg:px-5 lg:py-5">
-                <TourStatusBadge status={tour.status} />
-                {isOpen && tour.registrationDeadline && (
+                <TourStatusBadge tour={tour} />
+                {canRegister && tour.registrationDeadline && (
                   <p className="text-xs text-muted-foreground lg:text-right">
                     Anmeldeschluss:{" "}
                     <span className="font-bold text-foreground">
@@ -139,7 +140,7 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                     </span>
                   </p>
                 )}
-                {variant === "published" && tour.registrationOpensAt && (
+                {status === "published" && tour.registrationOpensAt && (
                   <p className="text-xs text-muted-foreground lg:text-right">
                     Anmeldung ab:{" "}
                     <span className="font-bold text-foreground">
@@ -147,7 +148,7 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                     </span>
                   </p>
                 )}
-                <div className="mt-1 flex w-full flex-col gap-2">
+                <div className="mt-1 flex w-full flex-col gap-2 lg:items-end">
                   <Button
                     size="sm"
                     variant="ghost"

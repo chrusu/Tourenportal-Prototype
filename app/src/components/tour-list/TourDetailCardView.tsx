@@ -1,12 +1,13 @@
-import { Calendar, TrendingUp, Gauge, Users, Bus } from "lucide-react";
+import { Hash, Calendar, Clock, TrendingUp, Gauge, Activity, Users, Bus } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TourStatusBadge } from "./TourStatusBadge";
 import { EmptyState } from "./EmptyState";
-import { formatDate, formatDateTime } from "@/lib/format";
-import { statusVariant } from "@/lib/status";
+import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
+import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
+import { participantsText, conditionText, ascentDescentText } from "@/lib/tour-display";
 
 interface TourDetailCardViewProps {
   tours: Tour[];
@@ -46,14 +47,17 @@ export function TourDetailCardView({
     <div className="flex flex-col gap-4">
       {tours.map((tour) => {
         const color = tourColor(tour.tourType, tour.disciplineColor);
-        const variant = statusVariant(tour.status);
-        const isOpen = variant === "open";
+        const status = registrationStatus(tour);
+        const canRegister = status === "open" || status === "full";
         const d = tour.detail;
         const dateRange =
           tour.endDate && tour.endDate !== tour.startDate
             ? `${formatDate(tour.startDate)} – ${formatDate(tour.endDate)}`
             : formatDate(tour.startDate);
         const leaderNames = tour.leaders.map((l) => l.name).join(", ");
+        const places = participantsText(tour);
+        const condition = conditionText(tour);
+        const elevation = ascentDescentText(tour);
 
         return (
           <article
@@ -74,7 +78,10 @@ export function TourDetailCardView({
                       </span>
                     )}
                   </div>
-                  <h3 className="mt-1 font-bold leading-snug text-white">
+                  <h3
+                    className="mt-1 cursor-pointer font-bold leading-snug text-white underline-offset-2 hover:underline"
+                    onClick={() => onShowDetails(tour)}
+                  >
                     {tour.title}
                   </h3>
                   {tour.signature && (
@@ -97,7 +104,7 @@ export function TourDetailCardView({
             {/* Body: badges + facts grid */}
             <div className="flex flex-1 flex-col gap-4 p-5">
               <div className="flex flex-wrap items-center gap-1.5">
-                <TourStatusBadge status={tour.status} />
+                <TourStatusBadge tour={tour} />
                 {tour.groups.map((g) => (
                   <Badge key={g} variant="outline">
                     {g}
@@ -111,14 +118,24 @@ export function TourDetailCardView({
 
               <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3 lg:grid-cols-4">
                 <Fact
+                  icon={<Hash className="h-4 w-4" />}
+                  label="Tour-ID"
+                  value={tour.id}
+                />
+                <Fact
                   icon={<Calendar className="h-4 w-4" />}
                   label="Datum"
                   value={`${dateRange}${tour.weekdaySpan ? ` (${tour.weekdaySpan})` : ""}`}
                 />
                 <Fact
+                  icon={<Clock className="h-4 w-4" />}
+                  label="Dauer"
+                  value={formatDuration(tour.durationDays)}
+                />
+                <Fact
                   icon={<TrendingUp className="h-4 w-4" />}
-                  label="Aufstieg"
-                  value={d?.ascentMeters != null ? `${d.ascentMeters} hm` : undefined}
+                  label="Auf-/Abstieg"
+                  value={elevation}
                 />
                 <Fact
                   icon={<Gauge className="h-4 w-4" />}
@@ -126,14 +143,17 @@ export function TourDetailCardView({
                   value={d?.pace}
                 />
                 <Fact
+                  icon={<Activity className="h-4 w-4" />}
+                  label="Kondition"
+                  value={condition}
+                />
+                <Fact
                   icon={<Users className="h-4 w-4" />}
-                  label="Teilnehmer"
+                  label="Plätze"
                   value={
-                    tour.participants?.display
-                      ? `${tour.participants.display}${d?.maxParticipants ? ` (max. ${d.maxParticipants})` : ""}`
-                      : d?.maxParticipants
-                        ? `max. ${d.maxParticipants}`
-                        : undefined
+                    places
+                      ? `${places}${d?.maxParticipants ? ` (max. ${d.maxParticipants})` : ""}`
+                      : undefined
                   }
                 />
                 <Fact
@@ -146,10 +166,10 @@ export function TourDetailCardView({
               {/* Footer */}
               <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t pt-3">
                 <span className="text-xs text-muted-foreground">
-                  {isOpen && tour.registrationDeadline && (
+                  {canRegister && tour.registrationDeadline && (
                     <>Anmeldeschluss: {formatDate(tour.registrationDeadline)}</>
                   )}
-                  {variant === "published" && tour.registrationOpensAt && (
+                  {status === "published" && tour.registrationOpensAt && (
                     <>Anmeldung ab: {formatDateTime(tour.registrationOpensAt)}</>
                   )}
                 </span>

@@ -1,4 +1,4 @@
-import type { RegistrationStatus, TourStatus } from "@/types/tour";
+import type { RegistrationStatus, Tour, TourStatus } from "@/types/tour";
 
 export type StatusVariant = "open" | "closed" | "published";
 
@@ -51,3 +51,64 @@ export const REGISTRATION_STATUS_OPTIONS: {
   { value: "anmeldung_geschlossen", label: "Anmeldung geschlossen" },
   { value: "veroeffentlicht", label: "Veröffentlicht" },
 ];
+
+// ---------------------------------------------------------------------------
+// Displayed registration status (per-tour, considering the participants config)
+// ---------------------------------------------------------------------------
+
+export type RegStatus = "published" | "open" | "closed" | "full";
+
+/** Base registration state, treating "ausgebucht" as an open (but full) tour. */
+function baseState(status: TourStatus): "published" | "open" | "closed" {
+  switch (status) {
+    case "anmeldung_offen":
+    case "ausgebucht":
+      return "open";
+    case "anmeldung_geschlossen":
+    case "abgesagt":
+    case "durchgefuehrt":
+    case "nicht_durchgefuehrt":
+      return "closed";
+    default:
+      return "published";
+  }
+}
+
+/** Whether the occupied/available places are shown for a tour (configurable). */
+export function showsParticipants(tour: Tour): boolean {
+  return tour.showParticipants ?? Boolean(tour.participants?.max);
+}
+
+function isFull(tour: Tour): boolean {
+  const p = tour.participants;
+  return p?.current != null && p?.max != null && p.current >= p.max;
+}
+
+/**
+ * Resolves the registration status shown to the user.
+ *
+ * - "published": registration not yet open
+ * - "open": registration open (only "not full" when places are shown)
+ * - "full": registration open but no free places — only when places are shown
+ * - "closed": registration closed
+ */
+export function registrationStatus(tour: Tour): RegStatus {
+  const base = baseState(tour.status);
+  if (base === "published") return "published";
+  if (base === "closed") return "closed";
+  if (showsParticipants(tour) && isFull(tour)) return "full";
+  return "open";
+}
+
+export function regStatusLabel(status: RegStatus): string {
+  switch (status) {
+    case "published":
+      return "Publiziert";
+    case "open":
+      return "Anmeldung offen";
+    case "full":
+      return "Ausgebucht";
+    case "closed":
+      return "Anmeldung geschlossen";
+  }
+}

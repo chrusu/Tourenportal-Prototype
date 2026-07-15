@@ -207,10 +207,25 @@
           "type": "array",
           "items": {
             "type": "object",
+            "description": "Tourenleiter*in. Kontaktfelder (Foto, Adresse, Telefon, E-Mail, Social Media) werden in der Detailansicht angezeigt, falls vorhanden.",
             "properties": {
               "name":   { "type": "string" },
               "role":   { "type": "string", "examples": ["TL", "Co-TL", "BF"] },
-              "profileUrl": { "type": "string", "format": "uri" }
+              "profileUrl": { "type": "string", "format": "uri" },
+              "photoUrl": { "type": "string", "format": "uri", "description": "Profilfoto; fehlt es, wird ein Avatar mit Initialen angezeigt." },
+              "address": { "type": "string" },
+              "phone":   { "type": "string", "examples": ["+41 79 123 45 67"] },
+              "email":   { "type": "string", "format": "email" },
+              "social": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "platform": { "enum": ["website", "facebook", "instagram", "linkedin"] },
+                    "url": { "type": "string", "format": "uri" }
+                  }
+                }
+              }
             }
           }
         },
@@ -226,6 +241,10 @@
             "max":     { "type": "integer" },
             "display": { "type": "string", "examples": ["5/8", "0", "7"] }
           }
+        },
+        "showParticipants": {
+          "type": "boolean",
+          "description": "Konfiguration pro Tour: Ob die Anzahl belegte/verfügbare Plätze angezeigt wird. Beeinflusst auch den Anmeldestatus (Status 'Ausgebucht' nur bei aktivierter Anzeige)."
         },
 
         "status": {
