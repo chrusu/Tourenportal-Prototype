@@ -1,15 +1,18 @@
+import { useMemo } from "react";
 import type { CheckedState } from "@radix-ui/react-checkbox";
 import { Mountain } from "lucide-react";
 import { FilterPopover } from "./FilterPopover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { DISCIPLINES } from "@/lib/disciplines";
+import type { Tour } from "@/types/tour";
 
 interface TourTypeFilterProps {
   selectedTypes: string[];
   difficultiesBySubType: Record<string, string[]>;
   onChangeTypes: (types: string[]) => void;
   onChangeDifficulties: (map: Record<string, string[]>) => void;
+  countTours: Tour[];
 }
 
 export function TourTypeFilter({
@@ -17,7 +20,18 @@ export function TourTypeFilter({
   difficultiesBySubType,
   onChangeTypes,
   onChangeDifficulties,
+  countTours,
 }: TourTypeFilterProps) {
+  // Count available tours per sub-type label
+  const countBySubType = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const tour of countTours) {
+      for (const t of tour.tourType) {
+        map[t] = (map[t] ?? 0) + 1;
+      }
+    }
+    return map;
+  }, [countTours]);
   const toggleHauptKategorie = (subTypeLabels: string[], state: CheckedState) => {
     if (state === true) {
       const next = new Set(selectedTypes);
@@ -100,8 +114,15 @@ export function TourTypeFilter({
                           checked={isSelected}
                           onCheckedChange={(v) => toggleSubType(st.label, v === true)}
                         />
-                        <span className="text-sm text-sac-gray-dark transition-colors duration-[180ms] group-hover:text-sac-red">
-                          {st.label}
+                        <span className="flex items-center gap-1.5">
+                          <span className="text-sm text-sac-gray-dark transition-colors duration-[180ms] group-hover:text-sac-red">
+                            {st.label}
+                          </span>
+                          {(countBySubType[st.label] ?? 0) > 0 && (
+                            <span className="min-w-[1.25rem] rounded-sm bg-sac-gray px-1 py-0.5 text-center text-xs font-bold text-sac-gray-dark">
+                              {countBySubType[st.label]}
+                            </span>
+                          )}
                         </span>
                       </label>
 

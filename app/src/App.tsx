@@ -13,7 +13,7 @@ import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/
 import { useTourData } from "@/hooks/useTourData";
 import { useTourFilters } from "@/hooks/useTourFilters";
 import { useIsLargeScreen } from "@/hooks/useIsLargeScreen";
-import { deriveGroups, deriveLeaders } from "@/lib/filter";
+import { applyFilters, deriveGroups, deriveLeaders } from "@/lib/filter";
 import type { Tour } from "@/types/tour";
 
 export default function App() {
@@ -23,6 +23,13 @@ export default function App() {
 
   const groups = useMemo(() => deriveGroups(tours), [tours]);
   const leaders = useMemo(() => deriveLeaders(tours), [tours]);
+
+  // Tours visible with every filter applied EXCEPT tourType —
+  // used to show meaningful per-sub-type counts in the filter.
+  const countTours = useMemo(
+    () => applyFilters(tours, { ...filters, tourTypes: [], difficultiesBySubType: {} }),
+    [tours, filters]
+  );
   const isLg = useIsLargeScreen();
 
   const [notice, setNotice] = useState<string | null>(null);
@@ -74,6 +81,7 @@ export default function App() {
               activeCount={activeCount}
               groups={groups}
               leaders={leaders}
+              countTours={countTours}
             />
 
             <Tabs defaultValue="list">

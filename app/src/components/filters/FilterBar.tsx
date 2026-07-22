@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RotateCcw, SlidersHorizontal, Users, TrendingUp, Activity, CalendarCheck } from "lucide-react";
-import type { ExperienceLevel, PhysicalDifficulty, RegistrationStatus } from "@/types/tour";
+import type { ExperienceLevel, PhysicalDifficulty, RegistrationStatus, Tour } from "@/types/tour";
 import type { TourFilterState } from "@/lib/filter";
 import { REGISTRATION_STATUS_OPTIONS } from "@/lib/status";
 import { Button } from "@/components/ui/button";
@@ -39,10 +39,11 @@ interface FilterBarProps {
   activeCount: number;
   groups: string[];
   leaders: string[];
+  countTours: Tour[];
 }
 
 export function FilterBar(props: FilterBarProps) {
-  const { filters, setFilters, update, reset, activeCount, groups, leaders } = props;
+  const { filters, setFilters, update, reset, activeCount, groups, leaders, countTours } = props;
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const controls = (
@@ -59,6 +60,7 @@ export function FilterBar(props: FilterBarProps) {
         difficultiesBySubType={filters.difficultiesBySubType}
         onChangeTypes={(v) => update("tourTypes", v)}
         onChangeDifficulties={(v) => update("difficultiesBySubType", v)}
+        countTours={countTours}
       />
       <MultiSelectFilter
         label="Anforderung"
