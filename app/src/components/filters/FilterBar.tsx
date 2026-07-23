@@ -15,6 +15,7 @@ import { DateRangeFilter } from "./DateRangeFilter";
 import { SearchInput } from "./SearchInput";
 import { MultiSelectFilter } from "./MultiSelectFilter";
 import { TourTypeFilter } from "./TourTypeFilter";
+import { FlagFilter } from "./FlagFilter";
 import { LeaderFilter } from "./LeaderFilter";
 import { ActiveFilterChips } from "./ActiveFilterChips";
 
@@ -25,10 +26,11 @@ const EXPERIENCE_OPTIONS: { value: ExperienceLevel; label: string }[] = [
 ];
 
 const CONDITION_OPTIONS: { value: PhysicalDifficulty; label: string }[] = [
-  { value: "A", label: "A – wenig anstrengend" },
-  { value: "B", label: "B – ziemlich anstrengend" },
-  { value: "C", label: "C – anstrengend" },
-  { value: "D", label: "D – sehr anstrengend" },
+  { value: "A", label: "A – nicht anstrengend" },
+  { value: "B", label: "B – wenig anstrengend" },
+  { value: "C", label: "C – ziemlich anstrengend" },
+  { value: "D", label: "D – anstrengend" },
+  { value: "E", label: "E – sehr anstrengend" },
 ];
 
 interface FilterBarProps {
@@ -75,6 +77,10 @@ export function FilterBar(props: FilterBarProps) {
         options={CONDITION_OPTIONS}
         selected={filters.physicalDifficulties}
         onChange={(v) => update("physicalDifficulties", v as PhysicalDifficulty[])}
+      />
+      <FlagFilter
+        selected={filters.flags}
+        onChange={(v) => update("flags", v)}
       />
       <LeaderFilter
         leaders={leaders}

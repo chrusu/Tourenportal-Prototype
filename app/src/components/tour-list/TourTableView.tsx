@@ -27,7 +27,6 @@ export function TourTableView({ tours, onReset, onShowDetails }: TourTableViewPr
       <table className="w-full border-collapse text-sm">
         <thead className="hidden md:table-header-group">
           <tr className="border-b bg-sac-snow text-left text-xs uppercase tracking-wide text-muted-foreground">
-            <th className="px-3 py-3 font-bold">Tour-ID</th>
             <th className="px-3 py-3 font-bold">Datum</th>
             <th className="px-3 py-3 font-bold">Sportart</th>
             <th className="px-3 py-3 font-bold">Schwierigkeit</th>
@@ -53,9 +52,6 @@ export function TourTableView({ tours, onReset, onShowDetails }: TourTableViewPr
                 key={tour.id}
                 className="mb-3 block overflow-hidden rounded-2xl border bg-white shadow-sm last:mb-0 md:mb-0 md:table-row md:rounded-none md:border-0 md:border-b md:shadow-none md:last:border-0 md:hover:bg-sac-snow"
               >
-                <td data-label="Tour-ID" className={`${cell} font-mono text-xs text-muted-foreground`}>
-                  {tour.id}
-                </td>
                 <td data-label="Datum" className={`${cell} text-muted-foreground`}>
                   {formatDate(tour.startDate)}
                 </td>

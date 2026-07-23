@@ -82,6 +82,14 @@ export function ActiveFilterChips({ filters, setFilters }: ActiveFilterChipsProp
         })),
     })
   );
+  filters.flags.forEach((flag) =>
+    chips.push({
+      key: `f-${flag}`,
+      label: flag,
+      onRemove: () =>
+        setFilters((p) => ({ ...p, flags: p.flags.filter((x) => x !== flag) })),
+    })
+  );
   if (filters.leader) {
     chips.push({
       key: "leader",

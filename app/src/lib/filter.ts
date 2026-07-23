@@ -5,7 +5,7 @@ import type {
   Tour,
 } from "@/types/tour";
 import { matchesRegistrationFilter } from "./status";
-import { expandRange, todayISO } from "./format";
+import { expandRange } from "./format";
 
 export interface TourFilterState {
   dateFrom?: string;
@@ -17,6 +17,7 @@ export interface TourFilterState {
   difficultiesBySubType: Record<string, string[]>;
   experienceLevels: ExperienceLevel[];
   physicalDifficulties: PhysicalDifficulty[];
+  flags: string[];
   leader?: string;
   registrationStatuses: RegistrationStatus[];
 }
@@ -28,15 +29,15 @@ export const emptyFilterState: TourFilterState = {
   difficultiesBySubType: {},
   experienceLevels: [],
   physicalDifficulties: [],
+  flags: [],
   registrationStatuses: [],
 };
 
 /**
- * Default filter state used on load and on reset: shows tours from today onwards
- * ("Von" defaults to the current date).
+ * Default filter state used on load and on reset.
  */
 export function createInitialFilterState(): TourFilterState {
-  return { ...emptyFilterState, dateFrom: todayISO() };
+  return { ...emptyFilterState };
 }
 
 function overlapsDateRange(tour: Tour, from?: string, to?: string): boolean {
@@ -111,6 +112,13 @@ export function tourMatchesFilters(tour: Tour, f: TourFilterState): boolean {
 
   if (!matchesPhysical(tour, f.physicalDifficulties)) return false;
 
+  if (
+    f.flags.length > 0 &&
+    !f.flags.every((flag) => tour.flags?.includes(flag))
+  ) {
+    return false;
+  }
+
   if (f.leader && !tour.leaders.some((l) => l.name === f.leader)) return false;
 
   if (
@@ -136,6 +144,7 @@ export function countActiveFilters(f: TourFilterState): number {
   n += f.tourTypes.length;
   n += f.experienceLevels.length;
   n += f.physicalDifficulties.length;
+  n += f.flags.length;
   if (f.leader) n++;
   n += f.registrationStatuses.length;
   return n;

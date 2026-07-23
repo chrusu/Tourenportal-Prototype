@@ -56,9 +56,7 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                       {tour.technicalDifficulty}
                     </span>
                   )}
-                  <span className="ml-auto shrink-0 font-mono text-xs text-muted-foreground">
-                    {tour.id}
-                  </span>
+
                 </div>
 
                 <h3
@@ -80,9 +78,9 @@ export function TourRowView({ tours, onReset, onShowDetails }: TourRowViewProps)
                       <BadgeCheck className="h-3 w-3" /> Mit BF
                     </Badge>
                   )}
-                  {tour.flags?.includes("Tourenwoche") && (
-                    <Badge variant="outline">Tourenwoche</Badge>
-                  )}
+                  {tour.flags?.map((flag) => (
+                    <Badge key={flag} variant="outline">{flag}</Badge>
+                  ))}
                 </div>
               </div>
 

@@ -65,7 +65,7 @@ export function TourTypeFilter({
 
   return (
     <FilterPopover
-      label="Tourentyp"
+      label="Aktivitäten"
       icon={<Mountain className="h-4 w-4 text-muted-foreground" />}
       count={selectedTypes.length}
       onReset={reset}

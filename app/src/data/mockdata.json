@@ -29,8 +29,8 @@
       "weekdaySpan": "Sa.-Mo.",
       "registrationDeadline": "2026-06-22",
       "tourType": [
-        "Klettern Alpin",
-        "Hochtour"
+        "Alpinklettern",
+        "Hochtouren"
       ],
       "tourTypeAbbr": "HT",
       "technicalDifficulty": "WS+",
@@ -88,7 +88,11 @@
         "display": "4/6"
       },
       "status": "anmeldung_geschlossen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Mehrseillänge"
+      ],
       "signature": "K Alp, HT/A-B/WS+",
       "destination": {
         "name": "Hangendgletscherhorn",
@@ -119,7 +123,7 @@
       "weekdaySpan": "So.-Mo.",
       "registrationDeadline": "2026-07-06",
       "tourType": [
-        "Bergwandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "BW",
       "technicalDifficulty": "T3",
@@ -145,7 +149,11 @@
         "display": "5/8"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Geeignet für Anfänger"
+      ],
       "signature": "W-B/B/T3",
       "destination": {
         "name": "Gehrihorn",
@@ -174,8 +182,8 @@
       "weekdaySpan": "So.-Mi.",
       "registrationDeadline": "2026-06-12",
       "tourType": [
-        "Klettern Alpin",
-        "Hochtour"
+        "Alpinklettern",
+        "Hochtouren"
       ],
       "tourTypeAbbr": "HT",
       "technicalDifficulty": "ZS",
@@ -229,7 +237,10 @@
         "display": "3/4"
       },
       "status": "anmeldung_geschlossen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV"
+      ],
       "signature": "K Alp, HT/B/ZS, 6a",
       "destination": {
         "name": "Gletschhorn",
@@ -260,7 +271,7 @@
       "weekdaySpan": "So.-Mo.",
       "registrationDeadline": "2026-05-28",
       "tourType": [
-        "Hochtour"
+        "Hochtouren"
       ],
       "tourTypeAbbr": "HT",
       "technicalDifficulty": "L",
@@ -286,7 +297,11 @@
         "display": "6/6"
       },
       "status": "ausgebucht",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Anreise am Vorabend"
+      ],
       "signature": "HT/A/L",
       "destination": {
         "name": "La Rosablanche",
@@ -317,8 +332,8 @@
       "weekdaySpan": "Mo.-Fr.",
       "registrationDeadline": "2026-04-01",
       "tourType": [
-        "Klettern Klettergarten",
-        "Klettern Mehrseillängen"
+        "Sportklettern",
+        "Sportklettern"
       ],
       "tourTypeAbbr": "K",
       "technicalDifficulty": "3a - 5c",
@@ -362,8 +377,10 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "MitBF",
-        "Tourenwoche"
+        "Mit Bergführer",
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Klettergarten"
       ],
       "signature": "K KG, K MSL/A-B/3a - 5c",
       "destination": {
@@ -396,7 +413,7 @@
       "weekdaySpan": "Mo.-Fr.",
       "registrationDeadline": "2026-04-01",
       "tourType": [
-        "Klettern Klettergarten"
+        "Sportklettern"
       ],
       "tourTypeAbbr": "K",
       "technicalDifficulty": "4a - 6a",
@@ -419,7 +436,11 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "MitBF"
+        "Mit Bergführer",
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Klettergarten",
+        "Geeignet für Anfänger"
       ],
       "signature": "K KG/A-B/4a - 6a",
       "destination": {
@@ -451,7 +472,7 @@
       "weekdaySpan": "Di.",
       "registrationDeadline": "2026-07-08",
       "tourType": [
-        "Wandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "W",
       "technicalDifficulty": "T2",
@@ -482,7 +503,10 @@
         "display": "10/15"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV",
+        "Geeignet für Anfänger"
+      ],
       "signature": "W/T2",
       "destination": {
         "name": "Alp Fräche, Diemtigtal",
@@ -510,7 +534,7 @@
       "weekdaySpan": "Mi.",
       "registrationDeadline": "2026-07-08",
       "tourType": [
-        "Bergwandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "BW",
       "technicalDifficulty": "T3",
@@ -536,7 +560,9 @@
         "display": "7/10"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV"
+      ],
       "signature": "W-B/B/T3",
       "destination": {
         "name": "Pas de Cheville",
@@ -564,7 +590,7 @@
       "weekdaySpan": "Do.",
       "registrationDeadline": "2026-07-14",
       "tourType": [
-        "Wandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "W",
       "technicalDifficulty": "T1",
@@ -595,7 +621,10 @@
         "display": "12/20"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV",
+        "Geeignet für Schnuppergäste"
+      ],
       "signature": "W/T1",
       "destination": {
         "name": "Riedbach - Eymatt"
@@ -623,7 +652,7 @@
       "weekdaySpan": "Do.",
       "registrationDeadline": "2026-07-12",
       "tourType": [
-        "Bergwandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "BW",
       "technicalDifficulty": "T2",
@@ -648,7 +677,10 @@
         "display": "8/15"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV",
+        "Geeignet für Anfänger"
+      ],
       "signature": "W-B/A/T2",
       "destination": {
         "name": "Flügenspitz",
@@ -677,8 +709,8 @@
       "weekdaySpan": "Do.-Fr.",
       "registrationDeadline": "2026-07-06",
       "tourType": [
-        "Bergwandern",
-        "Alpinwandern"
+        "Bergwandern (T1–T3)",
+        "Alpinwandern (T4–T6)"
       ],
       "tourTypeAbbr": "BW",
       "technicalDifficulty": "T3 - T4",
@@ -704,7 +736,10 @@
         "display": "6/8"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV"
+      ],
       "signature": "W-Alp/B/T3 - T4",
       "destination": {
         "name": "Pointe de Drône",
@@ -733,7 +768,7 @@
       "weekdaySpan": "Fr.-Sa.",
       "registrationDeadline": "2026-06-28",
       "tourType": [
-        "Bergwandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "BW",
       "technicalDifficulty": "T3",
@@ -768,7 +803,11 @@
         "display": "9/12"
       },
       "status": "anmeldung_geschlossen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Geeignet für Tourenleitende"
+      ],
       "signature": "W-B/A/T3",
       "destination": {
         "name": "Saanenland"
@@ -794,7 +833,7 @@
       "weekdaySpan": "Fr.-Sa.",
       "registrationDeadline": "2026-06-30",
       "tourType": [
-        "Hochtour"
+        "Hochtouren"
       ],
       "tourTypeAbbr": "HT",
       "technicalDifficulty": "L",
@@ -820,7 +859,11 @@
         "display": "4/6"
       },
       "status": "anmeldung_geschlossen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Anreise am Vorabend"
+      ],
       "signature": "HT/A/L",
       "destination": {
         "name": "Piz Medel",
@@ -850,8 +893,8 @@
       "weekdaySpan": "Sa.-So.",
       "registrationDeadline": "2026-07-15",
       "tourType": [
-        "Klettern Alpin",
-        "Hochtour"
+        "Alpinklettern",
+        "Hochtouren"
       ],
       "tourTypeAbbr": "HT",
       "technicalDifficulty": "WS",
@@ -884,7 +927,11 @@
         "display": "5/8"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Mehrseillänge"
+      ],
       "signature": "K Alp, HT/B/WS, 2b",
       "destination": {
         "name": "Diechterhorn",
@@ -913,7 +960,7 @@
       "weekdaySpan": "Sa.-So.",
       "registrationDeadline": "2026-07-13",
       "tourType": [
-        "Alpinwandern",
+        "Alpinwandern (T4–T6)",
         "Umwelttour"
       ],
       "tourTypeAbbr": "UW",
@@ -948,7 +995,9 @@
       },
       "status": "anmeldung_offen",
       "flags": [
-        "Umwelttour"
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Arbeitseinsatz"
       ],
       "signature": "W-Alp, UW/A/T4",
       "destination": {
@@ -976,8 +1025,8 @@
       "weekdaySpan": "Sa.-So.",
       "registrationDeadline": "2026-07-03",
       "tourType": [
-        "Klettern Mehrseillängen",
-        "Klettern Alpin"
+        "Sportklettern",
+        "Alpinklettern"
       ],
       "tourTypeAbbr": "K",
       "technicalDifficulty": "4c - 5a",
@@ -1009,7 +1058,13 @@
         "display": "6/8"
       },
       "status": "anmeldung_geschlossen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Mehrseillänge",
+        "Klettergarten",
+        "Plaisir"
+      ],
       "signature": "K MSL, K Alp/A-B/4c - 5a",
       "destination": {
         "name": "Sewenhütte",
@@ -1067,7 +1122,10 @@
       },
       "status": "veroeffentlicht",
       "registrationOpensAt": "2026-06-15T10:00:00+02:00",
-      "flags": [],
+      "flags": [
+        "Versammlung",
+        "Anreise mit ÖV"
+      ],
       "signature": "Anl",
       "destination": {
         "name": "Gurten, Bern",
@@ -1092,7 +1150,7 @@
       "weekdaySpan": "Mo.-Fr.",
       "registrationDeadline": "2026-06-20",
       "tourType": [
-        "Hochtour",
+        "Hochtouren",
         "Kurs"
       ],
       "tourTypeAbbr": "HT",
@@ -1130,7 +1188,11 @@
       },
       "status": "ausgebucht",
       "flags": [
-        "MitBF"
+        "Mit Bergführer",
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Training",
+        "Geeignet für Tourenleitende"
       ],
       "signature": "HT, Kurs/A/WS+",
       "destination": {
@@ -1159,7 +1221,7 @@
       "weekdaySpan": "Di.",
       "registrationDeadline": "2026-07-17",
       "tourType": [
-        "Wandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "W",
       "technicalDifficulty": "T1 - T2",
@@ -1185,7 +1247,10 @@
         "display": "11/20"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV",
+        "Geeignet für Anfänger"
+      ],
       "signature": "W/A-B/T1 - T2",
       "destination": {
         "name": "Engstligenalp",
@@ -1213,7 +1278,7 @@
       "weekdaySpan": "Di.",
       "registrationDeadline": "2026-07-15",
       "tourType": [
-        "Wandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "W",
       "technicalDifficulty": "T1",
@@ -1254,7 +1319,9 @@
         "display": "6/15"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV"
+      ],
       "signature": "W/A/T1",
       "destination": {
         "name": "Jaunbachschlucht"
@@ -1279,7 +1346,7 @@
       "weekdaySpan": "Di.",
       "registrationDeadline": "2026-07-20",
       "tourType": [
-        "Mountain-Bike"
+        "Mountainbike"
       ],
       "tourTypeAbbr": "MTB",
       "technicalDifficulty": "1 - 2",
@@ -1305,7 +1372,9 @@
         "display": "4/10"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Geeignet für E-Bike"
+      ],
       "signature": "MTB/A-B/1 - 2",
       "destination": {
         "name": "Bern und Umgebung"
@@ -1331,7 +1400,7 @@
       "weekdaySpan": "Di.",
       "registrationDeadline": "2026-07-18",
       "tourType": [
-        "Wandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "W",
       "technicalDifficulty": "T1",
@@ -1363,7 +1432,10 @@
         "display": "9/15"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV",
+        "Geeignet für Schnuppergäste"
+      ],
       "signature": "W/A/T1",
       "destination": {
         "name": "Mont Pèlerin",
@@ -1393,7 +1465,7 @@
       "weekdaySpan": "Do.-So.",
       "registrationDeadline": "2026-07-01",
       "tourType": [
-        "Mountain-Bike"
+        "Mountainbike"
       ],
       "tourTypeAbbr": "MTB",
       "technicalDifficulty": "2 - 3",
@@ -1415,7 +1487,11 @@
         "display": "6/8"
       },
       "status": "anmeldung_geschlossen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV",
+        "Geeignet für E-Bike"
+      ],
       "signature": "MTB/B-C/2 - 3",
       "destination": {
         "name": "Vinschgau, Südtirol"
@@ -1443,7 +1519,7 @@
       "weekdaySpan": "Do.-Fr.",
       "registrationDeadline": "2026-07-01",
       "tourType": [
-        "Hochtour"
+        "Hochtouren"
       ],
       "tourTypeAbbr": "HT",
       "technicalDifficulty": "WS+",
@@ -1475,7 +1551,10 @@
         "display": "5/6"
       },
       "status": "anmeldung_geschlossen",
-      "flags": [],
+      "flags": [
+        "Mehrtägig / Lager",
+        "Anreise mit ÖV"
+      ],
       "signature": "HT/A-B/WS+",
       "destination": {
         "name": "Weissmies",
@@ -1502,7 +1581,7 @@
       "weekdaySpan": "Fr.",
       "registrationDeadline": "2026-07-21",
       "tourType": [
-        "Bergwandern"
+        "Bergwandern (T1–T3)"
       ],
       "tourTypeAbbr": "BW",
       "technicalDifficulty": "T3",
@@ -1529,7 +1608,10 @@
         "display": "3/12"
       },
       "status": "anmeldung_offen",
-      "flags": [],
+      "flags": [
+        "Anreise mit ÖV",
+        "Organisiert von SAC & JO"
+      ],
       "signature": "W-B/B/T3",
       "destination": {
         "name": "Tanzbedeli",

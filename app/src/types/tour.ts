@@ -13,7 +13,7 @@ export type TourStatus =
 
 export type ExperienceLevel = "Einsteiger" | "Erfahren" | "Sehr erfahren";
 
-export type PhysicalDifficulty = "A" | "B" | "C" | "D";
+export type PhysicalDifficulty = "A" | "B" | "C" | "D" | "E";
 
 export type DestinationType =
   | "summit"

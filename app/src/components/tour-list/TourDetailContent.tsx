@@ -107,6 +107,9 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
           ))}
           {tour.withMountainGuide && <Badge variant="outline">Mit BF</Badge>}
           {d?.additionalInfo && <Badge variant="outline">{d.additionalInfo}</Badge>}
+          {tour.flags?.map((flag) => (
+            <Badge key={flag} variant="outline">{flag}</Badge>
+          ))}
         </div>
 
         {/* Facts grid */}

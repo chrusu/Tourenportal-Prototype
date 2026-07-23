@@ -26,8 +26,6 @@ export function TourCard({ tour, onShowDetails }: TourCardProps) {
       <div className="flex flex-col p-5 sm:flex-row sm:items-stretch sm:gap-0">
         {/* LEFT: id, sub-category, name, tags */}
         <div className="min-w-0 flex-1 sm:pr-5">
-          <div className="font-mono text-xs text-muted-foreground">{tour.id}</div>
-
           <div className="mt-1 flex items-center gap-2">
             <span
               className="h-2.5 w-2.5 shrink-0 rounded-full"
@@ -62,9 +60,9 @@ export function TourCard({ tour, onShowDetails }: TourCardProps) {
                 {g}
               </Badge>
             ))}
-            {tour.flags?.includes("Tourenwoche") && (
-              <Badge variant="outline">Tourenwoche</Badge>
-            )}
+            {tour.flags?.map((flag) => (
+              <Badge key={flag} variant="outline">{flag}</Badge>
+            ))}
           </div>
 
           <div className="mt-3">

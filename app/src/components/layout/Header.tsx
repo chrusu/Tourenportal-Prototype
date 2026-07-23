@@ -13,7 +13,7 @@ export function Header({ section }: { section: string }) {
         <img
           src={sacLogo}
           alt="Schweizer Alpen-Club SAC"
-          className="h-12 w-auto sm:h-14"
+          className="h-[3.6rem] w-auto sm:h-[4.2rem]"
         />
       </div>
     </header>
