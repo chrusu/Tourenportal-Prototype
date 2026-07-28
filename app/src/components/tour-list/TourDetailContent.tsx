@@ -2,11 +2,14 @@ import { X, ExternalLink, Mountain, TrendingUp, Gauge, Bus, Wallet, Users } from
 import type { Tour } from "@/types/tour";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { TourStatusBadge } from "./TourStatusBadge";
+import { TourDisciplineIcons } from "./TourDisciplineIcons";
 import { LeaderProfile } from "./LeaderProfile";
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
+import { conditionTooltip, technicalDifficultyTooltip } from "@/lib/scales";
 
 interface TourDetailContentProps {
   tour: Tour;
@@ -30,13 +33,15 @@ function Fact({
   icon,
   label,
   value,
+  tooltip,
 }: {
   icon: React.ReactNode;
   label: string;
   value?: React.ReactNode;
+  tooltip?: string;
 }) {
   if (value === undefined || value === null || value === "") return null;
-  return (
+  const content = (
     <div className="flex items-start gap-2">
       <span className="mt-0.5 text-muted-foreground">{icon}</span>
       <div>
@@ -44,6 +49,15 @@ function Fact({
         <div className="text-sm font-bold text-foreground">{value}</div>
       </div>
     </div>
+  );
+
+  if (!tooltip) return content;
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>{content}</TooltipTrigger>
+      <TooltipContent>{tooltip}</TooltipContent>
+    </Tooltip>
   );
 }
 
@@ -64,19 +78,25 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
     .join(" · ");
 
   return (
-    <div className="flex h-full flex-col overflow-hidden">
+    <div className="flex flex-col">
       {/* Colored header */}
       <div className="shrink-0 px-5 py-4" style={{ backgroundColor: color }}>
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex items-center gap-2">
+              <TourDisciplineIcons tourType={tour.tourType} className="inline-flex items-center gap-1.5" />
               <span className="text-xs font-bold uppercase tracking-wider text-white">
                 {tour.tourType.join(" · ")}
               </span>
               {tour.technicalDifficulty && (
-                <span className="rounded bg-white/25 px-1.5 py-0.5 text-xs font-bold text-white">
-                  {tour.technicalDifficulty}
-                </span>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span className="rounded bg-white/25 px-1.5 py-0.5 text-xs font-bold text-white">
+                      {tour.technicalDifficulty}
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>{technicalDifficultyTooltip(tour.tourType)}</TooltipContent>
+                </Tooltip>
               )}
             </div>
             <h2 className="mt-1 text-lg font-bold leading-snug text-white">
@@ -97,8 +117,8 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
         </div>
       </div>
 
-      {/* Scrollable body */}
-      <div className="flex flex-1 flex-col gap-5 overflow-y-auto p-5">
+      {/* Body */}
+      <div className="flex flex-col gap-5 p-5">
         {/* Status + badges */}
         <div className="flex flex-wrap items-center gap-2">
           <TourStatusBadge tour={tour} />
@@ -153,8 +173,9 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
           />
           <Fact
             icon={<Gauge className="h-4 w-4" />}
-            label="Tempo"
-            value={d?.pace}
+            label="Kondition"
+            value={tour.physicalDifficulty}
+            tooltip={conditionTooltip(tour.physicalDifficulty)}
           />
           <Fact
             icon={<Users className="h-4 w-4" />}

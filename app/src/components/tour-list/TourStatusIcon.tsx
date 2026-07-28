@@ -1,6 +1,7 @@
 import { CheckCircle2, XCircle, AlertTriangle, Clock } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { registrationStatus, regStatusLabel } from "@/lib/status";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 const ICONS = {
   open: CheckCircle2,
@@ -21,8 +22,13 @@ export function TourStatusIcon({ tour }: { tour: Tour }) {
   const Icon = ICONS[status];
   const label = regStatusLabel(status);
   return (
-    <span title={label} aria-label={label} className="inline-flex">
-      <Icon className={`h-5 w-5 ${COLORS[status]}`} />
-    </span>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span className="inline-flex" aria-label={label}>
+          <Icon className={`h-5 w-5 ${COLORS[status]}`} />
+        </span>
+      </TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
   );
 }

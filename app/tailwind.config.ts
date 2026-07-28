@@ -91,14 +91,19 @@ export default {
         ],
       },
       fontSize: {
-        // SAC typography scale (styleguide.md)
+        // SAC typography scale (fs-* styleguide)
         "sac-h1": ["36px", { lineHeight: "1.25", fontWeight: "700" }],
+        "sac-h1-subline": ["36px", { lineHeight: "1.25", fontWeight: "300" }],
         "sac-h2": ["30px", { lineHeight: "1.25", fontWeight: "700" }],
+        "sac-h2-subline": ["30px", { lineHeight: "1.25", fontWeight: "300" }],
         "sac-h3": ["22px", { lineHeight: "1.25", fontWeight: "700" }],
+        "sac-h3-subline": ["22px", { lineHeight: "1.25", fontWeight: "300" }],
         "sac-h4": ["15px", { lineHeight: "1.25", fontWeight: "700" }],
         "sac-copy": ["15px", { lineHeight: "1.5", fontWeight: "300" }],
+        "sac-copy-bold": ["15px", { lineHeight: "1.5", fontWeight: "700" }],
         "sac-copy-note": ["12px", { lineHeight: "1.5", fontWeight: "300" }],
-        "sac-label": ["10px", { lineHeight: "1" }],
+        "sac-copy-note-bold": ["12px", { lineHeight: "1.5", fontWeight: "700" }],
+        "sac-label": ["10px", { lineHeight: "1", fontWeight: "300" }],
       },
       borderRadius: {
         lg: "var(--radius)",

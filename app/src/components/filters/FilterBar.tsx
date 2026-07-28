@@ -3,6 +3,7 @@ import { RotateCcw, SlidersHorizontal, Users, Activity, CalendarCheck } from "lu
 import type { PhysicalDifficulty, RegistrationStatus, Tour } from "@/types/tour";
 import type { TourFilterState } from "@/lib/filter";
 import { REGISTRATION_STATUS_OPTIONS } from "@/lib/status";
+import { CONDITION_OPTIONS, CONDITION_SCALE_INFO } from "@/lib/scales";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -18,14 +19,6 @@ import { TourTypeFilter } from "./TourTypeFilter";
 import { FlagFilter } from "./FlagFilter";
 import { LeaderFilter } from "./LeaderFilter";
 import { ActiveFilterChips } from "./ActiveFilterChips";
-
-const CONDITION_OPTIONS: { value: PhysicalDifficulty; label: string }[] = [
-  { value: "A", label: "A – nicht anstrengend" },
-  { value: "B", label: "B – wenig anstrengend" },
-  { value: "C", label: "C – ziemlich anstrengend" },
-  { value: "D", label: "D – anstrengend" },
-  { value: "E", label: "E – sehr anstrengend" },
-];
 
 interface FilterBarProps {
   filters: TourFilterState;
@@ -61,7 +54,7 @@ export function FilterBar(props: FilterBarProps) {
       <MultiSelectFilter
         label="Kondition"
         icon={<Activity className="h-4 w-4 text-muted-foreground" />}
-        options={CONDITION_OPTIONS}
+        options={CONDITION_OPTIONS.map((o) => ({ ...o, tooltip: CONDITION_SCALE_INFO }))}
         selected={filters.physicalDifficulties}
         onChange={(v) => update("physicalDifficulties", v as PhysicalDifficulty[])}
       />

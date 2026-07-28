@@ -5,10 +5,9 @@ import { EmptyState } from "./EmptyState";
 interface TourListProps {
   tours: Tour[];
   onReset: () => void;
-  onShowDetails: (tour: Tour) => void;
 }
 
-export function TourList({ tours, onReset, onShowDetails }: TourListProps) {
+export function TourList({ tours, onReset }: TourListProps) {
   if (tours.length === 0) {
     return <EmptyState onReset={onReset} />;
   }
@@ -16,7 +15,7 @@ export function TourList({ tours, onReset, onShowDetails }: TourListProps) {
   return (
     <div className="flex flex-col gap-4">
       {tours.map((tour) => (
-        <TourCard key={tour.id} tour={tour} onShowDetails={onShowDetails} />
+        <TourCard key={tour.id} tour={tour} />
       ))}
     </div>
   );

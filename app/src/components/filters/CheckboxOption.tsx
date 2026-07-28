@@ -1,10 +1,12 @@
 import { Checkbox } from "@/components/ui/checkbox";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 interface CheckboxOptionProps {
   label: string;
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
   colorDot?: string;
+  tooltip?: string;
 }
 
 export function CheckboxOption({
@@ -12,8 +14,9 @@ export function CheckboxOption({
   checked,
   onCheckedChange,
   colorDot,
+  tooltip,
 }: CheckboxOptionProps) {
-  return (
+  const content = (
     <label className="group flex cursor-pointer items-center gap-2.5 px-1 py-1.5 hover:bg-sac-snow">
       <Checkbox
         checked={checked}
@@ -28,5 +31,14 @@ export function CheckboxOption({
       )}
       <span className="text-sm text-sac-gray-dark transition-colors duration-[180ms] group-hover:text-sac-red">{label}</span>
     </label>
+  );
+
+  if (!tooltip) return content;
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>{content}</TooltipTrigger>
+      <TooltipContent side="right">{tooltip}</TooltipContent>
+    </Tooltip>
   );
 }

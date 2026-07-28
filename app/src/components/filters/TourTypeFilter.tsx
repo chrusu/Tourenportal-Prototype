@@ -3,8 +3,9 @@ import type { CheckedState } from "@radix-ui/react-checkbox";
 import { Mountain } from "lucide-react";
 import { FilterPopover } from "./FilterPopover";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { DifficultyRangeSelect } from "./DifficultyRangeSelect";
 import { DISCIPLINES } from "@/lib/disciplines";
+import { scaleNameForSubType } from "@/lib/scales";
 import type { Tour } from "@/types/tour";
 
 interface TourTypeFilterProps {
@@ -126,20 +127,15 @@ export function TourTypeFilter({
                         </span>
                       </label>
 
-                      {/* Per-sub-type difficulty chips */}
+                      {/* Per-sub-type difficulty chips (click a grade, then hover + click another to select the range between them) */}
                       {isSelected && st.difficulties.length > 0 && (
                         <div className="mb-1 ml-6 mt-0.5">
-                          <ToggleGroup
-                            type="multiple"
+                          <DifficultyRangeSelect
+                            options={st.difficulties}
                             value={difficultiesBySubType[st.label] ?? []}
-                            onValueChange={(v) => setGrades(st.label, v)}
-                          >
-                            {st.difficulties.map((grade) => (
-                              <ToggleGroupItem key={grade} value={grade}>
-                                {grade}
-                              </ToggleGroupItem>
-                            ))}
-                          </ToggleGroup>
+                            onChange={(grades) => setGrades(st.label, grades)}
+                            scaleName={scaleNameForSubType(st.label)}
+                          />
                         </div>
                       )}
                     </div>

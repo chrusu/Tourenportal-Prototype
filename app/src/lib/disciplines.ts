@@ -9,12 +9,20 @@ export interface DisciplineDef {
   label: string;        // Hauptkategorie display name
   color: string;        // official SAC discipline hex colour (styleguide.md)
   subTypes: SubTypeDef[];
+  /**
+   * Icon id from the official SAC icon sprite (see styleguide "Icons" page),
+   * rendered via <use href="/icons/sac-discipline-sprite.svg#<id>" />.
+   * Undefined when the styleguide has no dedicated discipline icon; a
+   * fallback (lucide) icon is used instead, see DisciplineIcon.tsx.
+   */
+  iconId?: string;
 }
 
 export const DISCIPLINES: DisciplineDef[] = [
   {
     label: "Wandern",
     color: "#237100",
+    iconId: "icon-discipline-mountain-hiking",
     subTypes: [
       { label: "Bergwandern (T1–T3)", difficulties: ["T1", "T2", "T3"] },
       { label: "Alpinwandern (T4–T6)", difficulties: ["T4", "T5", "T6"] },
@@ -23,6 +31,7 @@ export const DISCIPLINES: DisciplineDef[] = [
   {
     label: "Hochtouren Sommer",
     color: "#662D91",
+    iconId: "icon-discipline-alpine-tour",
     subTypes: [
       { label: "Gletschertouren", difficulties: ["L", "WS-", "WS", "WS+", "ZS-", "ZS", "ZS+", "S-", "S", "S+", "SS", "AS", "EX"] },
       { label: "Hochtouren",      difficulties: ["L", "WS-", "WS", "WS+", "ZS-", "ZS", "ZS+", "S-", "S", "S+", "SS", "AS", "EX"] },
@@ -31,6 +40,7 @@ export const DISCIPLINES: DisciplineDef[] = [
   {
     label: "Schneesport",
     color: "#0033FF",
+    iconId: "icon-discipline-ski-tour",
     subTypes: [
       { label: "Freeride",          difficulties: ["L", "WS", "ZS", "S", "SS", "AS"] },
       { label: "Pistenfahren",      difficulties: [] },
@@ -43,6 +53,7 @@ export const DISCIPLINES: DisciplineDef[] = [
   {
     label: "Klettern",
     color: "#FF3D12",
+    iconId: "icon-discipline-climbing",
     subTypes: [
       { label: "Klettersteig",          difficulties: ["K1", "K2", "K3", "K4", "K5", "K6"] },
       { label: "Alpinklettern",         difficulties: ["L", "WS-", "WS", "WS+", "ZS-", "ZS", "ZS+", "S-", "S", "S+", "SS", "AS", "EX"] },
@@ -54,6 +65,7 @@ export const DISCIPLINES: DisciplineDef[] = [
   {
     label: "Velo/Bike",
     color: "#FFCC00",
+    // No dedicated discipline icon in the SAC icon set; DisciplineIcon falls back to lucide.
     subTypes: [
       { label: "Velo",        difficulties: [] },
       { label: "Mountainbike", difficulties: ["S0", "S1", "S2", "S3", "S4", "S5"] },
@@ -62,6 +74,7 @@ export const DISCIPLINES: DisciplineDef[] = [
   {
     label: "Höhle",
     color: "#706F6F",
+    iconId: "icon-destination-cave",
     subTypes: [
       { label: "Höhle", difficulties: [] },
     ],
@@ -69,6 +82,7 @@ export const DISCIPLINES: DisciplineDef[] = [
   {
     label: "Trailrunning",
     color: "#FF8800",
+    // No dedicated discipline icon in the SAC icon set; DisciplineIcon falls back to lucide.
     subTypes: [
       { label: "Trailrunning", difficulties: [] },
     ],
@@ -99,4 +113,40 @@ export function tourColor(tourType: string[], disciplineColor?: string): string 
     if (d) return d.color;
   }
   return "#706F6F";
+}
+
+/** Resolves the main discipline (Hauptsportart) for a tour, based on its first matching tourType. */
+export function mainDisciplineFor(tourType: string[]): DisciplineDef | undefined {
+  for (const t of tourType) {
+    const d = disciplineForType(t);
+    if (d) return d;
+  }
+  return undefined;
+}
+
+/** Resolves the main sub-type label (e.g. "Sportklettern") for a tour, i.e. the first tourType entry with a known discipline. */
+export function mainSubTypeLabel(tourType: string[]): string | undefined {
+  for (const t of tourType) {
+    if (disciplineForType(t)) return t;
+  }
+  return tourType[0];
+}
+
+export interface DisciplineMatch {
+  discipline: DisciplineDef;
+  /** The tourType sub-type labels of this tour that belong to this discipline. */
+  subTypeLabels: string[];
+}
+
+/** Resolves every distinct discipline (sport) involved in a tour, in order of appearance. */
+export function disciplinesFor(tourType: string[]): DisciplineMatch[] {
+  const matches = new Map<string, DisciplineMatch>();
+  for (const t of tourType) {
+    const d = disciplineForType(t);
+    if (!d) continue;
+    const existing = matches.get(d.label);
+    if (existing) existing.subTypeLabels.push(t);
+    else matches.set(d.label, { discipline: d, subTypeLabels: [t] });
+  }
+  return [...matches.values()];
 }

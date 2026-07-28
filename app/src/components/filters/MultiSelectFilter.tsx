@@ -5,6 +5,7 @@ import { CheckboxOption } from "./CheckboxOption";
 interface Option {
   value: string;
   label: string;
+  tooltip?: string;
 }
 
 interface MultiSelectFilterProps {
@@ -42,6 +43,7 @@ export function MultiSelectFilter({
             label={opt.label}
             checked={selected.includes(opt.value)}
             onCheckedChange={(c) => toggle(opt.value, c)}
+            tooltip={opt.tooltip}
           />
         ))}
       </div>
