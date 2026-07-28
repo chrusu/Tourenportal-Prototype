@@ -206,6 +206,29 @@ export interface Tour {
 }
 ```
 
+### 5.1 Konditionelle Anforderungen (Kondition-Skala `physicalDifficulty`)
+
+Offizielle SAC-Referenztabelle für die 5-stufige Konditionsskala (`A`–`E`, `PhysicalDifficulty`). Ein Tour-Wert kann auch einen Bereich abdecken (z. B. `"A-B"`), siehe `expandRange()` in `src/lib/format.ts`.
+
+| Grad | Bezeichnung | Wert | Totalzeit / Aufstieg |
+| --- | --- | --- | --- |
+| A | nicht anstrengend | 1 | 0–3h Totalzeit |
+| B | wenig anstrengend | 2 | 3–5h Totalzeit; bis ca. 800 HM Aufstieg |
+| C | ziemlich anstrengend | 3 | 4–7h Totalzeit; ca. 800–1300 HM Aufstieg |
+| D | anstrengend | 4 | 6–10h Totalzeit; ca. 1300–1600 HM Aufstieg |
+| E | sehr anstrengend | 5 | über 10h Totalzeit; Aufstieg mehr als 1600 HM |
+
+> Hinweis: In der Ursprungsquelle war die Zeitangabe für Grad C uneinheitlich angegeben (`4-7h` bzw. `5-7h` Totalzeit, je nach Spalte). Für die App wird einheitlich `4–7h` verwendet.
+
+**Implementierung** (`src/lib/scales.ts`):
+
+- `CONDITION_LABELS` – Kurzbezeichnung je Grad ("nicht anstrengend" … "sehr anstrengend").
+- `CONDITION_DETAILS` – Totalzeit-/Aufstiegs-Detail je Grad (obige Tabelle).
+- `CONDITION_OPTIONS` – für den `Kondition`-Filter (`value`, `label`, `tooltip` je Grad).
+- `conditionTooltip(physicalDifficulty)` – Tooltip-Text für Liste/Tabelle/Detailansicht, inkl. Totalzeit/Aufstieg, z. B. `"Kondition: A – nicht anstrengend (0–3h Totalzeit)"`.
+
+Diese Tooltips werden verwendet in: `FilterBar` (Kondition-Filter, je Option), `TourCard` (Liste), `TourDetailContent` (Detailseite). Die Tabellenansicht (`TourTableView`) zeigt keine Kondition-Spalte (bewusst entfernt).
+
 ## 6. Filterlogik (`src/lib/filter.ts`)
 
 Reine, ungebundene Funktionen (kein React-Code) – gut testbar mit Vitest. Ein Filterzustand-Objekt (`TourFilterState`) wird gegen jede Tour geprüft:

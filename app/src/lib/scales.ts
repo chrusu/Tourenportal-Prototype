@@ -1,5 +1,8 @@
 // Explanatory text for the SAC condition ("Kondition") and technical
 // difficulty scales, used to power info tooltips throughout the app.
+//
+// Source for the condition scale: "Konditionelle Anforderungen" reference
+// table (SAC), see technische-anforderungen.md § 5.1 for the full table.
 
 import type { PhysicalDifficulty } from "@/types/tour";
 import { expandRange } from "./format";
@@ -13,17 +16,35 @@ export const CONDITION_LABELS: Record<PhysicalDifficulty, string> = {
   E: "sehr anstrengend",
 };
 
-export const CONDITION_OPTIONS: { value: PhysicalDifficulty; label: string }[] = (
-  Object.keys(CONDITION_LABELS) as PhysicalDifficulty[]
-).map((value) => ({ value, label: `${value} – ${CONDITION_LABELS[value]}` }));
+/**
+ * Detailed condition requirement per grade ("konditionelle Anforderungen"):
+ * approximate total time and ascent. See technische-anforderungen.md § 5.1.
+ */
+export const CONDITION_DETAILS: Record<PhysicalDifficulty, string> = {
+  A: "0–3h Totalzeit",
+  B: "3–5h Totalzeit; bis ca. 800 HM Aufstieg",
+  C: "4–7h Totalzeit; ca. 800–1300 HM Aufstieg",
+  D: "6–10h Totalzeit; ca. 1300–1600 HM Aufstieg",
+  E: "über 10h Totalzeit; Aufstieg mehr als 1600 HM",
+};
 
-/** Tooltip text describing a tour's condition ("Kondition") requirement. */
+export const CONDITION_OPTIONS: { value: PhysicalDifficulty; label: string; tooltip: string }[] = (
+  Object.keys(CONDITION_LABELS) as PhysicalDifficulty[]
+).map((value) => ({
+  value,
+  label: `${value} – ${CONDITION_LABELS[value]}`,
+  tooltip: `${value} – ${CONDITION_LABELS[value]}: ${CONDITION_DETAILS[value]}`,
+}));
+
+/** Tooltip text describing a tour's condition ("Kondition") requirement, incl. time/ascent detail. */
 export function conditionTooltip(physicalDifficulty?: string): string | undefined {
   const grades = expandRange(physicalDifficulty);
   if (grades.length === 0) return undefined;
   const parts = grades.map((g) => {
     const label = CONDITION_LABELS[g as PhysicalDifficulty];
-    return label ? `${g} – ${label}` : g;
+    const detail = CONDITION_DETAILS[g as PhysicalDifficulty];
+    if (!label) return g;
+    return detail ? `${g} – ${label} (${detail})` : `${g} – ${label}`;
   });
   return `Kondition: ${parts.join(", ")}`;
 }
