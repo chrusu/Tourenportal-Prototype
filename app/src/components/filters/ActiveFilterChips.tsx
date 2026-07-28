@@ -60,17 +60,6 @@ export function ActiveFilterChips({ filters, setFilters }: ActiveFilterChipsProp
       },
     })
   );
-  filters.experienceLevels.forEach((e) =>
-    chips.push({
-      key: `e-${e}`,
-      label: e,
-      onRemove: () =>
-        setFilters((p) => ({
-          ...p,
-          experienceLevels: p.experienceLevels.filter((x) => x !== e),
-        })),
-    })
-  );
   filters.physicalDifficulties.forEach((c) =>
     chips.push({
       key: `c-${c}`,

@@ -1,12 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { LayoutList, Columns3, Table2, LayoutPanelTop } from "lucide-react";
+import { LayoutList, Table2 } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { ResultsSummary } from "@/components/layout/ResultsSummary";
 import { FilterBar } from "@/components/filters/FilterBar";
 import { TourList } from "@/components/tour-list/TourList";
-import { TourRowView } from "@/components/tour-list/TourRowView";
 import { TourTableView } from "@/components/tour-list/TourTableView";
-import { TourDetailCardView } from "@/components/tour-list/TourDetailCardView";
 import { TourDetailContent } from "@/components/tour-list/TourDetailContent";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
@@ -91,12 +89,6 @@ export default function App() {
                   <TabsTrigger value="list">
                     <LayoutList /> Liste
                   </TabsTrigger>
-                  <TabsTrigger value="rows">
-                    <Columns3 /> Spalten
-                  </TabsTrigger>
-                  <TabsTrigger value="cards">
-                    <LayoutPanelTop /> Detailkarten
-                  </TabsTrigger>
                   <TabsTrigger value="table">
                     <Table2 /> Tabelle
                   </TabsTrigger>
@@ -105,12 +97,6 @@ export default function App() {
 
               <TabsContent value="list">
                 <TourList tours={filtered} onReset={reset} onShowDetails={handleShowDetails} />
-              </TabsContent>
-              <TabsContent value="rows">
-                <TourRowView tours={filtered} onReset={reset} onShowDetails={handleShowDetails} />
-              </TabsContent>
-              <TabsContent value="cards">
-                <TourDetailCardView tours={filtered} onReset={reset} onShowDetails={handleShowDetails} />
               </TabsContent>
               <TabsContent value="table">
                 <TourTableView tours={filtered} onReset={reset} onShowDetails={handleShowDetails} />

@@ -1,10 +1,10 @@
 import type { Tour } from "@/types/tour";
 import { Button } from "@/components/ui/button";
-import { TourStatusBadge } from "./TourStatusBadge";
+import { TourStatusIcon } from "./TourStatusIcon";
 import { EmptyState } from "./EmptyState";
-import { formatDate, formatDuration } from "@/lib/format";
+import { formatDate } from "@/lib/format";
 import { tourColor } from "@/lib/disciplines";
-import { participantsText, conditionText, ascentDescentText } from "@/lib/tour-display";
+import { participantsText, conditionText } from "@/lib/tour-display";
 
 interface TourTableViewProps {
   tours: Tour[];
@@ -28,16 +28,15 @@ export function TourTableView({ tours, onReset, onShowDetails }: TourTableViewPr
         <thead className="hidden md:table-header-group">
           <tr className="border-b bg-sac-snow text-left text-xs uppercase tracking-wide text-muted-foreground">
             <th className="px-3 py-3 font-bold">Datum</th>
+            <th className="px-3 py-3 font-bold">Zeitraum</th>
+            <th className="px-3 py-3 font-bold">Tour</th>
             <th className="px-3 py-3 font-bold">Sportart</th>
             <th className="px-3 py-3 font-bold">Schwierigkeit</th>
             <th className="px-3 py-3 font-bold">Kondition</th>
-            <th className="px-3 py-3 font-bold">Dauer</th>
-            <th className="px-3 py-3 font-bold">Auf-/Abstieg</th>
-            <th className="px-3 py-3 font-bold">Tour</th>
             <th className="px-3 py-3 font-bold">Gruppe</th>
             <th className="px-3 py-3 font-bold">Kontakt</th>
             <th className="px-3 py-3 font-bold">Plätze</th>
-            <th className="px-3 py-3 font-bold">Status</th>
+            <th className="px-3 py-3 font-bold text-center">Status</th>
             <th className="px-3 py-3" />
           </tr>
         </thead>
@@ -46,7 +45,6 @@ export function TourTableView({ tours, onReset, onShowDetails }: TourTableViewPr
             const color = tourColor(tour.tourType, tour.disciplineColor);
             const places = participantsText(tour);
             const condition = conditionText(tour);
-            const elevation = ascentDescentText(tour);
             return (
               <tr
                 key={tour.id}
@@ -54,6 +52,19 @@ export function TourTableView({ tours, onReset, onShowDetails }: TourTableViewPr
               >
                 <td data-label="Datum" className={`${cell} text-muted-foreground`}>
                   {formatDate(tour.startDate)}
+                </td>
+                <td data-label="Zeitraum" className={`${cell} whitespace-nowrap text-muted-foreground`}>
+                  {tour.weekdaySpan ?? "–"}
+                </td>
+                <td data-label="Tour" className={cell}>
+                  <span className="text-right md:text-left">
+                    <span
+                      className="cursor-pointer font-bold underline-offset-2 hover:underline hover:text-sac-red"
+                      onClick={() => onShowDetails(tour)}
+                    >
+                      {tour.title}
+                    </span>
+                  </span>
                 </td>
                 <td data-label="Sportart" className={cell}>
                   <span className="inline-flex items-center gap-2">
@@ -73,22 +84,6 @@ export function TourTableView({ tours, onReset, onShowDetails }: TourTableViewPr
                 <td data-label="Kondition" className={`${cell} text-muted-foreground`}>
                   {condition ?? "–"}
                 </td>
-                <td data-label="Dauer" className={`${cell} text-muted-foreground`}>
-                  {formatDuration(tour.durationDays) || "–"}
-                </td>
-                <td data-label="Auf-/Abstieg" className={`${cell} whitespace-nowrap text-muted-foreground`}>
-                  {elevation ?? "–"}
-                </td>
-                <td data-label="Tour" className={cell}>
-                  <span className="text-right md:text-left">
-                    <span
-                      className="cursor-pointer font-bold underline-offset-2 hover:underline hover:text-sac-red"
-                      onClick={() => onShowDetails(tour)}
-                    >
-                      {tour.title}
-                    </span>
-                  </span>
-                </td>
                 <td data-label="Gruppe" className={`${cell} text-muted-foreground`}>
                   {tour.groups.join(", ")}
                 </td>
@@ -98,8 +93,10 @@ export function TourTableView({ tours, onReset, onShowDetails }: TourTableViewPr
                 <td data-label="Plätze" className={`${cell} text-muted-foreground`}>
                   {places ?? "–"}
                 </td>
-                <td data-label="Status" className={cell}>
-                  <TourStatusBadge tour={tour} />
+                <td data-label="Status" className={`${cell} md:text-center`}>
+                  <span className="md:mx-auto">
+                    <TourStatusIcon tour={tour} />
+                  </span>
                 </td>
                 <td className="flex justify-end border-b px-3 py-2 last:border-0 md:table-cell md:border-0 md:px-3 md:py-3 md:text-right">
                   <Button

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { RotateCcw, SlidersHorizontal, Users, TrendingUp, Activity, CalendarCheck } from "lucide-react";
-import type { ExperienceLevel, PhysicalDifficulty, RegistrationStatus, Tour } from "@/types/tour";
+import { RotateCcw, SlidersHorizontal, Users, Activity, CalendarCheck } from "lucide-react";
+import type { PhysicalDifficulty, RegistrationStatus, Tour } from "@/types/tour";
 import type { TourFilterState } from "@/lib/filter";
 import { REGISTRATION_STATUS_OPTIONS } from "@/lib/status";
 import { Button } from "@/components/ui/button";
@@ -18,12 +18,6 @@ import { TourTypeFilter } from "./TourTypeFilter";
 import { FlagFilter } from "./FlagFilter";
 import { LeaderFilter } from "./LeaderFilter";
 import { ActiveFilterChips } from "./ActiveFilterChips";
-
-const EXPERIENCE_OPTIONS: { value: ExperienceLevel; label: string }[] = [
-  { value: "Einsteiger", label: "Einsteiger" },
-  { value: "Erfahren", label: "Erfahren" },
-  { value: "Sehr erfahren", label: "Sehr erfahren" },
-];
 
 const CONDITION_OPTIONS: { value: PhysicalDifficulty; label: string }[] = [
   { value: "A", label: "A – nicht anstrengend" },
@@ -63,13 +57,6 @@ export function FilterBar(props: FilterBarProps) {
         onChangeTypes={(v) => update("tourTypes", v)}
         onChangeDifficulties={(v) => update("difficultiesBySubType", v)}
         countTours={countTours}
-      />
-      <MultiSelectFilter
-        label="Anforderung"
-        icon={<TrendingUp className="h-4 w-4 text-muted-foreground" />}
-        options={EXPERIENCE_OPTIONS}
-        selected={filters.experienceLevels}
-        onChange={(v) => update("experienceLevels", v as ExperienceLevel[])}
       />
       <MultiSelectFilter
         label="Kondition"
