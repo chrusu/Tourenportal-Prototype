@@ -30,11 +30,11 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
       <table className="w-full border-collapse text-sm md:table-fixed">
         <colgroup>
           <col className="md:w-[9%]" />
-          <col className="md:w-[8%]" />
-          <col className="md:w-[30%]" />
-          <col className="md:w-[10%]" />
-          <col className="md:w-[16%]" />
-          <col className="md:w-[16%]" />
+          <col className="md:w-[5%]" />
+          <col className="md:w-[44%]" />
+          <col className="md:w-[7%]" />
+          <col className="md:w-[12%]" />
+          <col className="md:w-[12%]" />
           <col className="md:w-[6%]" />
           <col className="md:w-[5%]" />
         </colgroup>
@@ -54,14 +54,14 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                   {formatDate(tour.startDate)}
                 </td>
                 <td data-label="Zeitraum" className={`${cell} whitespace-nowrap text-muted-foreground`}>
-                  {tour.durationDays ?? "–"}
+                  {tour.durationDays ? `${tour.durationDays}d` : "–"}
                 </td>
                 <td data-label="Tour" className={cell}>
                   <span className="inline-flex items-center gap-2 text-right md:text-left">
                     {mainDiscipline && (
                       <DisciplineIcon
                         discipline={mainDiscipline}
-                        color={mainDiscipline.color}
+                        color={color}
                         title={mainDiscipline.label}
                       />
                     )}
@@ -84,17 +84,17 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                           {tour.technicalDifficulty}
                         </span>
                       </TooltipTrigger>
-                      <TooltipContent>{technicalDifficultyTooltip(tour.tourType)}</TooltipContent>
+                      <TooltipContent>{technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)}</TooltipContent>
                     </Tooltip>
                   ) : (
                     "–"
                   )}
                 </td>
                 <td data-label="Gruppe" className={`${cell} text-muted-foreground`}>
-                  {tour.groups.join(", ")}
+                  {tour.groups[0] ?? "–"}
                 </td>
                 <td data-label="Kontakt" className={`${cell} text-muted-foreground`}>
-                  {tour.leaders.map((l) => l.name).join(", ") || "–"}
+                  {tour.leaders[0]?.name ?? "–"}
                 </td>
                 <td data-label="Plätze" className={`${cell} text-muted-foreground`}>
                   {places ?? "–"}

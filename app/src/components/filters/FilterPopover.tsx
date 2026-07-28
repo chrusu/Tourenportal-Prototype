@@ -35,8 +35,8 @@ export function FilterPopover({
         className={cn(
           // SAC: flat, square buttons; border-color changes on open/hover
           "inline-flex h-10 items-center gap-2 border border-sac-gray bg-white px-3 text-sm",
-          "transition-[border-color,background-color] duration-[180ms] ease-[cubic-bezier(0,0,0.2,1)]",
-          "hover:border-sac-gray-dark focus-visible:outline-none focus-visible:border-sac-gray-dark",
+          "transition-[border-color,background-color,box-shadow] duration-[180ms] ease-[cubic-bezier(0,0,0.2,1)]",
+          "hover:border-sac-gray-dark focus-visible:outline-none focus-visible:border-sac-red focus-visible:ring-2 focus-visible:ring-sac-red/40",
           "data-[state=open]:border-sac-red",
           className
         )}

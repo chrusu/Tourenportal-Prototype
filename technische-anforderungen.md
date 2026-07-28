@@ -148,14 +148,35 @@ fontSize: {
 
 ### 4.4 Buttons (Mapping SAC → shadcn `buttonVariants`)
 
-| SAC-Klasse | shadcn `variant` | Verwendung im Prototyp |
-| --- | --- | --- |
-| `c-button` (primary) | `default` | „Details anzeigen" |
-| `c-button--positive-cta` | eigene Variante `positive` (Tailwind: `bg-sac-green hover:bg-sac-greenHover`) | „Anmelden" |
-| `c-button--secondary` | `outline` | Sekundäraktionen |
-| `c-button-text` | `link` / `ghost` | „Reset", „Zurücksetzen" in Filter-Popovers |
-| `c-button-text--red` | `link` mit `text-sac-red` | Destruktive Aktion (z. B. Abmelden) |
-| `is-loading` (Spinner) | shadcn `Button` + `Loader2`-Icon (lucide, `animate-spin`) | Ladezustand bei künftiger echter Datenanbindung |
+Quelle: [SAC-Styleguide – Buttons](https://saccas-frontend.netlify.app/preview/styleguide/components-buttons) (`.c-button`-Familie). Umgesetzt in `src/components/ui/button.tsx`.
+
+| SAC-Klasse | shadcn `variant` | Optik | Verwendung im Prototyp |
+| --- | --- | --- | --- |
+| `c-button` (primary) | `default` | eckig, `bg-sac-red`/weiss, 12px uppercase, `font-semibold`, Hover `sac-red-hover`, disabled `sac-red/50` | „Details anzeigen" |
+| `c-button--positive-cta` | `positive` | wie `default`, aber `bg-sac-green`, Hover `sac-green-hover`, disabled `sac-green/50` | „Anmelden" |
+| `c-button--secondary` | `outline` | eckig, transparent, Border/Text `sac-gray-dark`, Hover Fill `sac-black` (weisser Text), disabled Fill `sac-gray` | Sekundäraktionen, z. B. externer Link „sac-bern.ch" |
+| `c-button--tertiary` | `tertiary` | eckig, `bg-sac-gray-light`, Border `sac-gray`, Text `sac-gray-dark`, Hover Border `sac-gray-dark` | dezente Sekundäraktionen |
+| `c-button--pill` | `pill` | `rounded-full`, transparent, Border/Text `sac-gray-dark`, 15px **nicht** uppercase; aktiver Zustand (`is-active`) via `aria-pressed` → Border/Text `sac-red` | Filter-Chips (zukünftig) |
+| `c-button--select` | `select` | eckig wie `default` (12px uppercase), transparent, Border `sac-gray`; aktiver Zustand via `aria-pressed` → Fill `sac-gray` | Auswahl-Buttons (zukünftig) |
+| `c-button-text` | `ghost` | kein Rahmen/Hintergrund, Hover-Farbe `sac-red`, sonst `currentColor` | „Reset", „Zurücksetzen" in Filter-Popovers, „Details"-Link in Liste/Tabelle |
+| `c-button-text--red` | `destructive` | wie `ghost`, aber Text immer `sac-red`, Hover `sac-red-hover` | Destruktive Aktion (z. B. Abmelden) |
+| `is-loading` (Spinner) | shadcn `Button` + `Loader2`-Icon (lucide, `animate-spin`) | – | Ladezustand bei künftiger echter Datenanbindung |
+
+Grössen (`size`): `default` = 50px Höhe / 32px horizontales Padding (`c-button`), `sm` = 32px Höhe / 12px Padding (`c-button--small`), `lg` = 60px Höhe / 40px Padding (`p-landing-page .c-button`), `icon` = 50×50px quadratisch, kein Padding (`c-button--icon-square`).
+
+### 4.5 Date-Input (Mapping SAC `c-date-input` → `DateInputField`)
+
+Quelle: [SAC-Styleguide – C004 Date Input](https://saccas-frontend.netlify.app/modules/c004_date_input/c004_date_input). Umgesetzt in `src/components/filters/DateInputField.tsx` (verwendet von `DateRangeFilter` für „Von"/„Bis").
+
+**Struktur laut SAC-Template** (`c-date-input.c-input-group`):
+
+- Container `cursor: pointer`.
+- Verschachteltes Label (`c-date-input__label`) **innerhalb** der Input-Box: `position: relative; top: 7px; margin: 0 64px -18px 14px; pointer-events: none;` – liegt optisch über dem Eingabefeld, Klicks gehen durch.
+- Folgt ein Label direkt vor dem Input, erhält dieses zusätzliches Padding (`padding-top: 18px; padding-left: 14px;`) und kleinere Schrift (12px), damit Label und Wert nicht überlappen.
+- Rot einfärbter Kalender-Icon-Button (`c-input-group__button.c-button-text.c-button-text--red`) rechtsbündig, 16×16px Icon.
+- Basis-Inputfeld folgt `c-input-text`: 50px Höhe, 1px Border `#e9e9e9` (`sac-gray`), Fokus-Border `#706f6f` (`sac-gray-dark`), Platzhalterfarbe `#bfbfbf`, `font-weight: 300`, 15px; disabled/readonly: Hintergrund `#f4f4f4` (`sac-gray-light`), Text `#999` (`sac-gray-medium`); Fehlerzustand (`has-error`): Border/Text `sac-red`; valide (`is-valid`): Border `sac-green`.
+
+**Umsetzung im Prototyp:** Da kein JS-Datepicker (wie im Original) eingebunden ist, nutzt `DateInputField` weiterhin ein natives `<input type="date">` (verlässlicher, barrierefreier nativer Kalender-Picker in allen Browsern), übernimmt aber die visuelle Sprache 1:1: verschachteltes 12px-`font-semibold`-Label oben links im Feld, rotes Kalender-Icon rechts (`lucide-react` `Calendar`, `text-sac-red`), gleiche Farben/Höhe/Radien wie `c-input-text`. Das native `::-webkit-calendar-picker-indicator` wird transparent über die gesamte Icon-Fläche gelegt, damit ein Klick auf das (rein dekorative) rote Icon den nativen Picker öffnet.
 
 ## 5. Datenmodell & Typisierung
 
@@ -228,6 +249,108 @@ Offizielle SAC-Referenztabelle für die 5-stufige Konditionsskala (`A`–`E`, `P
 - `conditionTooltip(physicalDifficulty)` – Tooltip-Text für Liste/Tabelle/Detailansicht, inkl. Totalzeit/Aufstieg, z. B. `"Kondition: A – nicht anstrengend (0–3h Totalzeit)"`.
 
 Diese Tooltips werden verwendet in: `FilterBar` (Kondition-Filter, je Option), `TourCard` (Liste), `TourDetailContent` (Detailseite). Die Tabellenansicht (`TourTableView`) zeigt keine Kondition-Spalte (bewusst entfernt).
+
+### 5.2 Technische Schwierigkeitsskalen (`technicalDifficulty`)
+
+Quelle: SAC-Styleguide – Schwierigkeitsskalen. Welche Skala gilt, richtet sich nach dem tourType-Subtyp (siehe `src/lib/disciplines.ts`); Mapping in `SCALE_BY_SUBTYPE` (`src/lib/scales.ts`).
+
+#### SAC-Wanderskala (Subtypen: Bergwandern (T1–T3), Alpinwandern (T4–T6))
+
+Bewertet die Schwierigkeit von Berg- und Wanderwegen von T1 (leicht) bis T6 (extrem schwierig). Berücksichtigt Geländeform, Markierung, Wegoberfläche, Exponiertheit sowie erforderliche Erfahrung und Ausrüstung; 2002 vom SAC eingeführt.
+
+| Grad | Bezeichnung |
+| --- | --- |
+| T1 | Wandern |
+| T2 | Bergwandern |
+| T3 | anspruchsvolles Bergwandern |
+| T4 | Alpinwandern |
+| T5 | anspruchsvolles Alpinwandern |
+| T6 | schwieriges Alpinwandern |
+
+#### SAC-Berg- und Hochtourenskala (Subtypen: Gletschertouren, Hochtouren, Alpinklettern)
+
+Bewertet die technische Schwierigkeit von Berg- und Hochtouren im hochalpinen Gelände (Fels, Firn, Eis) bei normalen, günstigen Verhältnissen.
+
+| Grad | Bezeichnung | Grad | Bezeichnung |
+| --- | --- | --- | --- |
+| L | leicht | S | schwierig |
+| WS- | wenig schwierig- | S+ | schwierig+ |
+| WS | wenig schwierig | SS- | sehr schwierig- |
+| WS+ | wenig schwierig+ | SS | sehr schwierig |
+| ZS- | wenig schwierig- | SS+ | sehr schwierig+ |
+| ZS | ziemlich schwierig | | |
+| ZS+ | ziemlich schwierig+ | | |
+| S- | schwierig- | | |
+
+#### SAC-Skitourenskala (Subtypen: Freeride, Skitour, Skihochtour)
+
+Bewertet ausschliesslich den skifahrerischen Teil einer Skitour bei guten Bedingungen; massgebend ist das höchste Hauptkriterium (Gesamtgrad = Spitzenwert). Werden zusätzlich Hilfskriterien einbezogen, wird der Grad um eine Drittelstufe angehoben (z. B. WS+ → ZS-). Alpintechnische Anforderungen (Kletterstellen, Fussaufstiege) werden separat mit der UIAA-Skala und Wortbeschrieb erfasst.
+
+| Grad | Bezeichnung | Grad | Bezeichnung |
+| --- | --- | --- | --- |
+| L | leicht | S- | ziemlich schwierig- |
+| WS- | wenig schwierig- | S | schwierig |
+| WS | wenig schwierig | S+ | schwierig+ |
+| WS+ | wenig schwierig+ | SS- | sehr schwierig- |
+| ZS- | wenig schwierig- | SS | sehr schwierig |
+| ZS | ziemlich schwierig | SS+ | sehr schwierig+ |
+| ZS+ | ziemlich schwierig+ | | |
+
+#### SAC-Schneeschuhtourenskala (Subtyp: Schneeschuhtouren)
+
+Richtwerte bei guten Schnee-/Witterungs-/Sichtverhältnissen, unabhängig von der Tourenlänge. Erfordert sichere Orientierung (Karte, Kompass, Höhenmesser/GPS) und Routenwahl; ab WT2 wird LVS, Schaufel und Sonde empfohlen.
+
+| Grad | Bezeichnung |
+| --- | --- |
+| WT1 | Leichte Schneeschuhwanderung |
+| WT2 | Schneeschuhwanderung |
+| WT3 | anspruchsvolle Schneeschuhwanderung |
+| WT4 | Schneeschuhtour |
+| WT5 | Alpine Schneeschuhtour |
+| WT6 | anspruchsvolle alpine Schneeschuhtour |
+
+#### Kletterskala – französische Skala (Subtypen: Sportklettern, Bouldern)
+
+International gebräuchliche Skala zur Bewertung der klettertechnischen Schwierigkeit der Schlüsselstelle einer Route; Zahlen 3–8 kombiniert mit Buchstaben a–c und Plus-Abstufungen (z. B. 6a, 6b+). Grade nicht einzeln benannt (kontinuierliche Skala) – in der App als Liste `3a–3c, 4a–4c, …, 8a–8c` gepflegt (siehe `disciplines.ts`).
+
+#### Eisklettern – Water Ice / WI-Skala (Subtyp: Eisklettern/Drytooling)
+
+Bewertet die technische Schwierigkeit von Wasserfalleis-Routen anhand Steilheit, Länge steiler Passagen und Absicherungsmöglichkeiten. Grade `WI1`–`WI7`, ohne weitere Bezeichnung je Grad.
+
+#### SAC-Klettersteigskala / Hüsler-Skala (Subtyp: Klettersteig)
+
+In der Schweiz gebräuchliche Skala für Klettersteige (benannt nach Eugen E. Hüsler, „Wandern vertikal“).
+
+| Grad | Bezeichnung |
+| --- | --- |
+| K1 | leicht |
+| K2 | mittel |
+| K3 | ziemlich schwierig |
+| K4 | schwierig |
+| K5 | sehr schwierig |
+| K6 | extrem schwierig |
+
+#### Singletrail-Skala / STS (Subtyp: Mountainbike)
+
+Vom SAC verwendete Skala zur Bewertung von MTB-Singletrails unter idealen Bedingungen (trocken, gutes Licht); bewertet Untergrund, Hindernisse, Steilheit, Kurvenform und Fahrtechnik – nicht Geschwindigkeit, Wetter oder Absturzgefahr.
+
+| Grad | Bezeichnung |
+| --- | --- |
+| S0 | leicht |
+| S1 | leicht |
+| S2 | mittel |
+| S3 | schwer |
+| S4 | schwer |
+| S5 | schwer |
+
+**Implementierung** (`src/lib/scales.ts`):
+
+- `DifficultyScale` – Typ mit `name`, `description` und `grades` (Grad → Bezeichnung; leer bei kontinuierlichen Skalen wie der franz. Kletterskala).
+- `SCALE_BY_SUBTYPE` – Mapping tourType-Subtyp → `DifficultyScale`.
+- `scaleForSubType(label)` / `scaleNameForSubType(label)` – Skala bzw. Skalenname zu einem Subtyp.
+- `technicalDifficultyTooltip(tourType, technicalDifficulty?)` – Tooltip-Text; zeigt bei bekanntem Grad dessen Bezeichnung (z. B. `"T3 – anspruchsvolles Bergwandern (SAC-Wanderskala)"`), sonst Skalenname + Kurzbeschreibung. Grad-Bereiche wie `"T3 - T4"` werden an `" - "` (mit Leerzeichen) gesplittet, um Codes wie `"WS-"` nicht zu zerstören.
+
+Verwendet in: `FilterBar` → `TourTypeFilter` (Schwierigkeits-Chips je Grad), `TourCard` (Liste), `TourTableView` (Tabelle), `TourDetailContent` (Detailseite).
 
 ## 6. Filterlogik (`src/lib/filter.ts`)
 

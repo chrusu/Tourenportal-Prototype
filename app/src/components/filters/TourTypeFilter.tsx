@@ -5,7 +5,7 @@ import { FilterPopover } from "./FilterPopover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DifficultyRangeSelect } from "./DifficultyRangeSelect";
 import { DISCIPLINES } from "@/lib/disciplines";
-import { scaleNameForSubType } from "@/lib/scales";
+import { scaleForSubType } from "@/lib/scales";
 import type { Tour } from "@/types/tour";
 
 interface TourTypeFilterProps {
@@ -83,65 +83,112 @@ export function TourTypeFilter({
               ? "indeterminate"
               : false;
 
+          // Disciplines with a single sub-type sharing the same label (e.g.
+          // "Höhle", "Trailrunning") are visually flattened to one row – the
+          // sub-type acts as the main activity – while the underlying filter
+          // logic still toggles that one sub-type label.
+          const isFlat = d.subTypes.length === 1 && d.subTypes[0].label === d.label;
+          const onlySubType = d.subTypes[0];
+
           return (
             <div
               key={d.label}
               className={di > 0 ? "mt-1.5 border-t border-sac-gray pt-1.5" : ""}
             >
-              {/* ── Hauptkategorie ── */}
-              <label className="group flex cursor-pointer items-center gap-2.5 px-1 py-1.5 hover:bg-sac-snow">
-                <Checkbox
-                  checked={mainState}
-                  onCheckedChange={(v) => toggleHauptKategorie(subLabels, v)}
-                />
-                <span
-                  className="h-3 w-3 shrink-0"
-                  style={{ backgroundColor: d.color }}
-                  aria-hidden
-                />
-                <span className="text-sm font-bold text-sac-black transition-colors duration-[180ms] group-hover:text-sac-red">
-                  {d.label}
-                </span>
-              </label>
-
-              {/* ── Unterkategorien ── */}
-              <div className="ml-7 flex flex-col">
-                {d.subTypes.map((st) => {
-                  const isSelected = selectedTypes.includes(st.label);
-                  return (
-                    <div key={st.label}>
-                      <label className="group flex cursor-pointer items-center gap-2.5 px-1 py-1 hover:bg-sac-snow">
-                        <Checkbox
-                          checked={isSelected}
-                          onCheckedChange={(v) => toggleSubType(st.label, v === true)}
-                        />
-                        <span className="flex items-center gap-1.5">
-                          <span className="text-sm text-sac-gray-dark transition-colors duration-[180ms] group-hover:text-sac-red">
-                            {st.label}
-                          </span>
-                          {(countBySubType[st.label] ?? 0) > 0 && (
-                            <span className="min-w-[1.25rem] rounded-sm bg-sac-gray px-1 py-0.5 text-center text-xs font-bold text-sac-gray-dark">
-                              {countBySubType[st.label]}
-                            </span>
-                          )}
+              {isFlat ? (
+                <>
+                  {/* ── Flattened Hauptkategorie (== single Unterkategorie) ── */}
+                  <label className="group flex cursor-pointer items-center gap-2.5 px-1 py-1.5 hover:bg-sac-snow">
+                    <Checkbox
+                      checked={selectedTypes.includes(onlySubType.label)}
+                      onCheckedChange={(v) => toggleSubType(onlySubType.label, v === true)}
+                    />
+                    <span
+                      className="h-3 w-3 shrink-0"
+                      style={{ backgroundColor: d.color }}
+                      aria-hidden
+                    />
+                    <span className="flex items-center gap-1.5">
+                      <span className="text-sm font-bold text-sac-black transition-colors duration-[180ms] group-hover:text-sac-red">
+                        {d.label}
+                      </span>
+                      {(countBySubType[onlySubType.label] ?? 0) > 0 && (
+                        <span className="min-w-[1.25rem] rounded-sm bg-sac-gray px-1 py-0.5 text-center text-xs font-bold text-sac-gray-dark">
+                          {countBySubType[onlySubType.label]}
                         </span>
-                      </label>
-
-                      {/* Per-sub-type difficulty chips (click a grade, then hover + click another to select the range between them) */}
-                      {isSelected && st.difficulties.length > 0 && (
-                        <div className="mb-1 ml-6 mt-0.5">
-                          <DifficultyRangeSelect
-                            options={st.difficulties}
-                            value={difficultiesBySubType[st.label] ?? []}
-                            onChange={(grades) => setGrades(st.label, grades)}
-                            scaleName={scaleNameForSubType(st.label)}
-                          />
-                        </div>
                       )}
+                    </span>
+                  </label>
+
+                  {selectedTypes.includes(onlySubType.label) && onlySubType.difficulties.length > 0 && (
+                    <div className="mb-1 ml-7 mt-0.5">
+                      <DifficultyRangeSelect
+                        options={onlySubType.difficulties}
+                        value={difficultiesBySubType[onlySubType.label] ?? []}
+                        onChange={(grades) => setGrades(onlySubType.label, grades)}
+                        scale={scaleForSubType(onlySubType.label)}
+                      />
                     </div>
-                  );
-                })}
-              </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* ── Hauptkategorie ── */}
+                  <label className="group flex cursor-pointer items-center gap-2.5 px-1 py-1.5 hover:bg-sac-snow">
+                    <Checkbox
+                      checked={mainState}
+                      onCheckedChange={(v) => toggleHauptKategorie(subLabels, v)}
+                    />
+                    <span
+                      className="h-3 w-3 shrink-0"
+                      style={{ backgroundColor: d.color }}
+                      aria-hidden
+                    />
+                    <span className="text-sm font-bold text-sac-black transition-colors duration-[180ms] group-hover:text-sac-red">
+                      {d.label}
+                    </span>
+                  </label>
+
+                  {/* ── Unterkategorien ── */}
+                  <div className="ml-7 flex flex-col">
+                    {d.subTypes.map((st) => {
+                      const isSelected = selectedTypes.includes(st.label);
+                      return (
+                        <div key={st.label}>
+                          <label className="group flex cursor-pointer items-center gap-2.5 px-1 py-1 hover:bg-sac-snow">
+                            <Checkbox
+                              checked={isSelected}
+                              onCheckedChange={(v) => toggleSubType(st.label, v === true)}
+                            />
+                            <span className="flex items-center gap-1.5">
+                              <span className="text-sm text-sac-gray-dark transition-colors duration-[180ms] group-hover:text-sac-red">
+                                {st.label}
+                              </span>
+                              {(countBySubType[st.label] ?? 0) > 0 && (
+                                <span className="min-w-[1.25rem] rounded-sm bg-sac-gray px-1 py-0.5 text-center text-xs font-bold text-sac-gray-dark">
+                                  {countBySubType[st.label]}
+                                </span>
+                              )}
+                            </span>
+                          </label>
+
+                          {/* Per-sub-type difficulty chips (click a grade, then hover + click another to select the range between them) */}
+                          {isSelected && st.difficulties.length > 0 && (
+                            <div className="mb-1 ml-6 mt-0.5">
+                              <DifficultyRangeSelect
+                                options={st.difficulties}
+                                value={difficultiesBySubType[st.label] ?? []}
+                                onChange={(grades) => setGrades(st.label, grades)}
+                                scale={scaleForSubType(st.label)}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
             </div>
           );
         })}

@@ -13,6 +13,8 @@ const badgeVariants = cva(
         closed: "border-transparent bg-sac-red/15 text-sac-red",
         full: "border-transparent bg-sac-orange/20 text-sac-orange",
         published: "border-input bg-sac-gray-light text-sac-gray-dark",
+        durchgefuehrt: "border-transparent bg-sac-gray text-sac-gray-dark",
+        abgesagt: "border-sac-red bg-white text-sac-red",
       },
     },
     defaultVariants: {

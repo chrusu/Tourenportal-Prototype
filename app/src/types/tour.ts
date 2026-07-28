@@ -105,8 +105,10 @@ export interface TourData {
   tours: Tour[];
 }
 
-/** UI-facing registration status (three visible states, see prototyp.md). */
+/** UI-facing registration status filter values (see prototyp.md). */
 export type RegistrationStatus =
   | "anmeldung_offen"
   | "anmeldung_geschlossen"
-  | "veroeffentlicht";
+  | "veroeffentlicht"
+  | "durchgefuehrt"
+  | "abgesagt";

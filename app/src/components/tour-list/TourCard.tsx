@@ -34,7 +34,7 @@ export function TourCard({ tour }: TourCardProps) {
         <div className="min-w-0 flex-1 sm:pr-5">
           <div className="mt-1 flex items-center gap-2">
             {mainDiscipline && (
-              <DisciplineIcon discipline={mainDiscipline} color={mainDiscipline.color} title={mainDiscipline.label} />
+              <DisciplineIcon discipline={mainDiscipline} color={color} title={mainDiscipline.label} />
             )}
             <span
               className="text-xs font-bold uppercase tracking-wider"
@@ -118,7 +118,7 @@ export function TourCard({ tour }: TourCardProps) {
                   </span>
                 </span>
               </TooltipTrigger>
-              <TooltipContent>{technicalDifficultyTooltip(tour.tourType)}</TooltipContent>
+              <TooltipContent>{technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)}</TooltipContent>
             </Tooltip>
           )}
           {elevation && (

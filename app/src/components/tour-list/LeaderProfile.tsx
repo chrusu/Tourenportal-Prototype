@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Globe, Instagram, Facebook, Linkedin } from "lucide-react";
+import { Phone, Mail, Globe, Instagram, Facebook, Linkedin } from "lucide-react";
 import type { Leader, SocialLink } from "@/types/tour";
 
 function Avatar({ leader }: { leader: Leader }) {
@@ -53,8 +53,7 @@ interface LeaderProfileProps {
 }
 
 export function LeaderProfile({ leader, highlight = false }: LeaderProfileProps) {
-  const hasContact =
-    leader.address || leader.phone || leader.email || leader.social?.length;
+  const hasContact = leader.phone || leader.email || leader.social?.length;
 
   return (
     <div
@@ -70,17 +69,6 @@ export function LeaderProfile({ leader, highlight = false }: LeaderProfileProps)
 
         {hasContact && (
           <div className="mt-2 flex flex-col gap-1">
-            {leader.address && (
-              <a
-                href={`https://maps.google.com/?q=${encodeURIComponent(leader.address)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-start gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-              >
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                {leader.address}
-              </a>
-            )}
             {leader.phone && (
               <a
                 href={`tel:${leader.phone.replace(/\s/g, "")}`}

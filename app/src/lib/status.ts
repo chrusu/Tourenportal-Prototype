@@ -37,9 +37,16 @@ export function matchesRegistrationFilter(
   status: TourStatus,
   filter: RegistrationStatus
 ): boolean {
+  // "Durchgeführt" and "Abgesagt" are their own filter values (for past
+  // tours), so they're excluded from the generic "closed" bucket below.
+  if (filter === "durchgefuehrt") return status === "durchgefuehrt";
+  if (filter === "abgesagt") return status === "abgesagt";
+
   const variant = statusVariant(status);
   if (filter === "anmeldung_offen") return variant === "open";
-  if (filter === "anmeldung_geschlossen") return variant === "closed";
+  if (filter === "anmeldung_geschlossen") {
+    return variant === "closed" && status !== "durchgefuehrt" && status !== "abgesagt";
+  }
   return variant === "published";
 }
 
@@ -50,25 +57,31 @@ export const REGISTRATION_STATUS_OPTIONS: {
   { value: "anmeldung_offen", label: "Anmeldung offen" },
   { value: "anmeldung_geschlossen", label: "Anmeldung geschlossen" },
   { value: "veroeffentlicht", label: "Veröffentlicht" },
+  { value: "durchgefuehrt", label: "Durchgeführt" },
+  { value: "abgesagt", label: "Abgesagt" },
 ];
 
 // ---------------------------------------------------------------------------
 // Displayed registration status (per-tour, considering the participants config)
 // ---------------------------------------------------------------------------
 
-export type RegStatus = "published" | "open" | "closed" | "full";
+export type RegStatus = "published" | "open" | "closed" | "full" | "durchgefuehrt" | "abgesagt";
 
 /** Base registration state, treating "ausgebucht" as an open (but full) tour. */
-function baseState(status: TourStatus): "published" | "open" | "closed" {
+function baseState(
+  status: TourStatus
+): "published" | "open" | "closed" | "durchgefuehrt" | "abgesagt" {
   switch (status) {
     case "anmeldung_offen":
     case "ausgebucht":
       return "open";
     case "anmeldung_geschlossen":
-    case "abgesagt":
-    case "durchgefuehrt":
     case "nicht_durchgefuehrt":
       return "closed";
+    case "durchgefuehrt":
+      return "durchgefuehrt";
+    case "abgesagt":
+      return "abgesagt";
     default:
       return "published";
   }
@@ -94,8 +107,9 @@ function isFull(tour: Tour): boolean {
  */
 export function registrationStatus(tour: Tour): RegStatus {
   const base = baseState(tour.status);
-  if (base === "published") return "published";
-  if (base === "closed") return "closed";
+  if (base === "published" || base === "closed" || base === "durchgefuehrt" || base === "abgesagt") {
+    return base;
+  }
   if (showsParticipants(tour) && isFull(tour)) return "full";
   return "open";
 }
@@ -110,5 +124,9 @@ export function regStatusLabel(status: RegStatus): string {
       return "Ausgebucht";
     case "closed":
       return "Anmeldung geschlossen";
+    case "durchgefuehrt":
+      return "Durchgeführt";
+    case "abgesagt":
+      return "Abgesagt";
   }
 }

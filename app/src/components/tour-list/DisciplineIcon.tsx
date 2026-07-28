@@ -22,7 +22,7 @@ interface DisciplineIconProps {
 export function DisciplineIcon({ discipline, color, title }: DisciplineIconProps) {
   const Fallback = FALLBACK_ICONS[discipline.label];
   const icon = discipline.iconId ? (
-    <svg className="h-4 w-4" style={{ color }} aria-hidden>
+    <svg className="h-4 w-4" style={{ color }} fill="currentColor" aria-hidden>
       <use xlinkHref={`${import.meta.env.BASE_URL}icons/sac-discipline-sprite.svg#${discipline.iconId}`} />
     </svg>
   ) : Fallback ? (

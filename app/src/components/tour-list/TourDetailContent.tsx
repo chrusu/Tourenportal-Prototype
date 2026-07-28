@@ -10,6 +10,7 @@ import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
 import { conditionTooltip, technicalDifficultyTooltip } from "@/lib/scales";
+import { linkifyText } from "@/lib/linkify";
 
 interface TourDetailContentProps {
   tour: Tour;
@@ -23,7 +24,7 @@ function Section({ title, text }: { title: string; text?: string }) {
     <div>
       <h4 className="mb-1 text-sm font-bold">{title}</h4>
       <p className="whitespace-pre-line text-sm leading-relaxed text-foreground/90">
-        {text}
+        {linkifyText(text)}
       </p>
     </div>
   );
@@ -95,7 +96,7 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
                       {tour.technicalDifficulty}
                     </span>
                   </TooltipTrigger>
-                  <TooltipContent>{technicalDifficultyTooltip(tour.tourType)}</TooltipContent>
+                  <TooltipContent>{technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)}</TooltipContent>
                 </Tooltip>
               )}
             </div>
@@ -118,7 +119,7 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
       </div>
 
       {/* Body */}
-      <div className="flex flex-col gap-5 p-5">
+      <div className="flex flex-col gap-5 p-5 lg:p-6">
         {/* Status + badges */}
         <div className="flex flex-wrap items-center gap-2">
           <TourStatusBadge tour={tour} />
@@ -133,7 +134,7 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
         </div>
 
         {/* Facts grid */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           <Fact
             icon={<Mountain className="h-4 w-4" />}
             label="Datum"
@@ -200,23 +201,27 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
           />
         </div>
 
-        {/* Text sections */}
-        <div className="flex flex-col gap-4 border-t pt-4">
-          <Section title="Beschrieb" text={d?.description} />
-          <Section title="Zusatztext" text={d?.additionalText} />
-          <Section title="Ausrüstung" text={d?.equipment} />
-          <Section title="Kosten" text={d?.costsInfo} />
-        </div>
-
-        {/* Leader profiles */}
-        {tour.leaders.length > 0 && (
-          <div className="flex flex-col gap-3 border-t pt-4">
-            <h4 className="text-sm font-bold">Tourenleitung</h4>
-            {tour.leaders.map((leader, i) => (
-              <LeaderProfile key={leader.name} leader={leader} highlight={i === 0} />
-            ))}
+        {/* Text sections + leader profiles side-by-side on wide screens */}
+        <div className="grid grid-cols-1 gap-6 border-t pt-4 lg:grid-cols-[1fr_22rem]">
+          <div className="flex flex-col gap-4">
+            <Section title="Beschrieb" text={d?.description} />
+            <Section title="Zusatztext" text={d?.additionalText} />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <Section title="Ausrüstung" text={d?.equipment} />
+              <Section title="Kosten" text={d?.costsInfo} />
+            </div>
           </div>
-        )}
+
+          {/* Leader profiles */}
+          {tour.leaders.length > 0 && (
+            <div className="flex flex-col gap-3 lg:border-l lg:pl-6">
+              <h4 className="text-sm font-bold">Tourenleitung</h4>
+              {tour.leaders.map((leader, i) => (
+                <LeaderProfile key={leader.name} leader={leader} highlight={i === 0} />
+              ))}
+            </div>
+          )}
+        </div>
 
         {/* Footer: deadline + actions */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-t pt-4">

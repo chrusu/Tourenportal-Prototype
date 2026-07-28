@@ -35,7 +35,7 @@ export function TourDetailPage() {
         </Link>
 
         {tour ? (
-          <div className="mx-auto w-full max-w-3xl overflow-hidden border bg-white shadow-sm">
+          <div className="overflow-hidden border bg-white shadow-sm">
             <TourDetailContent
               tour={tour}
               onClose={() => navigate("/")}
@@ -43,7 +43,7 @@ export function TourDetailPage() {
             />
           </div>
         ) : (
-          <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-2 border bg-white p-10 text-center shadow-sm">
+          <div className="flex w-full flex-col items-center gap-2 border bg-white p-10 text-center shadow-sm">
             <p className="text-sac-h4">Tour nicht gefunden</p>
             <p className="text-sm text-muted-foreground">
               Diese Tour existiert nicht oder wurde entfernt.

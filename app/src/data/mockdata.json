@@ -148,7 +148,7 @@
         "max": 8,
         "display": "5/8"
       },
-      "status": "anmeldung_offen",
+      "status": "durchgefuehrt",
       "flags": [
         "Mehrtägig / Lager",
         "Anreise mit ÖV",
@@ -620,7 +620,7 @@
         "max": 20,
         "display": "12/20"
       },
-      "status": "anmeldung_offen",
+      "status": "abgesagt",
       "flags": [
         "Anreise mit ÖV",
         "Geeignet für Schnuppergäste"

@@ -1,4 +1,4 @@
-import { CheckCircle2, XCircle, AlertTriangle, Clock } from "lucide-react";
+import { CheckCircle2, XCircle, AlertTriangle, Clock, CheckCheck, Ban } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { registrationStatus, regStatusLabel } from "@/lib/status";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
@@ -8,6 +8,8 @@ const ICONS = {
   full: AlertTriangle,
   closed: XCircle,
   published: Clock,
+  durchgefuehrt: CheckCheck,
+  abgesagt: Ban,
 } as const;
 
 const COLORS = {
@@ -15,6 +17,8 @@ const COLORS = {
   full: "text-sac-orange",
   closed: "text-sac-red",
   published: "text-sac-gray-dark",
+  durchgefuehrt: "text-sac-gray-dark",
+  abgesagt: "text-sac-red",
 } as const;
 
 export function TourStatusIcon({ tour }: { tour: Tour }) {

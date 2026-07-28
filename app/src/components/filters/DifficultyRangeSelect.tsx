@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
+import type { DifficultyScale } from "@/lib/scales";
 
 interface DifficultyRangeSelectProps {
   /** All grades for this sub-type, in ascending difficulty order. */
@@ -8,8 +9,8 @@ interface DifficultyRangeSelectProps {
   /** Currently persisted selection. */
   value: string[];
   onChange: (grades: string[]) => void;
-  /** Name of the difficulty scale these grades belong to, shown in each grade's tooltip. */
-  scaleName?: string;
+  /** Difficulty scale these grades belong to, used to build each grade's tooltip. */
+  scale?: DifficultyScale;
 }
 
 function rangeBetween(options: string[], a: string, b: string): string[] {
@@ -26,7 +27,7 @@ function rangeBetween(options: string[], a: string, b: string): string[] {
  * click a second grade to commit the whole range as the active filter.
  * Clicking a single grade twice (or the same grade again) selects just that one.
  */
-export function DifficultyRangeSelect({ options, value, onChange, scaleName }: DifficultyRangeSelectProps) {
+export function DifficultyRangeSelect({ options, value, onChange, scale }: DifficultyRangeSelectProps) {
   const [rangeStart, setRangeStart] = useState<string | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
 
@@ -58,7 +59,7 @@ export function DifficultyRangeSelect({ options, value, onChange, scaleName }: D
             onMouseEnter={() => previewing && setHovered(grade)}
             aria-pressed={isActive}
             className={cn(
-              "inline-flex select-none items-center justify-center rounded-full border border-input bg-background px-2.5 py-1 text-xs font-light transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
+              "inline-flex select-none items-center justify-center rounded-full border border-input bg-background px-2.5 py-1 text-xs font-light transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sac-red/40 focus-visible:ring-offset-1",
               isActive && "border-primary bg-primary font-bold text-primary-foreground"
             )}
           >
@@ -66,14 +67,15 @@ export function DifficultyRangeSelect({ options, value, onChange, scaleName }: D
           </button>
         );
 
-        if (!scaleName) return <div key={grade}>{button}</div>;
+        if (!scale) return <div key={grade}>{button}</div>;
+
+        const gradeLabel = scale.grades[grade];
+        const tooltip = gradeLabel ? `${grade} – ${gradeLabel} (${scale.name})` : `${grade} – ${scale.name}`;
 
         return (
           <Tooltip key={grade}>
             <TooltipTrigger asChild>{button}</TooltipTrigger>
-            <TooltipContent>
-              {grade} – {scaleName}
-            </TooltipContent>
+            <TooltipContent>{tooltip}</TooltipContent>
           </Tooltip>
         );
       })}

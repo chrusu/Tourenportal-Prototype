@@ -49,36 +49,183 @@ export function conditionTooltip(physicalDifficulty?: string): string | undefine
   return `Kondition: ${parts.join(", ")}`;
 }
 
-/** Human-readable name of the technical difficulty scale, keyed by tourType sub-type label. */
-const SCALE_BY_SUBTYPE: Record<string, string> = {
-  "Bergwandern (T1–T3)": "SAC-Wanderskala (T1–T6)",
-  "Alpinwandern (T4–T6)": "SAC-Wanderskala (T1–T6)",
-  Gletschertouren: "SAC-Hochtourenskala (L–EX)",
-  Hochtouren: "SAC-Hochtourenskala (L–EX)",
-  Freeride: "SAC-Hochtourenskala (L–AS)",
-  Skitour: "SAC-Hochtourenskala (L–AS)",
-  Skihochtour: "SAC-Hochtourenskala (L–AS)",
-  Schneeschuhtouren: "Schneeschuh-Skala (WT1–WT6)",
-  Klettersteig: "Klettersteig-Skala (K1–K6)",
-  Alpinklettern: "SAC-Hochtourenskala (L–EX)",
-  Sportklettern: "UIAA-/Frz. Kletterskala (3–7)",
-  Bouldern: "UIAA-/Frz. Kletterskala (3–7)",
-  "Eisklettern/Drytooling": "WI-Eisskala (WI1–WI6)",
-  Mountainbike: "MTB-Skala (S0–S5)",
+/**
+ * A SAC technical-difficulty scale: name, one-line description, and (where
+ * enumerable) a label per grade. See technische-anforderungen.md § 5.2 for
+ * the full reference (source: SAC styleguide – Schwierigkeitsskalen).
+ */
+export interface DifficultyScale {
+  name: string;
+  description: string;
+  /** Grade code -> short label, e.g. "T3" -> "anspruchsvolles Bergwandern". Empty when grades aren't discrete (e.g. Kletterskala). */
+  grades: Record<string, string>;
+}
+
+const WANDERSKALA: DifficultyScale = {
+  name: "SAC-Wanderskala",
+  description: "Bewertet die Schwierigkeit von Berg- und Wanderwegen von T1 (leicht) bis T6 (extrem schwierig).",
+  grades: {
+    T1: "Wandern",
+    T2: "Bergwandern",
+    T3: "anspruchsvolles Bergwandern",
+    T4: "Alpinwandern",
+    T5: "anspruchsvolles Alpinwandern",
+    T6: "schwieriges Alpinwandern",
+  },
 };
 
-/** Tooltip text describing the technical difficulty scale for a tour's (main) sport. */
-export function technicalDifficultyTooltip(tourType: string[]): string {
-  for (const t of tourType) {
-    const scale = SCALE_BY_SUBTYPE[t];
-    if (scale) return `Technische Schwierigkeit nach ${scale}`;
-  }
-  return "Technische Schwierigkeit";
+const HOCHTOURENSKALA: DifficultyScale = {
+  name: "SAC-Berg- und Hochtourenskala",
+  description:
+    "Bewertet die technische Schwierigkeit von Berg- und Hochtouren im hochalpinen Gelände bei guten Verhältnissen.",
+  grades: {
+    L: "leicht",
+    "WS-": "wenig schwierig-",
+    WS: "wenig schwierig",
+    "WS+": "wenig schwierig+",
+    "ZS-": "wenig schwierig-",
+    ZS: "ziemlich schwierig",
+    "ZS+": "ziemlich schwierig+",
+    "S-": "schwierig-",
+    S: "schwierig",
+    "S+": "schwierig+",
+    "SS-": "sehr schwierig-",
+    SS: "sehr schwierig",
+    "SS+": "sehr schwierig+",
+  },
+};
+
+const SKITOURENSKALA: DifficultyScale = {
+  name: "SAC-Skitourenskala",
+  description:
+    "Bewertet den skifahrerischen Teil einer Skitour anhand des höchsten Hauptkriteriums bei guten Bedingungen.",
+  grades: {
+    L: "leicht",
+    "WS-": "wenig schwierig-",
+    WS: "wenig schwierig",
+    "WS+": "wenig schwierig+",
+    "ZS-": "wenig schwierig-",
+    ZS: "ziemlich schwierig",
+    "ZS+": "ziemlich schwierig+",
+    "S-": "ziemlich schwierig-",
+    S: "schwierig",
+    "S+": "schwierig+",
+    "SS-": "sehr schwierig-",
+    SS: "sehr schwierig",
+    "SS+": "sehr schwierig+",
+  },
+};
+
+const SCHNEESCHUHSKALA: DifficultyScale = {
+  name: "SAC-Schneeschuhtourenskala",
+  description:
+    "Richtwerte für Schneeschuhtouren bei guten Bedingungen; setzt sichere Orientierung und ab WT2 LVS-Ausrüstung voraus.",
+  grades: {
+    WT1: "Leichte Schneeschuhwanderung",
+    WT2: "Schneeschuhwanderung",
+    WT3: "anspruchsvolle Schneeschuhwanderung",
+    WT4: "Schneeschuhtour",
+    WT5: "Alpine Schneeschuhtour",
+    WT6: "anspruchsvolle alpine Schneeschuhtour",
+  },
+};
+
+const KLETTERSKALA_FR: DifficultyScale = {
+  name: "Kletterskala (französische Skala)",
+  description: "Bewertet die klettertechnische Schwierigkeit anhand der Schlüsselstelle (z. B. 6a, 6b+).",
+  grades: {},
+};
+
+const WI_SKALA: DifficultyScale = {
+  name: "Eisklettern (Water Ice, WI-Skala)",
+  description:
+    "Bewertet die technische Schwierigkeit von Eiskletterrouten (Wasserfalleis) anhand Steilheit, Länge und Absicherung.",
+  grades: {},
+};
+
+const KLETTERSTEIGSKALA: DifficultyScale = {
+  name: "SAC-Klettersteigskala (Hüsler-Skala)",
+  description: "Schweizer Schwierigkeitsskala für Klettersteige, Grade K1 (leicht) bis K6 (extrem schwierig).",
+  grades: {
+    K1: "leicht",
+    K2: "mittel",
+    K3: "ziemlich schwierig",
+    K4: "schwierig",
+    K5: "sehr schwierig",
+    K6: "extrem schwierig",
+  },
+};
+
+const SINGLETRAILSKALA: DifficultyScale = {
+  name: "Singletrail-Skala (STS)",
+  description:
+    "Bewertet die technische Schwierigkeit von Mountainbike-Singletrails unter idealen Bedingungen, S0 (sehr leicht) bis S5 (extrem schwierig).",
+  grades: {
+    S0: "leicht",
+    S1: "leicht",
+    S2: "mittel",
+    S3: "schwer",
+    S4: "schwer",
+    S5: "schwer",
+  },
+};
+
+/** Maps a tourType sub-type label to its technical difficulty scale. */
+const SCALE_BY_SUBTYPE: Record<string, DifficultyScale> = {
+  "Bergwandern (T1–T3)": WANDERSKALA,
+  "Alpinwandern (T4–T6)": WANDERSKALA,
+  Gletschertouren: HOCHTOURENSKALA,
+  Hochtouren: HOCHTOURENSKALA,
+  Alpinklettern: HOCHTOURENSKALA,
+  Freeride: SKITOURENSKALA,
+  Skitour: SKITOURENSKALA,
+  Skihochtour: SKITOURENSKALA,
+  Schneeschuhtouren: SCHNEESCHUHSKALA,
+  Klettersteig: KLETTERSTEIGSKALA,
+  Sportklettern: KLETTERSKALA_FR,
+  Bouldern: KLETTERSKALA_FR,
+  "Eisklettern/Drytooling": WI_SKALA,
+  Mountainbike: SINGLETRAILSKALA,
+};
+
+/** Resolves the technical difficulty scale for a given tourType sub-type label (e.g. "Sportklettern"). */
+export function scaleForSubType(label: string): DifficultyScale | undefined {
+  return SCALE_BY_SUBTYPE[label];
 }
 
 /** Name of the technical difficulty scale for a given tourType sub-type label (e.g. "Sportklettern"). */
 export function scaleNameForSubType(label: string): string {
-  return SCALE_BY_SUBTYPE[label] ?? "Technische Schwierigkeit";
+  return SCALE_BY_SUBTYPE[label]?.name ?? "Technische Schwierigkeit";
+}
+
+/** Splits a grade range like "T3 - T4" into its endpoints, without breaking codes such as "WS-". */
+function splitGradeRange(value: string): string[] {
+  return value
+    .split(/\s+-\s+/)
+    .map((v) => v.trim())
+    .filter(Boolean);
+}
+
+/** Tooltip text describing a tour's technical difficulty, incl. the scale and (if known) the specific grade's meaning. */
+export function technicalDifficultyTooltip(tourType: string[], technicalDifficulty?: string): string {
+  let scale: DifficultyScale | undefined;
+  for (const t of tourType) {
+    scale = SCALE_BY_SUBTYPE[t];
+    if (scale) break;
+  }
+  if (!scale) return "Technische Schwierigkeit";
+
+  if (technicalDifficulty) {
+    const grades = splitGradeRange(technicalDifficulty);
+    const parts = grades
+      .map((g) => (scale!.grades[g] ? `${g} – ${scale!.grades[g]}` : undefined))
+      .filter((p): p is string => !!p);
+    if (parts.length > 0) {
+      return `${parts.join(", ")} (${scale.name})`;
+    }
+  }
+
+  return `${scale.name}: ${scale.description}`;
 }
 
 /** General explanation of the SAC condition ("Kondition") scale, for filter tooltips. */
