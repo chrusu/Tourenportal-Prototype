@@ -1,10 +1,11 @@
-import { CheckCircle2, XCircle, AlertTriangle, Clock, CheckCheck, Ban } from "lucide-react";
+import { CheckCircle2, XCircle, AlertTriangle, Clock, CheckCheck, Ban, ListPlus } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { registrationStatus, regStatusLabel } from "@/lib/status";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 
 const ICONS = {
   open: CheckCircle2,
+  waitlist: ListPlus,
   full: AlertTriangle,
   closed: XCircle,
   published: Clock,
@@ -14,6 +15,7 @@ const ICONS = {
 
 const COLORS = {
   open: "text-sac-green-hover",
+  waitlist: "text-sac-alert-blue",
   full: "text-sac-orange",
   closed: "text-sac-red",
   published: "text-sac-gray-dark",

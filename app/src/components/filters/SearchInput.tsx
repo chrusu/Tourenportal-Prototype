@@ -14,8 +14,8 @@ export function SearchInput({ value, onChange }: SearchInputProps) {
         type="search"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="Nach Tourentitel, Beschreibung, Typ, etc. suchen"
-        aria-label="Touren durchsuchen"
+        placeholder="Nach Aktivitätstitel, Beschreibung, Typ, etc. suchen"
+        aria-label="Aktivitäten durchsuchen"
         className="h-[50px] pl-9"
       />
     </div>

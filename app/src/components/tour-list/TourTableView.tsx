@@ -1,12 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
+import { Calendar, Clock, Gauge, Tag, User, Users } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { TourStatusIcon } from "./TourStatusIcon";
 import { DisciplineIcon } from "./DisciplineIcon";
+import { FavoriteButton } from "./FavoriteButton";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { EmptyState } from "./EmptyState";
 import { formatDate } from "@/lib/format";
 import { tourColor, mainDisciplineFor } from "@/lib/disciplines";
 import { technicalDifficultyTooltip } from "@/lib/scales";
+import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { participantsText } from "@/lib/tour-display";
 
 interface TourTableViewProps {
@@ -51,13 +54,24 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                 onClick={() => navigate(detailHref)}
               >
                 <td data-label="Datum" className={`${cell} text-muted-foreground`}>
-                  {formatDate(tour.startDate)}
+                  <span className="inline-flex items-center gap-1.5">
+                    <Calendar className="h-4 w-4 shrink-0" />
+                    {formatDate(tour.startDate)}
+                  </span>
                 </td>
                 <td data-label="Zeitraum" className={`${cell} whitespace-nowrap text-muted-foreground`}>
-                  {tour.durationDays ? `${tour.durationDays}d` : "–"}
+                  {tour.durationDays ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock className="h-4 w-4 shrink-0" />
+                      {tour.durationDays}d
+                    </span>
+                  ) : (
+                    "–"
+                  )}
                 </td>
-                <td data-label="Tour" className={cell}>
-                  <span className="inline-flex items-center gap-2 text-right md:text-left">
+                <td data-label="Aktivität" className={cell}>
+                  <span className="flex min-w-0 flex-1 items-center justify-end gap-1.5 text-right md:justify-start md:text-left">
+                    <FavoriteButton tourId={tour.id} size="sm" />
                     {mainDiscipline && (
                       <DisciplineIcon
                         discipline={mainDiscipline}
@@ -67,7 +81,7 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                     )}
                     <Link
                       to={detailHref}
-                      className="font-bold underline-offset-2 hover:underline hover:text-sac-red"
+                      className="min-w-0 font-bold underline-offset-2 hover:underline hover:text-sac-red"
                     >
                       {tour.title}
                     </Link>
@@ -77,27 +91,53 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                   {tour.technicalDifficulty ? (
                     <Tooltip>
                       <TooltipTrigger asChild>
-                        <span
-                          className="rounded-full px-3 py-1 text-xs font-bold"
-                          style={{ backgroundColor: `${color}33`, color }}
-                        >
-                          {tour.technicalDifficulty}
+                        <span className="inline-flex items-center gap-1.5">
+                          <Gauge className="h-4 w-4 shrink-0 text-muted-foreground" />
+                          <span
+                            className="rounded-full px-3 py-1 text-xs font-bold"
+                            style={{ backgroundColor: `${color}33`, color }}
+                          >
+                            {tour.technicalDifficulty}
+                          </span>
                         </span>
                       </TooltipTrigger>
-                      <TooltipContent>{technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)}</TooltipContent>
+                      <TooltipContent>
+                        <TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />
+                      </TooltipContent>
                     </Tooltip>
                   ) : (
                     "–"
                   )}
                 </td>
                 <td data-label="Gruppe" className={`${cell} text-muted-foreground`}>
-                  {tour.groups[0] ?? "–"}
+                  {tour.groups[0] ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Tag className="h-4 w-4 shrink-0" />
+                      {tour.groups[0]}
+                    </span>
+                  ) : (
+                    "–"
+                  )}
                 </td>
                 <td data-label="Kontakt" className={`${cell} text-muted-foreground`}>
-                  {tour.leaders[0]?.name ?? "–"}
+                  {tour.leaders[0]?.name ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <User className="h-4 w-4 shrink-0" />
+                      {tour.leaders[0].name}
+                    </span>
+                  ) : (
+                    "–"
+                  )}
                 </td>
                 <td data-label="Plätze" className={`${cell} text-muted-foreground`}>
-                  {places ?? "–"}
+                  {places ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Users className="h-4 w-4 shrink-0" />
+                      {places}
+                    </span>
+                  ) : (
+                    "–"
+                  )}
                 </td>
                 <td data-label="Status" className={`${cell} md:text-center`}>
                   <span className="md:mx-auto">

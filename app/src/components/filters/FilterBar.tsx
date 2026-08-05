@@ -19,6 +19,7 @@ import { TourTypeFilter } from "./TourTypeFilter";
 import { FlagFilter } from "./FlagFilter";
 import { LeaderFilter } from "./LeaderFilter";
 import { ActiveFilterChips } from "./ActiveFilterChips";
+import { SavedFiltersPopover } from "./SavedFiltersPopover";
 
 interface FilterBarProps {
   filters: TourFilterState;
@@ -68,11 +69,15 @@ export function FilterBar(props: FilterBarProps) {
         onChange={(v) => update("leader", v)}
       />
       <MultiSelectFilter
-        label="Anmeldestatus"
+        label="Status"
         icon={<CalendarCheck className="h-4 w-4 text-muted-foreground" />}
         options={REGISTRATION_STATUS_OPTIONS}
         selected={filters.registrationStatuses}
         onChange={(v) => update("registrationStatuses", v as RegistrationStatus[])}
+      />
+      <SavedFiltersPopover
+        filters={filters}
+        onApply={(next) => setFilters(() => next)}
       />
     </>
   );
@@ -97,16 +102,20 @@ export function FilterBar(props: FilterBarProps) {
       {/* Row 2: facet filters (desktop) */}
       <div className="mt-4 hidden flex-wrap items-center gap-2 lg:flex">
         {controls}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={reset}
-          className="ml-auto text-muted-foreground"
-          disabled={activeCount === 0}
-        >
-          <RotateCcw className="h-4 w-4" />
-          Reset
-        </Button>
+        {/* When no filter is active, there's no chips line to share with the
+            reset button below, so it stays here instead. */}
+        {activeCount === 0 && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={reset}
+            className="ml-auto text-muted-foreground"
+            disabled
+          >
+            <RotateCcw className="h-4 w-4" />
+            Reset
+          </Button>
+        )}
       </div>
 
       {/* Row 2: facet filters (mobile -> sheet) */}
@@ -139,10 +148,19 @@ export function FilterBar(props: FilterBarProps) {
         </Sheet>
       </div>
 
-      {/* Active filter chips */}
+      {/* Active filter chips + reset (same line) */}
       {activeCount > 0 && (
-        <div className="mt-4 border-t pt-4">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-4">
           <ActiveFilterChips filters={filters} setFilters={setFilters} />
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={reset}
+            className="shrink-0 text-muted-foreground"
+          >
+            <RotateCcw className="h-4 w-4" />
+            Reset
+          </Button>
         </div>
       )}
     </div>

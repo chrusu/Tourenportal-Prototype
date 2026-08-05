@@ -12,7 +12,7 @@ export const FLAG_CATEGORIES: FlagCategory[] = [
   },
   {
     label: "Struktur & Dauer",
-    flags: ["Mehrtägig / Lager"],
+    flags: ["Mehrtägig", "Lager"],
   },
   {
     label: "Anreise & Logistik",
@@ -20,7 +20,7 @@ export const FLAG_CATEGORIES: FlagCategory[] = [
   },
   {
     label: "Art / thematische Ausrichtung",
-    flags: ["Training", "Exkursion", "Arbeitseinsatz", "Versammlung"],
+    flags: ["Kurs", "Exkursion", "Arbeitseinsatz", "Versammlung"],
   },
   {
     label: "Zielgruppe / Eignung",

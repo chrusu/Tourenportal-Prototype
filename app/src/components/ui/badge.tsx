@@ -10,6 +10,7 @@ const badgeVariants = cva(
         default: "border-transparent bg-secondary text-secondary-foreground",
         outline: "border-input text-foreground font-light",
         open: "border-transparent bg-sac-green/20 text-sac-green-hover",
+        waitlist: "border-transparent bg-sac-alert-blue/15 text-sac-alert-blue",
         closed: "border-transparent bg-sac-red/15 text-sac-red",
         full: "border-transparent bg-sac-orange/20 text-sac-orange",
         published: "border-input bg-sac-gray-light text-sac-gray-dark",

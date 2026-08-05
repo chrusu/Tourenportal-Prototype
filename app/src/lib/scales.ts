@@ -36,17 +36,23 @@ export const CONDITION_OPTIONS: { value: PhysicalDifficulty; label: string; tool
   tooltip: `${value} – ${CONDITION_LABELS[value]}: ${CONDITION_DETAILS[value]}`,
 }));
 
-/** Tooltip text describing a tour's condition ("Kondition") requirement, incl. time/ascent detail. */
-export function conditionTooltip(physicalDifficulty?: string): string | undefined {
+/** Structured tooltip content: bold title + one detail line per item. */
+export interface TooltipInfoData {
+  title: string;
+  items: string[];
+}
+
+/** Tooltip content describing a tour's condition ("Kondition") requirement, incl. time/ascent detail. */
+export function conditionTooltip(physicalDifficulty?: string): TooltipInfoData | undefined {
   const grades = expandRange(physicalDifficulty);
   if (grades.length === 0) return undefined;
-  const parts = grades.map((g) => {
+  const items = grades.map((g) => {
     const label = CONDITION_LABELS[g as PhysicalDifficulty];
     const detail = CONDITION_DETAILS[g as PhysicalDifficulty];
     if (!label) return g;
     return detail ? `${g} – ${label} (${detail})` : `${g} – ${label}`;
   });
-  return `Kondition: ${parts.join(", ")}`;
+  return { title: "Kondition", items };
 }
 
 /**
@@ -193,39 +199,47 @@ export function scaleForSubType(label: string): DifficultyScale | undefined {
   return SCALE_BY_SUBTYPE[label];
 }
 
+/** Resolves the technical difficulty scale for a tour's tourType list (first match wins). */
+export function scaleForTourType(tourType: string[]): DifficultyScale | undefined {
+  for (const t of tourType) {
+    const scale = SCALE_BY_SUBTYPE[t];
+    if (scale) return scale;
+  }
+  return undefined;
+}
+
 /** Name of the technical difficulty scale for a given tourType sub-type label (e.g. "Sportklettern"). */
 export function scaleNameForSubType(label: string): string {
   return SCALE_BY_SUBTYPE[label]?.name ?? "Technische Schwierigkeit";
 }
 
 /** Splits a grade range like "T3 - T4" into its endpoints, without breaking codes such as "WS-". */
-function splitGradeRange(value: string): string[] {
+export function splitGradeRange(value: string): string[] {
   return value
     .split(/\s+-\s+/)
     .map((v) => v.trim())
     .filter(Boolean);
 }
 
-/** Tooltip text describing a tour's technical difficulty, incl. the scale and (if known) the specific grade's meaning. */
-export function technicalDifficultyTooltip(tourType: string[], technicalDifficulty?: string): string {
-  let scale: DifficultyScale | undefined;
-  for (const t of tourType) {
-    scale = SCALE_BY_SUBTYPE[t];
-    if (scale) break;
-  }
-  if (!scale) return "Technische Schwierigkeit";
+/** Tooltip content describing a tour's technical difficulty, incl. the scale and (if known) the specific grade's meaning. */
+export function technicalDifficultyTooltip(
+  tourType: string[],
+  technicalDifficulty?: string
+): TooltipInfoData {
+  const scale = scaleForTourType(tourType);
+  if (!scale) return { title: "Technische Schwierigkeit", items: [] };
 
   if (technicalDifficulty) {
     const grades = splitGradeRange(technicalDifficulty);
-    const parts = grades
+    const items = grades
       .map((g) => (scale!.grades[g] ? `${g} – ${scale!.grades[g]}` : undefined))
       .filter((p): p is string => !!p);
-    if (parts.length > 0) {
-      return `${parts.join(", ")} (${scale.name})`;
+    if (items.length > 0) {
+      return { title: scale.name, items };
     }
   }
 
-  return `${scale.name}: ${scale.description}`;
+  return { title: scale.name, items: [scale.description] };
 }
 
 /** General explanation of the SAC condition ("Kondition") scale, for filter tooltips. */

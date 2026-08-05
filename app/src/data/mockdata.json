@@ -89,7 +89,7 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Mehrseillänge"
       ],
@@ -150,7 +150,7 @@
       },
       "status": "durchgefuehrt",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Geeignet für Anfänger"
       ],
@@ -238,7 +238,7 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV"
       ],
       "signature": "K Alp, HT/B/ZS, 6a",
@@ -294,11 +294,12 @@
       "participants": {
         "current": 6,
         "max": 6,
-        "display": "6/6"
+        "display": "6/6",
+        "waitlist": true
       },
       "status": "ausgebucht",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Anreise am Vorabend"
       ],
@@ -378,7 +379,8 @@
       "status": "anmeldung_geschlossen",
       "flags": [
         "Mit Bergführer",
-        "Mehrtägig / Lager",
+        "Mehrtägig",
+        "Lager",
         "Anreise mit ÖV",
         "Klettergarten"
       ],
@@ -437,7 +439,7 @@
       "status": "anmeldung_geschlossen",
       "flags": [
         "Mit Bergführer",
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Klettergarten",
         "Geeignet für Anfänger"
@@ -737,7 +739,7 @@
       },
       "status": "anmeldung_offen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV"
       ],
       "signature": "W-Alp/B/T3 - T4",
@@ -804,7 +806,7 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Geeignet für Tourenleitende"
       ],
@@ -860,7 +862,7 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Anreise am Vorabend"
       ],
@@ -928,7 +930,7 @@
       },
       "status": "anmeldung_offen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Mehrseillänge"
       ],
@@ -995,7 +997,7 @@
       },
       "status": "anmeldung_offen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Arbeitseinsatz"
       ],
@@ -1059,7 +1061,7 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Mehrseillänge",
         "Klettergarten",
@@ -1189,9 +1191,9 @@
       "status": "ausgebucht",
       "flags": [
         "Mit Bergführer",
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
-        "Training",
+        "Kurs",
         "Geeignet für Tourenleitende"
       ],
       "signature": "HT, Kurs/A/WS+",
@@ -1488,7 +1490,7 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV",
         "Geeignet für E-Bike"
       ],
@@ -1552,7 +1554,7 @@
       },
       "status": "anmeldung_geschlossen",
       "flags": [
-        "Mehrtägig / Lager",
+        "Mehrtägig",
         "Anreise mit ÖV"
       ],
       "signature": "HT/A-B/WS+",

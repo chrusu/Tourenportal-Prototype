@@ -123,7 +123,7 @@ export function tourMatchesFilters(tour: Tour, f: TourFilterState): boolean {
 
   if (
     f.registrationStatuses.length > 0 &&
-    !f.registrationStatuses.some((s) => matchesRegistrationFilter(tour.status, s))
+    !f.registrationStatuses.some((s) => matchesRegistrationFilter(tour, s))
   ) {
     return false;
   }

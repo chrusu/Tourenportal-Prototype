@@ -51,6 +51,8 @@ export interface Participants {
   current?: number;
   max?: number;
   display?: string;
+  /** Whether a full tour still accepts registrations onto a waitlist. */
+  waitlist?: boolean;
 }
 
 export interface TourDetail {
@@ -108,6 +110,7 @@ export interface TourData {
 /** UI-facing registration status filter values (see prototyp.md). */
 export type RegistrationStatus =
   | "anmeldung_offen"
+  | "warteliste"
   | "anmeldung_geschlossen"
   | "veroeffentlicht"
   | "durchgefuehrt"

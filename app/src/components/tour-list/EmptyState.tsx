@@ -6,7 +6,7 @@ export function EmptyState({ onReset }: { onReset: () => void }) {
     <div className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-dashed bg-white py-16 text-center">
       <SearchX className="h-10 w-10 text-muted-foreground" />
       <div>
-        <p className="text-sac-h4">Keine Touren gefunden</p>
+        <p className="text-sac-h4">Keine Aktivitäten gefunden</p>
         <p className="mt-1 text-sm text-muted-foreground">
           Passe deine Filter an oder setze sie zurück.
         </p>

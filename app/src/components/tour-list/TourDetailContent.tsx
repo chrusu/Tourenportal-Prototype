@@ -1,20 +1,23 @@
-import { X, ExternalLink, Mountain, TrendingUp, Gauge, Bus, Wallet, Users } from "lucide-react";
+import { ExternalLink, Mountain, TrendingUp, Gauge, Bus, Wallet, Users } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { TourStatusBadge } from "./TourStatusBadge";
 import { TourDisciplineIcons } from "./TourDisciplineIcons";
+import { FavoriteButton } from "./FavoriteButton";
 import { LeaderProfile } from "./LeaderProfile";
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
 import { conditionTooltip, technicalDifficultyTooltip } from "@/lib/scales";
+import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { linkifyText } from "@/lib/linkify";
+import { useAuth } from "@/contexts/AuthContext";
+import { useMyActivities } from "@/contexts/MyActivitiesContext";
 
 interface TourDetailContentProps {
   tour: Tour;
-  onClose: () => void;
   onRegister: (tour: Tour) => void;
 }
 
@@ -39,7 +42,7 @@ function Fact({
   icon: React.ReactNode;
   label: string;
   value?: React.ReactNode;
-  tooltip?: string;
+  tooltip?: React.ReactNode;
 }) {
   if (value === undefined || value === null || value === "") return null;
   const content = (
@@ -62,10 +65,13 @@ function Fact({
   );
 }
 
-export function TourDetailContent({ tour, onClose, onRegister }: TourDetailContentProps) {
+export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) {
+  const { isAuthenticated } = useAuth();
+  const { markApplied } = useMyActivities();
   const color = tourColor(tour.tourType, tour.disciplineColor);
   const status = registrationStatus(tour);
-  const canRegister = status === "open" || status === "full";
+  const canRegister = status === "open" || status === "waitlist" || status === "full";
+  const canSubmitRegistration = status === "open" || status === "waitlist";
   const d = tour.detail;
   const dateRange =
     tour.endDate && tour.endDate !== tour.startDate
@@ -96,7 +102,9 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
                       {tour.technicalDifficulty}
                     </span>
                   </TooltipTrigger>
-                  <TooltipContent>{technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)}</TooltipContent>
+                  <TooltipContent>
+                    <TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />
+                  </TooltipContent>
                 </Tooltip>
               )}
             </div>
@@ -107,14 +115,9 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
               <p className="mt-0.5 text-xs text-white/80">{tour.signature}</p>
             )}
           </div>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Schliessen"
-            className="shrink-0 rounded-full bg-white/20 p-1.5 text-white transition-colors hover:bg-white/40"
-          >
-            <X className="h-4 w-4" />
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            <FavoriteButton tourId={tour.id} variant="onColor" />
+          </div>
         </div>
       </div>
 
@@ -174,9 +177,19 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
           />
           <Fact
             icon={<Gauge className="h-4 w-4" />}
+            label="Schwierigkeit"
+            value={tour.technicalDifficulty}
+            tooltip={<TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />}
+          />
+          <Fact
+            icon={<Gauge className="h-4 w-4" />}
             label="Kondition"
             value={tour.physicalDifficulty}
-            tooltip={conditionTooltip(tour.physicalDifficulty)}
+            tooltip={
+              conditionTooltip(tour.physicalDifficulty) && (
+                <TooltipInfo {...conditionTooltip(tour.physicalDifficulty)!} />
+              )
+            }
           />
           <Fact
             icon={<Users className="h-4 w-4" />}
@@ -241,9 +254,16 @@ export function TourDetailContent({ tour, onClose, onRegister }: TourDetailConte
                 </a>
               </Button>
             )}
-            {status === "open" && (
-              <Button size="sm" variant="positive" onClick={() => onRegister(tour)}>
-                Anmelden
+            {canSubmitRegistration && (
+              <Button
+                size="sm"
+                variant="positive"
+                onClick={() => {
+                  if (isAuthenticated) markApplied(tour.id);
+                  onRegister(tour);
+                }}
+              >
+                {status === "waitlist" ? "Auf Warteliste" : "Anmelden"}
               </Button>
             )}
           </div>

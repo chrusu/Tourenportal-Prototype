@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { TourDetailContent } from "@/components/tour-list/TourDetailContent";
@@ -8,7 +8,6 @@ import type { Tour } from "@/types/tour";
 
 export function TourDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const { section, tours } = useTourData();
   const tour = tours.find((t) => t.id === id);
 
@@ -36,17 +35,13 @@ export function TourDetailPage() {
 
         {tour ? (
           <div className="overflow-hidden border bg-white shadow-sm">
-            <TourDetailContent
-              tour={tour}
-              onClose={() => navigate("/")}
-              onRegister={handleRegister}
-            />
+            <TourDetailContent tour={tour} onRegister={handleRegister} />
           </div>
         ) : (
           <div className="flex w-full flex-col items-center gap-2 border bg-white p-10 text-center shadow-sm">
-            <p className="text-sac-h4">Tour nicht gefunden</p>
+            <p className="text-sac-h4">Aktivität nicht gefunden</p>
             <p className="text-sm text-muted-foreground">
-              Diese Tour existiert nicht oder wurde entfernt.
+              Diese Aktivität existiert nicht oder wurde entfernt.
             </p>
           </div>
         )}

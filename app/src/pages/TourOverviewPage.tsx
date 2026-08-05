@@ -1,19 +1,38 @@
-import { useMemo } from "react";
-import { LayoutList, Table2 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { LayoutList, Table2, Heart, UserCheck } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { ResultsSummary } from "@/components/layout/ResultsSummary";
 import { FilterBar } from "@/components/filters/FilterBar";
 import { TourList } from "@/components/tour-list/TourList";
 import { TourTableView } from "@/components/tour-list/TourTableView";
+import { CollectionOnlyToggle } from "@/components/tour-list/CollectionOnlyToggle";
+import { LoadingOverlay } from "@/components/tour-list/LoadingOverlay";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useTourData } from "@/hooks/useTourData";
 import { useTourFilters } from "@/hooks/useTourFilters";
 import { applyFilters, deriveGroups, deriveLeaders } from "@/lib/filter";
+import { useAuth } from "@/contexts/AuthContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import { useMyActivities } from "@/contexts/MyActivitiesContext";
 
 export function TourOverviewPage() {
   const { section, tours } = useTourData();
-  const { filters, setFilters, update, reset, filtered, activeCount } =
+  const { filters, setFilters, update, reset, filtered, activeCount, isLoading } =
     useTourFilters(tours);
+  const { isAuthenticated } = useAuth();
+  const { favoriteIds, isFavorite } = useFavorites();
+  const { appliedIds, isApplied } = useMyActivities();
+  const [favoritesOnly, setFavoritesOnly] = useState(false);
+  const [myActivitiesOnly, setMyActivitiesOnly] = useState(false);
+
+  // Leave the "only" toggles behind on logout, so they don't silently hide
+  // everything for the next (logged-out) view.
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setFavoritesOnly(false);
+      setMyActivitiesOnly(false);
+    }
+  }, [isAuthenticated]);
 
   const groups = useMemo(() => deriveGroups(tours), [tours]);
   const leaders = useMemo(() => deriveLeaders(tours), [tours]);
@@ -24,6 +43,19 @@ export function TourOverviewPage() {
     () => applyFilters(tours, { ...filters, tourTypes: [], difficultiesBySubType: {} }),
     [tours, filters]
   );
+
+  const visibleTours = useMemo(() => {
+    let result = filtered;
+    if (favoritesOnly) result = result.filter((t) => isFavorite(t.id));
+    if (myActivitiesOnly) result = result.filter((t) => isApplied(t.id));
+    return result;
+  }, [filtered, favoritesOnly, myActivitiesOnly, isFavorite, isApplied]);
+
+  const resetAll = () => {
+    reset();
+    setFavoritesOnly(false);
+    setMyActivitiesOnly(false);
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -43,23 +75,50 @@ export function TourOverviewPage() {
 
         <Tabs defaultValue="list">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <ResultsSummary count={filtered.length} />
-            <TabsList>
-              <TabsTrigger value="list">
-                <LayoutList /> Liste
-              </TabsTrigger>
-              <TabsTrigger value="table">
-                <Table2 /> Tabelle
-              </TabsTrigger>
-            </TabsList>
+            <ResultsSummary count={visibleTours.length} loading={isLoading} />
+            <div className="flex flex-wrap items-center gap-2">
+              <CollectionOnlyToggle
+                icon={<Heart className="h-4 w-4" />}
+                label="Nur Favoriten"
+                active={favoritesOnly}
+                count={favoriteIds.length}
+                onToggle={setFavoritesOnly}
+              />
+              <CollectionOnlyToggle
+                icon={<UserCheck className="h-4 w-4" />}
+                label="Meine Aktivitäten"
+                active={myActivitiesOnly}
+                count={appliedIds.length}
+                onToggle={setMyActivitiesOnly}
+              />
+              <TabsList>
+                <TabsTrigger value="list">
+                  <LayoutList /> Liste
+                </TabsTrigger>
+                <TabsTrigger value="table">
+                  <Table2 /> Tabelle
+                </TabsTrigger>
+              </TabsList>
+            </div>
           </div>
 
-          <TabsContent value="list">
-            <TourList tours={filtered} onReset={reset} />
-          </TabsContent>
-          <TabsContent value="table">
-            <TourTableView tours={filtered} onReset={reset} />
-          </TabsContent>
+          <div className="relative">
+            <div
+              className={
+                isLoading
+                  ? "pointer-events-none opacity-40 transition-opacity"
+                  : "transition-opacity"
+              }
+            >
+              <TabsContent value="list">
+                <TourList tours={visibleTours} onReset={resetAll} />
+              </TabsContent>
+              <TabsContent value="table">
+                <TourTableView tours={visibleTours} onReset={resetAll} />
+              </TabsContent>
+            </div>
+            {isLoading && <LoadingOverlay />}
+          </div>
         </Tabs>
       </main>
     </div>

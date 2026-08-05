@@ -32,20 +32,23 @@ export function statusLabel(status: TourStatus): string {
   }
 }
 
-/** Whether a granular status matches a UI registration-status filter value. */
-export function matchesRegistrationFilter(
-  status: TourStatus,
-  filter: RegistrationStatus
-): boolean {
+/** Whether a tour matches a UI registration-status filter value. */
+export function matchesRegistrationFilter(tour: Tour, filter: RegistrationStatus): boolean {
   // "Durchgeführt" and "Abgesagt" are their own filter values (for past
   // tours), so they're excluded from the generic "closed" bucket below.
-  if (filter === "durchgefuehrt") return status === "durchgefuehrt";
-  if (filter === "abgesagt") return status === "abgesagt";
+  if (filter === "durchgefuehrt") return tour.status === "durchgefuehrt";
+  if (filter === "abgesagt") return tour.status === "abgesagt";
 
-  const variant = statusVariant(status);
-  if (filter === "anmeldung_offen") return variant === "open";
+  // Waitlisted tours are participants-aware (see registrationStatus below),
+  // so they need to be checked and excluded from the plain "open" bucket
+  // independently of the raw status variant.
+  const isWaitlist = registrationStatus(tour) === "waitlist";
+  if (filter === "warteliste") return isWaitlist;
+
+  const variant = statusVariant(tour.status);
+  if (filter === "anmeldung_offen") return variant === "open" && !isWaitlist;
   if (filter === "anmeldung_geschlossen") {
-    return variant === "closed" && status !== "durchgefuehrt" && status !== "abgesagt";
+    return variant === "closed" && tour.status !== "durchgefuehrt" && tour.status !== "abgesagt";
   }
   return variant === "published";
 }
@@ -55,6 +58,7 @@ export const REGISTRATION_STATUS_OPTIONS: {
   label: string;
 }[] = [
   { value: "anmeldung_offen", label: "Anmeldung offen" },
+  { value: "warteliste", label: "Anmeldung offen (Warteliste)" },
   { value: "anmeldung_geschlossen", label: "Anmeldung geschlossen" },
   { value: "veroeffentlicht", label: "Veröffentlicht" },
   { value: "durchgefuehrt", label: "Durchgeführt" },
@@ -65,7 +69,14 @@ export const REGISTRATION_STATUS_OPTIONS: {
 // Displayed registration status (per-tour, considering the participants config)
 // ---------------------------------------------------------------------------
 
-export type RegStatus = "published" | "open" | "closed" | "full" | "durchgefuehrt" | "abgesagt";
+export type RegStatus =
+  | "published"
+  | "open"
+  | "waitlist"
+  | "closed"
+  | "full"
+  | "durchgefuehrt"
+  | "abgesagt";
 
 /** Base registration state, treating "ausgebucht" as an open (but full) tour. */
 function baseState(
@@ -101,8 +112,9 @@ function isFull(tour: Tour): boolean {
  * Resolves the registration status shown to the user.
  *
  * - "published": registration not yet open
- * - "open": registration open (only "not full" when places are shown)
- * - "full": registration open but no free places — only when places are shown
+ * - "open": registration open with free places (only checked when places are shown)
+ * - "waitlist": registration open, but full — new registrations join a waitlist
+ * - "full": registration open but no free places and no waitlist — cannot register
  * - "closed": registration closed
  */
 export function registrationStatus(tour: Tour): RegStatus {
@@ -110,7 +122,9 @@ export function registrationStatus(tour: Tour): RegStatus {
   if (base === "published" || base === "closed" || base === "durchgefuehrt" || base === "abgesagt") {
     return base;
   }
-  if (showsParticipants(tour) && isFull(tour)) return "full";
+  if (showsParticipants(tour) && isFull(tour)) {
+    return tour.participants?.waitlist ? "waitlist" : "full";
+  }
   return "open";
 }
 
@@ -120,6 +134,8 @@ export function regStatusLabel(status: RegStatus): string {
       return "Publiziert";
     case "open":
       return "Anmeldung offen";
+    case "waitlist":
+      return "Anmeldung offen (Warteliste)";
     case "full":
       return "Ausgebucht";
     case "closed":

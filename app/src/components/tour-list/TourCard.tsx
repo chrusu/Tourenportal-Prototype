@@ -5,30 +5,41 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TourStatusBadge } from "./TourStatusBadge";
 import { DisciplineIcon } from "./DisciplineIcon";
+import { FavoriteButton } from "./FavoriteButton";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 import { registrationStatus } from "@/lib/status";
 import { tourColor, mainDisciplineFor, mainSubTypeLabel } from "@/lib/disciplines";
 import { conditionTooltip, technicalDifficultyTooltip } from "@/lib/scales";
+import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { participantsText, conditionText, ascentDescentText } from "@/lib/tour-display";
+import { useAuth } from "@/contexts/AuthContext";
+import { useMyActivities } from "@/contexts/MyActivitiesContext";
 
 interface TourCardProps {
   tour: Tour;
 }
 
 export function TourCard({ tour }: TourCardProps) {
+  const { isAuthenticated } = useAuth();
+  const { markApplied } = useMyActivities();
   const color = tourColor(tour.tourType, tour.disciplineColor);
   const mainDiscipline = mainDisciplineFor(tour.tourType);
   const mainSubType = mainSubTypeLabel(tour.tourType);
   const status = registrationStatus(tour);
-  const canRegister = status === "open" || status === "full";
+  const canRegister = status === "open" || status === "waitlist" || status === "full";
+  const canSubmitRegistration = status === "open" || status === "waitlist";
   const places = participantsText(tour);
   const condition = conditionText(tour);
   const elevation = ascentDescentText(tour);
   const detailHref = `/tours/${tour.id}`;
 
   return (
-    <article className="overflow-hidden border bg-white shadow-sm transition-shadow hover:shadow-md">
+    <article className="relative overflow-hidden border bg-white shadow-sm transition-shadow hover:shadow-md">
+      <FavoriteButton
+        tourId={tour.id}
+        className="absolute right-3 top-3 z-10 bg-white/90 shadow-sm"
+      />
       <div className="flex flex-col p-5 sm:flex-row sm:items-stretch sm:gap-0">
         {/* LEFT: id, sub-category, name, tags */}
         <div className="min-w-0 flex-1 sm:pr-5">
@@ -102,7 +113,9 @@ export function TourCard({ tour }: TourCardProps) {
                   </span>
                 </span>
               </TooltipTrigger>
-              <TooltipContent>{conditionTooltip(tour.physicalDifficulty)}</TooltipContent>
+              <TooltipContent>
+                <TooltipInfo {...conditionTooltip(tour.physicalDifficulty)!} />
+              </TooltipContent>
             </Tooltip>
           )}
           {tour.technicalDifficulty && (
@@ -118,7 +131,9 @@ export function TourCard({ tour }: TourCardProps) {
                   </span>
                 </span>
               </TooltipTrigger>
-              <TooltipContent>{technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)}</TooltipContent>
+              <TooltipContent>
+                <TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />
+              </TooltipContent>
             </Tooltip>
           )}
           {elevation && (
@@ -168,17 +183,22 @@ export function TourCard({ tour }: TourCardProps) {
           )}
 
           <div className="mt-auto flex items-center gap-2">
-            {status === "open" && tour.url && (
+            {canSubmitRegistration && tour.url && (
               <Button size="sm" variant="positive" asChild>
-                <a href={tour.url} target="_blank" rel="noreferrer">
-                  Anmeldung
+                <a
+                  href={tour.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => isAuthenticated && markApplied(tour.id)}
+                >
+                  {status === "waitlist" ? "Warteliste" : "Anmeldung"}
                 </a>
               </Button>
             )}
             <Button
               size="sm"
-              variant="ghost"
-              className="self-start text-sac-red hover:text-sac-red-hover"
+              variant="outline"
+              className="self-start border-sac-red bg-white text-sac-red hover:border-sac-red-hover hover:bg-sac-red hover:text-white"
               asChild
             >
               <Link to={detailHref}>Details</Link>
