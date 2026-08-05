@@ -37,7 +37,7 @@
       "physicalDifficulty": "A-B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive"
+        "Erwachsene"
       ],
       "leaders": [
         {
@@ -48,10 +48,6 @@
           "phone": "+41 76 278 46 61",
           "email": "viviane.fischer@sac-bern.ch",
           "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/viviane.fischer"
-            },
             {
               "platform": "instagram",
               "url": "https://instagram.com/viviane_fischer"
@@ -70,10 +66,6 @@
           "phone": "+41 77 892 45 52",
           "email": "gerhard.schuwerk@sac-bern.ch",
           "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/gerhard.schuwerk"
-            },
             {
               "platform": "instagram",
               "url": "https://instagram.com/gerhard_schuwerk"
@@ -130,7 +122,7 @@
       "physicalDifficulty": "B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive (Senior:innen)"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -190,8 +182,8 @@
       "physicalDifficulty": "B",
       "experienceLevel": "Sehr erfahren",
       "groups": [
-        "Aktive",
-        "JO"
+        "Erwachsene",
+        "Jugend (JO)"
       ],
       "leaders": [
         {
@@ -201,10 +193,6 @@
           "phone": "+41 77 356 05 24",
           "email": "dominik.berger@sac-bern.ch",
           "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/dominik.berger"
-            },
             {
               "platform": "instagram",
               "url": "https://instagram.com/dominik_berger"
@@ -278,8 +266,8 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Aktive (Senior:innen)",
-        "Aktive"
+        "Senior/innen",
+        "Erwachsene"
       ],
       "leaders": [
         {
@@ -341,7 +329,8 @@
       "physicalDifficulty": "A-B",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "FaBe"
+        "Familienbergsteigen (FaBe)",
+        "Kinderbergsteigen (KiBe)"
       ],
       "leaders": [
         {
@@ -352,10 +341,6 @@
           "phone": "+41 79 748 82 63",
           "email": "rhea.fay@sac-bern.ch",
           "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/rhea.fay"
-            },
             {
               "platform": "instagram",
               "url": "https://instagram.com/rhea_fay"
@@ -422,7 +407,7 @@
       "physicalDifficulty": "A-B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "FaBe"
+        "Familienbergsteigen (FaBe)"
       ],
       "leaders": [
         {
@@ -480,7 +465,7 @@
       "technicalDifficulty": "T2",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Veteranen Gängige"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -489,13 +474,7 @@
           "photoUrl": "https://i.pravatar.cc/160?u=helmut.salzgeber",
           "address": "Längassstrasse 20, 3012 Bern",
           "phone": "+41 77 771 36 97",
-          "email": "helmut.salzgeber@sac-bern.ch",
-          "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/helmut.salzgeber"
-            }
-          ]
+          "email": "helmut.salzgeber@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -543,7 +522,7 @@
       "physicalDifficulty": "B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive (Senior:innen)"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -598,7 +577,7 @@
       "technicalDifficulty": "T1",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Veteranen Bären"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -607,13 +586,7 @@
           "photoUrl": "https://i.pravatar.cc/160?u=ursula.kissing",
           "address": "Kramgasse 44, 3011 Bern",
           "phone": "+41 78 488 57 09",
-          "email": "ursula.kissing@sac-bern.ch",
-          "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/ursula.kissing"
-            }
-          ]
+          "email": "ursula.kissing@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -661,7 +634,7 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Veteranen Gängige"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -719,7 +692,7 @@
       "physicalDifficulty": "B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive (Senior:innen)"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -777,7 +750,7 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive (Senior:innen)"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -842,7 +815,7 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Aktive"
+        "Erwachsene"
       ],
       "leaders": [
         {
@@ -903,8 +876,8 @@
       "physicalDifficulty": "B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive",
-        "Aktive (Senior:innen)"
+        "Erwachsene",
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -970,8 +943,8 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive",
-        "Aktive (Senior:innen)"
+        "Erwachsene",
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -980,13 +953,7 @@
           "photoUrl": "https://i.pravatar.cc/160?u=yvonne.stampfli",
           "address": "Nydeggstalden 6, 3011 Bern",
           "phone": "+41 76 856 87 14",
-          "email": "yvonne.stampfli@sac-bern.ch",
-          "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/yvonne.stampfli"
-            }
-          ]
+          "email": "yvonne.stampfli@sac-bern.ch"
         }
       ],
       "withMountainGuide": false,
@@ -1035,7 +1002,8 @@
       "physicalDifficulty": "A-B",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "JO"
+        "Jugend (JO)",
+        "Jung-Erwachsene"
       ],
       "leaders": [
         {
@@ -1101,7 +1069,7 @@
       "tourTypeAbbr": "V",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Veteranen"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -1160,7 +1128,7 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Aktive (Senior:innen)"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -1171,10 +1139,6 @@
           "phone": "+41 77 439 45 45",
           "email": "martin.gerber@sac-bern.ch",
           "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/martin.gerber"
-            },
             {
               "platform": "instagram",
               "url": "https://instagram.com/martin_gerber"
@@ -1230,7 +1194,7 @@
       "physicalDifficulty": "A-B",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Veteranen Gängige"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -1287,8 +1251,7 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Aktive (Senior:innen)",
-        "Veteranen Gängige"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -1299,10 +1262,6 @@
           "phone": "+41 78 858 78 95",
           "email": "renate.suetterlin@sac-bern.ch",
           "social": [
-            {
-              "platform": "website",
-              "url": "https://www.sac-bern.ch/leiter/renate.suetterlin"
-            },
             {
               "platform": "instagram",
               "url": "https://instagram.com/renate_suetterlin"
@@ -1355,7 +1314,7 @@
       "physicalDifficulty": "A-B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive"
+        "Erwachsene"
       ],
       "leaders": [
         {
@@ -1409,8 +1368,7 @@
       "physicalDifficulty": "A",
       "experienceLevel": "Einsteiger",
       "groups": [
-        "Aktive (Senior:innen)",
-        "Veteranen Gängige"
+        "Senior/innen"
       ],
       "leaders": [
         {
@@ -1474,7 +1432,7 @@
       "physicalDifficulty": "B-C",
       "experienceLevel": "Sehr erfahren",
       "groups": [
-        "Aktive"
+        "Erwachsene"
       ],
       "leaders": [
         {
@@ -1528,7 +1486,7 @@
       "physicalDifficulty": "A-B",
       "experienceLevel": "Sehr erfahren",
       "groups": [
-        "Aktive"
+        "Erwachsene"
       ],
       "leaders": [
         {
@@ -1590,8 +1548,8 @@
       "physicalDifficulty": "B",
       "experienceLevel": "Erfahren",
       "groups": [
-        "Aktive (Senior:innen)",
-        "Aktive"
+        "Senior/innen",
+        "Erwachsene"
       ],
       "leaders": [
         {

@@ -247,13 +247,6 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
             )}
           </div>
           <div className="flex gap-2">
-            {tour.url && (
-              <Button variant="outline" size="sm" asChild>
-                <a href={tour.url} target="_blank" rel="noreferrer">
-                  sac-bern.ch <ExternalLink className="h-4 w-4" />
-                </a>
-              </Button>
-            )}
             {canSubmitRegistration && (
               <Button
                 size="sm"

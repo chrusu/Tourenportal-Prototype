@@ -4,12 +4,12 @@ import type { Tour } from "@/types/tour";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { TourStatusBadge } from "./TourStatusBadge";
-import { DisciplineIcon } from "./DisciplineIcon";
+import { TourActivityTypes } from "./TourActivityTypes";
 import { FavoriteButton } from "./FavoriteButton";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 import { registrationStatus } from "@/lib/status";
-import { tourColor, mainDisciplineFor, mainSubTypeLabel } from "@/lib/disciplines";
+import { tourColor } from "@/lib/disciplines";
 import { conditionTooltip, technicalDifficultyTooltip } from "@/lib/scales";
 import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { participantsText, conditionText, ascentDescentText } from "@/lib/tour-display";
@@ -24,8 +24,6 @@ export function TourCard({ tour }: TourCardProps) {
   const { isAuthenticated } = useAuth();
   const { markApplied } = useMyActivities();
   const color = tourColor(tour.tourType, tour.disciplineColor);
-  const mainDiscipline = mainDisciplineFor(tour.tourType);
-  const mainSubType = mainSubTypeLabel(tour.tourType);
   const status = registrationStatus(tour);
   const canRegister = status === "open" || status === "waitlist" || status === "full";
   const canSubmitRegistration = status === "open" || status === "waitlist";
@@ -43,16 +41,8 @@ export function TourCard({ tour }: TourCardProps) {
       <div className="flex flex-col p-5 sm:flex-row sm:items-stretch sm:gap-0">
         {/* LEFT: id, sub-category, name, tags */}
         <div className="min-w-0 flex-1 sm:pr-5">
-          <div className="mt-1 flex items-center gap-2">
-            {mainDiscipline && (
-              <DisciplineIcon discipline={mainDiscipline} color={color} title={mainDiscipline.label} />
-            )}
-            <span
-              className="text-xs font-bold uppercase tracking-wider"
-              style={{ color }}
-            >
-              {mainSubType}
-            </span>
+          <div className="mt-1">
+            <TourActivityTypes tourType={tour.tourType} />
           </div>
 
           <div className="mt-1 flex flex-wrap items-center gap-2">
@@ -183,16 +173,13 @@ export function TourCard({ tour }: TourCardProps) {
           )}
 
           <div className="mt-auto flex items-center gap-2">
-            {canSubmitRegistration && tour.url && (
-              <Button size="sm" variant="positive" asChild>
-                <a
-                  href={tour.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => isAuthenticated && markApplied(tour.id)}
-                >
-                  {status === "waitlist" ? "Warteliste" : "Anmeldung"}
-                </a>
+            {canSubmitRegistration && (
+              <Button
+                size="sm"
+                variant="positive"
+                onClick={() => isAuthenticated && markApplied(tour.id)}
+              >
+                {status === "waitlist" ? "Warteliste" : "Anmeldung"}
               </Button>
             )}
             <Button

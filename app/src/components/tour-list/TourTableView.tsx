@@ -2,12 +2,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Calendar, Clock, Gauge, Tag, User, Users } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { TourStatusIcon } from "./TourStatusIcon";
-import { DisciplineIcon } from "./DisciplineIcon";
+import { TourActivityTypes } from "./TourActivityTypes";
 import { FavoriteButton } from "./FavoriteButton";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { EmptyState } from "./EmptyState";
 import { formatDate } from "@/lib/format";
-import { tourColor, mainDisciplineFor } from "@/lib/disciplines";
+import { tourColor } from "@/lib/disciplines";
 import { technicalDifficultyTooltip } from "@/lib/scales";
 import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { participantsText } from "@/lib/tour-display";
@@ -45,7 +45,6 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
           {tours.map((tour) => {
             const places = participantsText(tour);
             const color = tourColor(tour.tourType, tour.disciplineColor);
-            const mainDiscipline = mainDisciplineFor(tour.tourType);
             const detailHref = `/tours/${tour.id}`;
             return (
               <tr
@@ -70,22 +69,22 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                   )}
                 </td>
                 <td data-label="Aktivität" className={cell}>
-                  <span className="flex min-w-0 flex-1 items-center justify-end gap-1.5 text-right md:justify-start md:text-left">
-                    <FavoriteButton tourId={tour.id} size="sm" />
-                    {mainDiscipline && (
-                      <DisciplineIcon
-                        discipline={mainDiscipline}
-                        color={color}
-                        title={mainDiscipline.label}
-                      />
-                    )}
-                    <Link
-                      to={detailHref}
-                      className="min-w-0 font-bold underline-offset-2 hover:underline hover:text-sac-red"
-                    >
-                      {tour.title}
-                    </Link>
-                  </span>
+                  <div className="flex min-w-0 flex-1 flex-col items-end gap-1 md:items-start">
+                    <span className="flex items-center gap-1.5">
+                      <FavoriteButton tourId={tour.id} size="sm" />
+                      <Link
+                        to={detailHref}
+                        className="min-w-0 text-right font-bold underline-offset-2 hover:underline hover:text-sac-red md:text-left"
+                      >
+                        {tour.title}
+                      </Link>
+                    </span>
+                    <TourActivityTypes
+                      tourType={tour.tourType}
+                      size="sm"
+                      className="flex flex-wrap items-center justify-end gap-x-2 gap-y-0.5 md:justify-start"
+                    />
+                  </div>
                 </td>
                 <td data-label="Schwierigkeit" className={cell}>
                   {tour.technicalDifficulty ? (
