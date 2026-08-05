@@ -10,7 +10,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
-import { conditionTooltip, technicalDifficultyTooltip } from "@/lib/scales";
+import { conditionTooltip, difficultiesForTourType } from "@/lib/scales";
 import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { participantsText, conditionText, ascentDescentText } from "@/lib/tour-display";
 import { useAuth } from "@/contexts/AuthContext";
@@ -31,6 +31,9 @@ export function TourCard({ tour }: TourCardProps) {
   const condition = conditionText(tour);
   const elevation = ascentDescentText(tour);
   const detailHref = `/tours/${tour.id}`;
+  const difficulties = tour.technicalDifficulty
+    ? difficultiesForTourType(tour.tourType, tour.technicalDifficulty)
+    : [];
 
   return (
     <article className="relative overflow-hidden border bg-white shadow-sm transition-shadow hover:shadow-md">
@@ -108,8 +111,8 @@ export function TourCard({ tour }: TourCardProps) {
               </TooltipContent>
             </Tooltip>
           )}
-          {tour.technicalDifficulty && (
-            <Tooltip>
+          {difficulties.map(({ scale, tooltip }) => (
+            <Tooltip key={scale.name}>
               <TooltipTrigger asChild>
                 <span className="inline-flex items-center gap-2">
                   <Gauge className="h-4 w-4 shrink-0" />
@@ -122,10 +125,10 @@ export function TourCard({ tour }: TourCardProps) {
                 </span>
               </TooltipTrigger>
               <TooltipContent>
-                <TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />
+                <TooltipInfo {...tooltip} />
               </TooltipContent>
             </Tooltip>
-          )}
+          ))}
           {elevation && (
             <span className="inline-flex items-center gap-2">
               <TrendingUp className="h-4 w-4 shrink-0" />

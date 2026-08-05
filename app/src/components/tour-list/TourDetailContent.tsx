@@ -10,7 +10,7 @@ import { LeaderProfile } from "./LeaderProfile";
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
 import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
-import { conditionTooltip, technicalDifficultyTooltip } from "@/lib/scales";
+import { conditionTooltip, difficultiesForTourType } from "@/lib/scales";
 import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { linkifyText } from "@/lib/linkify";
 import { useAuth } from "@/contexts/AuthContext";
@@ -83,6 +83,9 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
   ]
     .filter(Boolean)
     .join(" · ");
+  const difficulties = tour.technicalDifficulty
+    ? difficultiesForTourType(tour.tourType, tour.technicalDifficulty)
+    : [];
 
   return (
     <div className="flex flex-col">
@@ -95,18 +98,18 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
               <span className="text-xs font-bold uppercase tracking-wider text-white">
                 {tour.tourType.join(" · ")}
               </span>
-              {tour.technicalDifficulty && (
-                <Tooltip>
+              {difficulties.map(({ scale, tooltip }) => (
+                <Tooltip key={scale.name}>
                   <TooltipTrigger asChild>
                     <span className="rounded bg-white/25 px-1.5 py-0.5 text-xs font-bold text-white">
                       {tour.technicalDifficulty}
                     </span>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />
+                    <TooltipInfo {...tooltip} />
                   </TooltipContent>
                 </Tooltip>
-              )}
+              ))}
             </div>
             <h2 className="mt-1 text-lg font-bold leading-snug text-white">
               {tour.title}
@@ -175,12 +178,15 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
             label="Aufstieg"
             value={d?.ascentMeters != null ? `${d.ascentMeters} hm` : undefined}
           />
-          <Fact
-            icon={<Gauge className="h-4 w-4" />}
-            label="Schwierigkeit"
-            value={tour.technicalDifficulty}
-            tooltip={<TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />}
-          />
+          {difficulties.map(({ scale, tooltip }) => (
+            <Fact
+              key={scale.name}
+              icon={<Gauge className="h-4 w-4" />}
+              label={difficulties.length > 1 ? `Schwierigkeit (${scale.name})` : "Schwierigkeit"}
+              value={tour.technicalDifficulty}
+              tooltip={<TooltipInfo {...tooltip} />}
+            />
+          ))}
           <Fact
             icon={<Gauge className="h-4 w-4" />}
             label="Kondition"

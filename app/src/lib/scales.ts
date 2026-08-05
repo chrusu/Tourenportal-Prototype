@@ -221,18 +221,12 @@ export function splitGradeRange(value: string): string[] {
     .filter(Boolean);
 }
 
-/** Tooltip content describing a tour's technical difficulty, incl. the scale and (if known) the specific grade's meaning. */
-export function technicalDifficultyTooltip(
-  tourType: string[],
-  technicalDifficulty?: string
-): TooltipInfoData {
-  const scale = scaleForTourType(tourType);
-  if (!scale) return { title: "Technische Schwierigkeit", items: [] };
-
+/** Builds the tooltip content for a single resolved difficulty scale. */
+function buildScaleTooltip(scale: DifficultyScale, technicalDifficulty?: string): TooltipInfoData {
   if (technicalDifficulty) {
     const grades = splitGradeRange(technicalDifficulty);
     const items = grades
-      .map((g) => (scale!.grades[g] ? `${g} – ${scale!.grades[g]}` : undefined))
+      .map((g) => (scale.grades[g] ? `${g} – ${scale.grades[g]}` : undefined))
       .filter((p): p is string => !!p);
     if (items.length > 0) {
       return { title: scale.name, items };
@@ -240,6 +234,43 @@ export function technicalDifficultyTooltip(
   }
 
   return { title: scale.name, items: [scale.description] };
+}
+
+/** Tooltip content describing a tour's technical difficulty, incl. the scale and (if known) the specific grade's meaning. */
+export function technicalDifficultyTooltip(
+  tourType: string[],
+  technicalDifficulty?: string
+): TooltipInfoData {
+  const scale = scaleForTourType(tourType);
+  if (!scale) return { title: "Technische Schwierigkeit", items: [] };
+  return buildScaleTooltip(scale, technicalDifficulty);
+}
+
+/**
+ * A tour can combine multiple activity types (e.g. "Alpinklettern" +
+ * "Hochtouren"), each potentially governed by its own SAC difficulty scale.
+ * Resolves one entry per *distinct* scale referenced by `tourType` (so types
+ * sharing a scale, like the example above, aren't duplicated), each paired
+ * with a tooltip for the tour's technical difficulty under that scale.
+ */
+export interface SubTypeDifficulty {
+  scale: DifficultyScale;
+  tooltip: TooltipInfoData;
+}
+
+export function difficultiesForTourType(
+  tourType: string[],
+  technicalDifficulty?: string
+): SubTypeDifficulty[] {
+  const scales = new Map<string, DifficultyScale>();
+  for (const t of tourType) {
+    const scale = SCALE_BY_SUBTYPE[t];
+    if (scale && !scales.has(scale.name)) scales.set(scale.name, scale);
+  }
+  return [...scales.values()].map((scale) => ({
+    scale,
+    tooltip: buildScaleTooltip(scale, technicalDifficulty),
+  }));
 }
 
 /** General explanation of the SAC condition ("Kondition") scale, for filter tooltips. */
