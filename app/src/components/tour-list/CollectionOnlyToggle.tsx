@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEasterEgg } from "@/contexts/EasterEggContext";
 
 interface CollectionOnlyToggleProps {
   icon: ReactNode;
@@ -25,7 +26,10 @@ export function CollectionOnlyToggle({
   className,
 }: CollectionOnlyToggleProps) {
   const { isAuthenticated, openLoginDialog } = useAuth();
+  const { unlocked } = useEasterEgg();
   const isActive = isAuthenticated && active;
+
+  if (!unlocked) return null;
 
   const handleClick = () => {
     if (!isAuthenticated) {

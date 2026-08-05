@@ -4,6 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEasterEgg } from "@/contexts/EasterEggContext";
 import { useSavedFilters } from "@/contexts/SavedFiltersContext";
 import { countActiveFilters, type TourFilterState } from "@/lib/filter";
 import { cn } from "@/lib/utils";
@@ -20,11 +21,14 @@ interface SavedFiltersPopoverProps {
  */
 export function SavedFiltersPopover({ filters, onApply }: SavedFiltersPopoverProps) {
   const { isAuthenticated, openLoginDialog } = useAuth();
+  const { unlocked } = useEasterEgg();
   const { savedFilters, saveFilter, deleteFilter } = useSavedFilters();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
 
   const activeCount = countActiveFilters(filters);
+
+  if (!unlocked) return null;
 
   const handleTriggerClick = (e: MouseEvent) => {
     if (!isAuthenticated) {

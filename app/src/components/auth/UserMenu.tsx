@@ -2,9 +2,13 @@ import { LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEasterEgg } from "@/contexts/EasterEggContext";
 
 export function UserMenu() {
   const { user, isAuthenticated, logout, openLoginDialog } = useAuth();
+  const { unlocked } = useEasterEgg();
+
+  if (!unlocked) return null;
 
   if (!isAuthenticated || !user) {
     return (

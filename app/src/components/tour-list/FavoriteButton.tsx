@@ -2,6 +2,7 @@ import type { MouseEvent } from "react";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEasterEgg } from "@/contexts/EasterEggContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 
 interface FavoriteButtonProps {
@@ -24,8 +25,11 @@ export function FavoriteButton({
 }: FavoriteButtonProps) {
   const { isAuthenticated, openLoginDialog } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { unlocked } = useEasterEgg();
   const active = isAuthenticated && isFavorite(tourId);
   const iconSize = size === "sm" ? "h-4 w-4" : "h-5 w-5";
+
+  if (!unlocked) return null;
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
