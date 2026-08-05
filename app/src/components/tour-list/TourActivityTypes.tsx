@@ -5,6 +5,8 @@ interface TourActivityTypesProps {
   tourType: string[];
   className?: string;
   size?: "sm" | "md";
+  /** Set to false to render only the discipline icons, without labels. */
+  showLabel?: boolean;
 }
 
 /**
@@ -12,7 +14,7 @@ interface TourActivityTypesProps {
  * each with its discipline icon and label — instead of only the first/main
  * one — so multi-discipline tours are fully visible in list and table view.
  */
-export function TourActivityTypes({ tourType, className, size = "md" }: TourActivityTypesProps) {
+export function TourActivityTypes({ tourType, className, size = "md", showLabel = true }: TourActivityTypesProps) {
   const labels = [...new Set(tourType)];
   if (labels.length === 0) return null;
 
@@ -25,9 +27,11 @@ export function TourActivityTypes({ tourType, className, size = "md" }: TourActi
             {discipline && (
               <DisciplineIcon discipline={discipline} color={discipline.color} title={discipline.label} size={size} />
             )}
-            <span className="text-xs font-bold uppercase tracking-wider" style={{ color: discipline?.color }}>
-              {label}
-            </span>
+            {showLabel && (
+              <span className="text-xs font-bold uppercase tracking-wider" style={{ color: discipline?.color }}>
+                {label}
+              </span>
+            )}
           </span>
         );
       })}

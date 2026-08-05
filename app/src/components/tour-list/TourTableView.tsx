@@ -17,12 +17,19 @@ interface TourTableViewProps {
   onReset: () => void;
 }
 
-// On mobile each <td> becomes a label/value row (label via data-label);
-// on md+ it renders as a normal table cell.
+// On mobile each <td> becomes a label/value row laid out as a two-column
+// grid: a fixed-width label column (wide enough for the longest label,
+// "Schwierigkeit") and a left-aligned content column. On md+ it renders as
+// a normal table cell.
 const cell =
-  "flex items-center justify-between gap-4 border-b px-3 py-2 text-right " +
-  "before:font-bold before:text-muted-foreground before:content-[attr(data-label)] " +
-  "last:border-0 md:table-cell md:border-0 md:px-3 md:py-3 md:text-left md:before:hidden md:truncate";
+  "grid grid-cols-[8rem_1fr] items-center gap-3 border-b px-3 py-2 text-left " +
+  "last:border-0 md:table-cell md:border-0 md:px-3 md:py-3 md:truncate";
+
+const cellLabel = "font-bold text-muted-foreground md:hidden";
+
+// Forces the value part of a mobile row onto the left edge of its grid
+// column, regardless of the content's own intrinsic width.
+const cellValue = "flex w-full min-w-0 justify-self-stretch justify-start text-left";
 
 export function TourTableView({ tours, onReset }: TourTableViewProps) {
   const navigate = useNavigate();
@@ -52,29 +59,34 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                 className="mb-3 block cursor-pointer overflow-hidden border bg-white shadow-sm last:mb-0 md:mb-0 md:table-row md:border-0 md:border-b md:shadow-none md:last:border-0 md:hover:bg-sac-snow"
                 onClick={() => navigate(detailHref)}
               >
-                <td data-label="Datum" className={`${cell} text-muted-foreground`}>
-                  <span className="inline-flex items-center gap-1.5">
+                <td className={`${cell} text-muted-foreground`}>
+                  <span className={cellLabel}>Datum</span>
+                  <span className={`${cellValue} items-center gap-1.5`}>
                     <Calendar className="h-4 w-4 shrink-0" />
                     {formatDate(tour.startDate)}
                   </span>
                 </td>
-                <td data-label="Zeitraum" className={`${cell} whitespace-nowrap text-muted-foreground`}>
-                  {tour.durationDays ? (
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="h-4 w-4 shrink-0" />
-                      {tour.durationDays}d
-                    </span>
-                  ) : (
-                    "–"
-                  )}
+                <td className={`${cell} whitespace-nowrap text-muted-foreground`}>
+                  <span className={cellLabel}>Zeitraum</span>
+                  <span className={`${cellValue} items-center gap-1.5`}>
+                    {tour.durationDays ? (
+                      <>
+                        <Clock className="h-4 w-4 shrink-0" />
+                        {tour.durationDays}d
+                      </>
+                    ) : (
+                      "–"
+                    )}
+                  </span>
                 </td>
-                <td data-label="Aktivität" className={cell}>
-                  <div className="flex min-w-0 flex-1 flex-col items-end gap-1 md:items-start">
+                <td className={cell}>
+                  <span className={cellLabel}>Aktivität</span>
+                  <div className={`${cellValue} flex-col items-start gap-1`}>
                     <span className="flex items-center gap-1.5">
                       <FavoriteButton tourId={tour.id} size="sm" />
                       <Link
                         to={detailHref}
-                        className="min-w-0 text-right font-bold underline-offset-2 hover:underline hover:text-sac-red md:text-left"
+                        className="min-w-0 font-bold underline-offset-2 hover:underline hover:text-sac-red"
                       >
                         {tour.title}
                       </Link>
@@ -82,64 +94,78 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                     <TourActivityTypes
                       tourType={tour.tourType}
                       size="sm"
-                      className="flex flex-wrap items-center justify-end gap-x-2 gap-y-0.5 md:justify-start"
+                      showLabel={false}
+                      className="flex flex-wrap items-center gap-x-2 gap-y-0.5"
                     />
                   </div>
                 </td>
-                <td data-label="Schwierigkeit" className={cell}>
-                  {tour.technicalDifficulty ? (
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <span className="inline-flex items-center gap-1.5">
-                          <Gauge className="h-4 w-4 shrink-0 text-muted-foreground" />
-                          <span
-                            className="rounded-full px-3 py-1 text-xs font-bold"
-                            style={{ backgroundColor: `${color}33`, color }}
-                          >
-                            {tour.technicalDifficulty}
+                <td className={cell}>
+                  <span className={cellLabel}>Schwierigkeit</span>
+                  <span className={`${cellValue} items-center`}>
+                    {tour.technicalDifficulty ? (
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="inline-flex items-center gap-1.5">
+                            <Gauge className="h-4 w-4 shrink-0 text-muted-foreground" />
+                            <span
+                              className="rounded-full px-3 py-1 text-xs font-bold"
+                              style={{ backgroundColor: `${color}33`, color }}
+                            >
+                              {tour.technicalDifficulty}
+                            </span>
                           </span>
-                        </span>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />
-                      </TooltipContent>
-                    </Tooltip>
-                  ) : (
-                    "–"
-                  )}
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <TooltipInfo {...technicalDifficultyTooltip(tour.tourType, tour.technicalDifficulty)} />
+                        </TooltipContent>
+                      </Tooltip>
+                    ) : (
+                      "–"
+                    )}
+                  </span>
                 </td>
-                <td data-label="Gruppe" className={`${cell} text-muted-foreground`}>
-                  {tour.groups[0] ? (
-                    <span className="inline-flex items-center gap-1.5">
-                      <Tag className="h-4 w-4 shrink-0" />
-                      {tour.groups[0]}
-                    </span>
-                  ) : (
-                    "–"
-                  )}
+                <td className={`${cell} text-muted-foreground`}>
+                  <span className={cellLabel}>Gruppe</span>
+                  <span className={`${cellValue} items-center gap-1.5`}>
+                    {tour.groups[0] ? (
+                      <>
+                        <Tag className="h-4 w-4 shrink-0" />
+                        {tour.groups[0]}
+                      </>
+                    ) : (
+                      "–"
+                    )}
+                  </span>
                 </td>
-                <td data-label="Kontakt" className={`${cell} text-muted-foreground`}>
-                  {tour.leaders[0]?.name ? (
-                    <span className="inline-flex items-center gap-1.5">
-                      <User className="h-4 w-4 shrink-0" />
-                      {tour.leaders[0].name}
-                    </span>
-                  ) : (
-                    "–"
-                  )}
+                <td className={`${cell} text-muted-foreground`}>
+                  <span className={cellLabel}>Kontakt</span>
+                  <span className={`${cellValue} items-center gap-1.5`}>
+                    {tour.leaders[0]?.name ? (
+                      <>
+                        <User className="h-4 w-4 shrink-0" />
+                        {tour.leaders[0].name}
+                      </>
+                    ) : (
+                      "–"
+                    )}
+                  </span>
                 </td>
-                <td data-label="Plätze" className={`${cell} text-muted-foreground`}>
-                  {places ? (
-                    <span className="inline-flex items-center gap-1.5">
-                      <Users className="h-4 w-4 shrink-0" />
-                      {places}
-                    </span>
-                  ) : (
-                    "–"
-                  )}
+                <td className={`${cell} text-muted-foreground`}>
+                  <span className={cellLabel}>Plätze</span>
+                  <span className={`${cellValue} items-center gap-1.5`}>
+                    {places ? (
+                      <>
+                        <Users className="h-4 w-4 shrink-0" />
+                        {places}
+                      </>
+                    ) : (
+                      "–"
+                    )}
+                  </span>
                 </td>
-                <td data-label="Status" className={`${cell} md:text-center`}>
-                  <span className="md:mx-auto">
+                <td className={`${cell} md:text-center`}>
+                  <span className={cellLabel}>Status</span>
+                  <span className={`${cellValue} items-center md:mx-auto md:w-auto md:justify-center`}>
                     <TourStatusIcon tour={tour} />
                   </span>
                 </td>
