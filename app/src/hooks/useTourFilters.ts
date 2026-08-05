@@ -35,9 +35,17 @@ export function useTourFilters(tours: Tour[]) {
     window.clearTimeout(timeoutRef.current);
 
     if (!hasDelayedOnce.current) {
-      hasDelayedOnce.current = true;
+      // Only mark the delay as "used" once it actually completes below —
+      // not the moment it's scheduled. Otherwise a second filter change
+      // (e.g. a fast keystroke) arriving before the timeout fires would
+      // clear it in the cleanup above, take the `else` branch instead, and
+      // leave `isLoading` stuck `true` forever, since nothing would call
+      // `setIsLoading(false)` anymore. Rescheduling here instead means the
+      // delay simply restarts on every change and reliably resolves once
+      // the user stops changing filters.
       setIsLoading(true);
       timeoutRef.current = window.setTimeout(() => {
+        hasDelayedOnce.current = true;
         setAppliedFilters(filters);
         setIsLoading(false);
       }, FIRST_LOAD_DELAY_MS);
