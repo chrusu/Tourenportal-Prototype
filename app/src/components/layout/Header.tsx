@@ -12,7 +12,7 @@ export function Header({ section }: { section: string }) {
     >
       <div className="container flex items-center justify-between gap-4 py-4">
         <div>
-          <h1 className="text-sac-h3 leading-none">Aktivitätenprogramm</h1>
+          <h1 className="text-sac-h3 leading-none">Tourenprogramm</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             SAC Sektion {section}
           </p>

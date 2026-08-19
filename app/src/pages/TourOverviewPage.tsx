@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { LayoutList, Table2, Heart, UserCheck } from "lucide-react";
+import { LayoutList, Table2, Heart, UserCheck, Download } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { ResultsSummary } from "@/components/layout/ResultsSummary";
 import { FilterBar } from "@/components/filters/FilterBar";
@@ -7,10 +7,12 @@ import { TourList } from "@/components/tour-list/TourList";
 import { TourTableView } from "@/components/tour-list/TourTableView";
 import { CollectionOnlyToggle } from "@/components/tour-list/CollectionOnlyToggle";
 import { LoadingOverlay } from "@/components/tour-list/LoadingOverlay";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { useTourData } from "@/hooks/useTourData";
 import { useTourFilters } from "@/hooks/useTourFilters";
 import { applyFilters, deriveGroups, deriveLeaders } from "@/lib/filter";
+import { toursToCsv, downloadTextFile } from "@/lib/csv";
 import { useAuth } from "@/contexts/AuthContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useMyActivities } from "@/contexts/MyActivitiesContext";
@@ -57,6 +59,12 @@ export function TourOverviewPage() {
     setMyActivitiesOnly(false);
   };
 
+  const exportCsv = () => {
+    const csv = toursToCsv(visibleTours);
+    const date = new Date().toISOString().slice(0, 10);
+    downloadTextFile(`tourenprogramm-${section.toLowerCase()}-${date}.csv`, csv, "text/csv");
+  };
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header section={section} />
@@ -99,6 +107,14 @@ export function TourOverviewPage() {
                   <Table2 /> Tabelle
                 </TabsTrigger>
               </TabsList>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={exportCsv}
+                disabled={visibleTours.length === 0}
+              >
+                <Download className="h-4 w-4" /> CSV exportieren
+              </Button>
             </div>
           </div>
 

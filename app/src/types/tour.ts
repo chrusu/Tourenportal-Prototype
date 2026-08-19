@@ -53,6 +53,8 @@ export interface Participants {
   display?: string;
   /** Whether a full tour still accepts registrations onto a waitlist. */
   waitlist?: boolean;
+  /** Number of people currently on the waitlist, if known. */
+  waitlistCount?: number;
 }
 
 export interface TourDetail {
@@ -95,6 +97,21 @@ export interface Tour {
   showParticipants?: boolean;
   status: TourStatus;
   statusNote?: string;
+  /**
+   * Additional free-climbing grade (French/UIAA, e.g. "5b") for the crux of
+   * an "Alpinklettern" portion of the tour, shown as its own difficulty
+   * badge alongside the main technicalDifficulty (e.g. the Hochtourenskala
+   * rating).
+   */
+  climbingGrade?: string;
+  /**
+   * Free-text call-out shown as a full-width banner (e.g. "Bitte Anmelden,
+   * es hat noch freie Plätze"), color-coded by urgency/tone.
+   */
+  note?: {
+    text: string;
+    variant: "green" | "orange";
+  };
   flags?: string[];
   signature?: string;
   destination?: Destination;

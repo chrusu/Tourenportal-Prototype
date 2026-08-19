@@ -34,6 +34,7 @@
       ],
       "tourTypeAbbr": "HT",
       "technicalDifficulty": "WS+",
+      "climbingGrade": "4b",
       "physicalDifficulty": "A-B",
       "experienceLevel": "Erfahren",
       "groups": [
@@ -283,7 +284,8 @@
         "current": 6,
         "max": 6,
         "display": "6/6",
-        "waitlist": true
+        "waitlist": true,
+        "waitlistCount": 3
       },
       "status": "ausgebucht",
       "flags": [
@@ -484,6 +486,10 @@
         "display": "10/15"
       },
       "status": "anmeldung_offen",
+      "note": {
+        "text": "Bitte Anmelden, es hat noch freie Plätze",
+        "variant": "green"
+      },
       "flags": [
         "Anreise mit ÖV",
         "Geeignet für Anfänger"
@@ -1153,6 +1159,10 @@
         "display": "6/6"
       },
       "status": "ausgebucht",
+      "note": {
+        "text": "Für diese Tour werden noch SeilschaftsführerInnen benötigt. Sonst ist die Teilnehmerzahl bereits erreicht.",
+        "variant": "orange"
+      },
       "flags": [
         "Mit Bergführer",
         "Mehrtägig",
@@ -1279,7 +1289,8 @@
         "max": 15,
         "display": "6/15"
       },
-      "status": "anmeldung_offen",
+      "status": "geplant",
+      "registrationOpensAt": "2026-07-10T09:00:00+02:00",
       "flags": [
         "Anreise mit ÖV"
       ],
@@ -1332,7 +1343,8 @@
         "max": 10,
         "display": "4/10"
       },
-      "status": "anmeldung_offen",
+      "status": "geplant",
+      "registrationOpensAt": "2026-07-14T18:00:00+02:00",
       "flags": [
         "Geeignet für E-Bike"
       ],

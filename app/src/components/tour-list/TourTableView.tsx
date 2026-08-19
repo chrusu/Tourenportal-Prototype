@@ -4,11 +4,12 @@ import type { Tour } from "@/types/tour";
 import { TourStatusIcon } from "./TourStatusIcon";
 import { TourActivityTypes } from "./TourActivityTypes";
 import { FavoriteButton } from "./FavoriteButton";
+import { ParticipantsTooltip } from "./ParticipantsTooltip";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { EmptyState } from "./EmptyState";
 import { formatDate } from "@/lib/format";
 import { tourColor } from "@/lib/disciplines";
-import { technicalDifficultyTooltip } from "@/lib/scales";
+import { technicalDifficultyTooltip, scaleForTourType } from "@/lib/scales";
 import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { participantsText } from "@/lib/tour-display";
 
@@ -23,7 +24,7 @@ interface TourTableViewProps {
 // a normal table cell.
 const cell =
   "grid grid-cols-[8rem_1fr] items-center gap-3 border-b px-3 py-2 text-left " +
-  "last:border-0 md:table-cell md:border-0 md:px-3 md:py-3 md:truncate";
+  "last:border-0 md:table-cell md:border-0 md:px-3 md:py-3 md:align-top";
 
 const cellLabel = "font-bold text-muted-foreground md:hidden";
 
@@ -37,21 +38,12 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
 
   return (
     <div className="md:overflow-x-auto md:border md:bg-white md:shadow-sm">
-      <table className="w-full border-collapse text-sm md:table-fixed">
-        <colgroup>
-          <col className="md:w-[9%]" />
-          <col className="md:w-[5%]" />
-          <col className="md:w-[44%]" />
-          <col className="md:w-[7%]" />
-          <col className="md:w-[12%]" />
-          <col className="md:w-[12%]" />
-          <col className="md:w-[6%]" />
-          <col className="md:w-[5%]" />
-        </colgroup>
+      <table className="w-full border-collapse text-sm">
         <tbody className="block md:table-row-group">
           {tours.map((tour) => {
             const places = participantsText(tour);
             const color = tourColor(tour.tourType, tour.disciplineColor);
+            const difficultyColor = scaleForTourType(tour.tourType)?.color ?? color;
             const detailHref = `/tours/${tour.id}`;
             return (
               <tr
@@ -72,7 +64,7 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                     {tour.durationDays ? (
                       <>
                         <Clock className="h-4 w-4 shrink-0" />
-                        {tour.durationDays}d
+                        {tour.durationDays} {tour.durationDays === 1 ? "Tag" : "Tage"}
                       </>
                     ) : (
                       "–"
@@ -108,8 +100,8 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                           <span className="inline-flex items-center gap-1.5">
                             <Gauge className="h-4 w-4 shrink-0 text-muted-foreground" />
                             <span
-                              className="rounded-full px-3 py-1 text-xs font-bold"
-                              style={{ backgroundColor: `${color}33`, color }}
+                              className="whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold"
+                              style={{ backgroundColor: `${difficultyColor}33`, color: difficultyColor }}
                             >
                               {tour.technicalDifficulty}
                             </span>
@@ -139,10 +131,10 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                 </td>
                 <td className={`${cell} text-muted-foreground`}>
                   <span className={cellLabel}>Kontakt</span>
-                  <span className={`${cellValue} items-center gap-1.5`}>
+                  <span className={`${cellValue} items-start gap-1.5`}>
                     {tour.leaders[0]?.name ? (
                       <>
-                        <User className="h-4 w-4 shrink-0" />
+                        <User className="mt-0.5 h-4 w-4 shrink-0" />
                         {tour.leaders[0].name}
                       </>
                     ) : (
@@ -152,16 +144,18 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                 </td>
                 <td className={`${cell} text-muted-foreground`}>
                   <span className={cellLabel}>Plätze</span>
-                  <span className={`${cellValue} items-center gap-1.5`}>
-                    {places ? (
-                      <>
-                        <Users className="h-4 w-4 shrink-0" />
-                        {places}
-                      </>
-                    ) : (
-                      "–"
-                    )}
-                  </span>
+                  <ParticipantsTooltip tour={tour}>
+                    <span className={`${cellValue} items-center gap-1.5`}>
+                      {places ? (
+                        <>
+                          <Users className="h-4 w-4 shrink-0" />
+                          {places}
+                        </>
+                      ) : (
+                        "–"
+                      )}
+                    </span>
+                  </ParticipantsTooltip>
                 </td>
                 <td className={`${cell} md:text-center`}>
                   <span className={cellLabel}>Status</span>

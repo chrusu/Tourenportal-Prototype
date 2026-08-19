@@ -39,7 +39,7 @@ export function FilterBar(props: FilterBarProps) {
   const controls = (
     <>
       <MultiSelectFilter
-        label="Tourengruppe"
+        label="Zielgruppe"
         icon={<Users className="h-4 w-4 text-muted-foreground" />}
         options={groups.map((g) => ({ value: g, label: g }))}
         selected={filters.groups}

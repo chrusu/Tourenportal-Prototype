@@ -1,4 +1,4 @@
-import { ExternalLink, Mountain, TrendingUp, Gauge, Bus, Wallet, Users } from "lucide-react";
+import { ExternalLink, Mountain, TrendingUp, Gauge, Bus, Wallet, Users, Info } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -7,14 +7,18 @@ import { TourStatusBadge } from "./TourStatusBadge";
 import { TourDisciplineIcons } from "./TourDisciplineIcons";
 import { FavoriteButton } from "./FavoriteButton";
 import { LeaderProfile } from "./LeaderProfile";
+import { TourNote } from "./TourNote";
 import { formatDate, formatDateTime, formatDuration } from "@/lib/format";
+import { waitlistCount } from "@/lib/tour-display";
 import { registrationStatus } from "@/lib/status";
 import { tourColor } from "@/lib/disciplines";
 import { conditionTooltip, difficultiesForTourType } from "@/lib/scales";
 import { TooltipInfo } from "@/components/ui/tooltip-info";
 import { linkifyText } from "@/lib/linkify";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEasterEgg } from "@/contexts/EasterEggContext";
 import { useMyActivities } from "@/contexts/MyActivitiesContext";
+import { participantNames, shortName } from "@/lib/participants";
 
 interface TourDetailContentProps {
   tour: Tour;
@@ -67,6 +71,7 @@ function Fact({
 
 export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) {
   const { isAuthenticated } = useAuth();
+  const { unlocked } = useEasterEgg();
   const { markApplied } = useMyActivities();
   const color = tourColor(tour.tourType, tour.disciplineColor);
   const status = registrationStatus(tour);
@@ -83,9 +88,12 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
   ]
     .filter(Boolean)
     .join(" · ");
-  const difficulties = tour.technicalDifficulty
-    ? difficultiesForTourType(tour.tourType, tour.technicalDifficulty)
-    : [];
+  const difficulties =
+    tour.technicalDifficulty || tour.climbingGrade
+      ? difficultiesForTourType(tour.tourType, tour.technicalDifficulty, tour.climbingGrade)
+      : [];
+  const waitlist = waitlistCount(tour);
+  const participants = isAuthenticated && unlocked ? participantNames(tour) : undefined;
 
   return (
     <div className="flex flex-col">
@@ -93,16 +101,19 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
       <div className="shrink-0 px-5 py-4" style={{ backgroundColor: color }}>
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <TourDisciplineIcons tourType={tour.tourType} className="inline-flex items-center gap-1.5" />
               <span className="text-xs font-bold uppercase tracking-wider text-white">
                 {tour.tourType.join(" · ")}
               </span>
-              {difficulties.map(({ scale, tooltip }) => (
+              {difficulties.map(({ scale, value, color: badgeColor, tooltip }) => (
                 <Tooltip key={scale.name}>
                   <TooltipTrigger asChild>
-                    <span className="rounded bg-white/25 px-1.5 py-0.5 text-xs font-bold text-white">
-                      {tour.technicalDifficulty}
+                    <span
+                      className="whitespace-nowrap rounded-full bg-white px-2 py-0.5 text-xs font-bold shadow-sm"
+                      style={{ color: badgeColor }}
+                    >
+                      {value}
                     </span>
                   </TooltipTrigger>
                   <TooltipContent>
@@ -114,9 +125,6 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
             <h2 className="mt-1 text-lg font-bold leading-snug text-white">
               {tour.title}
             </h2>
-            {tour.signature && (
-              <p className="mt-0.5 text-xs text-white/80">{tour.signature}</p>
-            )}
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <FavoriteButton tourId={tour.id} variant="onColor" />
@@ -135,7 +143,7 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
           {tour.withMountainGuide && <Badge variant="outline">Mit BF</Badge>}
           {d?.additionalInfo && <Badge variant="outline">{d.additionalInfo}</Badge>}
           {tour.flags?.map((flag) => (
-            <Badge key={flag} variant="outline">{flag}</Badge>
+            <Badge key={flag} variant={flag === "Kurs" ? "kurs" : "outline"}>{flag}</Badge>
           ))}
         </div>
 
@@ -178,15 +186,31 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
             label="Aufstieg"
             value={d?.ascentMeters != null ? `${d.ascentMeters} hm` : undefined}
           />
-          {difficulties.map(({ scale, tooltip }) => (
+          {difficulties.length > 0 && (
             <Fact
-              key={scale.name}
               icon={<Gauge className="h-4 w-4" />}
-              label={difficulties.length > 1 ? `Schwierigkeit (${scale.name})` : "Schwierigkeit"}
-              value={tour.technicalDifficulty}
-              tooltip={<TooltipInfo {...tooltip} />}
+              label="Schwierigkeit"
+              value={
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {difficulties.map(({ scale, value, color: badgeColor, tooltip }) => (
+                    <Tooltip key={scale.name}>
+                      <TooltipTrigger asChild>
+                        <span
+                          className="whitespace-nowrap rounded-full px-3 py-1 text-xs font-bold"
+                          style={{ backgroundColor: `${badgeColor}33`, color: badgeColor }}
+                        >
+                          {value}
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <TooltipInfo {...tooltip} />
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </div>
+              }
             />
-          ))}
+          )}
           <Fact
             icon={<Gauge className="h-4 w-4" />}
             label="Kondition"
@@ -201,11 +225,28 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
             icon={<Users className="h-4 w-4" />}
             label="Teilnehmer"
             value={
-              tour.participants?.display
-                ? `${tour.participants.display}${d?.maxParticipants ? ` (max. ${d.maxParticipants})` : ""}`
-                : d?.maxParticipants
-                  ? `max. ${d.maxParticipants}`
-                  : undefined
+              tour.participants?.display || d?.maxParticipants ? (
+                <span className="inline-flex items-center gap-1.5">
+                  {tour.participants?.display
+                    ? `${tour.participants.display}${d?.maxParticipants ? ` (max. ${d.maxParticipants})` : ""}`
+                    : `max. ${d!.maxParticipants}`}
+                  {waitlist !== undefined && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Info className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        {waitlist} {waitlist === 1 ? "Person" : "Personen"} auf der Warteliste
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                </span>
+              ) : undefined
+            }
+            tooltip={
+              participants && participants.length > 0 ? (
+                <TooltipInfo title="Teilnehmende" items={participants.map(shortName)} />
+              ) : undefined
             }
           />
           <Fact
@@ -249,7 +290,7 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
               <>Anmeldeschluss: {formatDate(tour.registrationDeadline)}</>
             )}
             {status === "published" && tour.registrationOpensAt && (
-              <>Anmeldung ab: {formatDateTime(tour.registrationOpensAt)}</>
+              <>Anmeldestart: {formatDateTime(tour.registrationOpensAt)}</>
             )}
           </div>
           <div className="flex gap-2">
@@ -268,6 +309,7 @@ export function TourDetailContent({ tour, onRegister }: TourDetailContentProps) 
           </div>
         </div>
       </div>
+      <TourNote tour={tour} />
     </div>
   );
 }

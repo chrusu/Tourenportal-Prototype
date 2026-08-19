@@ -1,10 +1,20 @@
 import type { Tour } from "@/types/tour";
-import { showsParticipants } from "./status";
+import { registrationStatus, showsParticipants } from "./status";
 
 /** Occupied/available places string, or undefined if hidden for this tour. */
 export function participantsText(tour: Tour): string | undefined {
   if (!showsParticipants(tour)) return undefined;
   return tour.participants?.display || undefined;
+}
+
+/**
+ * Number of people currently on the waitlist, only for tours that are full
+ * but still open for waitlist registrations (and only when that count is
+ * actually known).
+ */
+export function waitlistCount(tour: Tour): number | undefined {
+  if (registrationStatus(tour) !== "waitlist") return undefined;
+  return tour.participants?.waitlistCount;
 }
 
 /** Conditional (physical) requirement, e.g. "A-B". */

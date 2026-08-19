@@ -16,6 +16,7 @@ const badgeVariants = cva(
         published: "border-input bg-sac-gray-light text-sac-gray-dark",
         durchgefuehrt: "border-transparent bg-sac-gray text-sac-gray-dark",
         abgesagt: "border-sac-red bg-white text-sac-red",
+        kurs: "border-transparent bg-violet-100 text-violet-700",
       },
     },
     defaultVariants: {

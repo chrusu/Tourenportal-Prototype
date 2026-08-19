@@ -64,7 +64,7 @@ export const DISCIPLINES: DisciplineDef[] = [
   },
   {
     label: "Velo/Bike",
-    color: "#FFCC00",
+    color: "#706F6F",
     // No dedicated discipline icon in the SAC icon set; DisciplineIcon falls back to lucide.
     subTypes: [
       { label: "Velo",        difficulties: [] },

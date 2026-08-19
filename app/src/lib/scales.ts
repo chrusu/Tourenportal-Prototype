@@ -6,6 +6,12 @@
 
 import type { PhysicalDifficulty } from "@/types/tour";
 import { expandRange } from "./format";
+import { DISCIPLINES } from "./disciplines";
+
+/** Resolves a discipline's official color by its display label (e.g. "Klettern"). */
+function disciplineColor(label: string): string {
+  return DISCIPLINES.find((d) => d.label === label)?.color ?? "#706F6F";
+}
 
 /** Full description per SAC condition ("Kondition") grade. */
 export const CONDITION_LABELS: Record<PhysicalDifficulty, string> = {
@@ -65,11 +71,14 @@ export interface DifficultyScale {
   description: string;
   /** Grade code -> short label, e.g. "T3" -> "anspruchsvolles Bergwandern". Empty when grades aren't discrete (e.g. Kletterskala). */
   grades: Record<string, string>;
+  /** Color of the activity/discipline this scale represents (see disciplines.ts). */
+  color: string;
 }
 
 const WANDERSKALA: DifficultyScale = {
   name: "SAC-Wanderskala",
   description: "Bewertet die Schwierigkeit von Berg- und Wanderwegen von T1 (leicht) bis T6 (extrem schwierig).",
+  color: disciplineColor("Wandern"),
   grades: {
     T1: "Wandern",
     T2: "Bergwandern",
@@ -84,6 +93,7 @@ const HOCHTOURENSKALA: DifficultyScale = {
   name: "SAC-Berg- und Hochtourenskala",
   description:
     "Bewertet die technische Schwierigkeit von Berg- und Hochtouren im hochalpinen Gelände bei guten Verhältnissen.",
+  color: disciplineColor("Hochtouren Sommer"),
   grades: {
     L: "leicht",
     "WS-": "wenig schwierig-",
@@ -105,6 +115,7 @@ const SKITOURENSKALA: DifficultyScale = {
   name: "SAC-Skitourenskala",
   description:
     "Bewertet den skifahrerischen Teil einer Skitour anhand des höchsten Hauptkriteriums bei guten Bedingungen.",
+  color: disciplineColor("Schneesport"),
   grades: {
     L: "leicht",
     "WS-": "wenig schwierig-",
@@ -126,6 +137,7 @@ const SCHNEESCHUHSKALA: DifficultyScale = {
   name: "SAC-Schneeschuhtourenskala",
   description:
     "Richtwerte für Schneeschuhtouren bei guten Bedingungen; setzt sichere Orientierung und ab WT2 LVS-Ausrüstung voraus.",
+  color: disciplineColor("Schneesport"),
   grades: {
     WT1: "Leichte Schneeschuhwanderung",
     WT2: "Schneeschuhwanderung",
@@ -139,6 +151,7 @@ const SCHNEESCHUHSKALA: DifficultyScale = {
 const KLETTERSKALA_FR: DifficultyScale = {
   name: "Kletterskala (französische Skala)",
   description: "Bewertet die klettertechnische Schwierigkeit anhand der Schlüsselstelle (z. B. 6a, 6b+).",
+  color: disciplineColor("Klettern"),
   grades: {},
 };
 
@@ -146,12 +159,14 @@ const WI_SKALA: DifficultyScale = {
   name: "Eisklettern (Water Ice, WI-Skala)",
   description:
     "Bewertet die technische Schwierigkeit von Eiskletterrouten (Wasserfalleis) anhand Steilheit, Länge und Absicherung.",
+  color: disciplineColor("Klettern"),
   grades: {},
 };
 
 const KLETTERSTEIGSKALA: DifficultyScale = {
   name: "SAC-Klettersteigskala (Hüsler-Skala)",
   description: "Schweizer Schwierigkeitsskala für Klettersteige, Grade K1 (leicht) bis K6 (extrem schwierig).",
+  color: disciplineColor("Klettern"),
   grades: {
     K1: "leicht",
     K2: "mittel",
@@ -166,6 +181,7 @@ const SINGLETRAILSKALA: DifficultyScale = {
   name: "Singletrail-Skala (STS)",
   description:
     "Bewertet die technische Schwierigkeit von Mountainbike-Singletrails unter idealen Bedingungen, S0 (sehr leicht) bis S5 (extrem schwierig).",
+  color: disciplineColor("Velo/Bike"),
   grades: {
     S0: "leicht",
     S1: "leicht",
@@ -251,26 +267,49 @@ export function technicalDifficultyTooltip(
  * "Hochtouren"), each potentially governed by its own SAC difficulty scale.
  * Resolves one entry per *distinct* scale referenced by `tourType` (so types
  * sharing a scale, like the example above, aren't duplicated), each paired
- * with a tooltip for the tour's technical difficulty under that scale.
+ * with a tooltip and the actual grade for that scale.
+ *
+ * An optional `climbingGrade` (e.g. "5b") adds a second, separate entry for
+ * the free-climbing (French/UIAA) difficulty of an "Alpinklettern" portion,
+ * alongside the tour's main technicalDifficulty — since alpine climbing is
+ * often additionally rated on its own crux-pitch grade.
  */
 export interface SubTypeDifficulty {
   scale: DifficultyScale;
+  value: string | undefined;
+  /** Color of the activity/discipline this specific badge represents. */
+  color: string;
   tooltip: TooltipInfoData;
 }
 
 export function difficultiesForTourType(
   tourType: string[],
-  technicalDifficulty?: string
+  technicalDifficulty?: string,
+  climbingGrade?: string
 ): SubTypeDifficulty[] {
   const scales = new Map<string, DifficultyScale>();
   for (const t of tourType) {
     const scale = SCALE_BY_SUBTYPE[t];
     if (scale && !scales.has(scale.name)) scales.set(scale.name, scale);
   }
-  return [...scales.values()].map((scale) => ({
+
+  const result = [...scales.values()].map((scale) => ({
     scale,
+    value: technicalDifficulty,
+    color: scale.color,
     tooltip: buildScaleTooltip(scale, technicalDifficulty),
   }));
+
+  if (climbingGrade && tourType.includes("Alpinklettern") && !scales.has(KLETTERSKALA_FR.name)) {
+    result.push({
+      scale: KLETTERSKALA_FR,
+      value: climbingGrade,
+      color: KLETTERSKALA_FR.color,
+      tooltip: buildScaleTooltip(KLETTERSKALA_FR, climbingGrade),
+    });
+  }
+
+  return result;
 }
 
 /** General explanation of the SAC condition ("Kondition") scale, for filter tooltips. */
