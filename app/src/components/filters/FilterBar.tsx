@@ -36,7 +36,7 @@ export function FilterBar(props: FilterBarProps) {
   const { filters, setFilters, update, reset, activeCount, groups, leaders, countTours } = props;
   const [sheetOpen, setSheetOpen] = useState(false);
 
-  const controls = (
+  const sharedFilters = (inline: boolean) => (
     <>
       <MultiSelectFilter
         label="Zielgruppe"
@@ -51,6 +51,7 @@ export function FilterBar(props: FilterBarProps) {
         onChangeTypes={(v) => update("tourTypes", v)}
         onChangeDifficulties={(v) => update("difficultiesBySubType", v)}
         countTours={countTours}
+        inline={inline}
       />
       <MultiSelectFilter
         label="Kondition"
@@ -101,7 +102,7 @@ export function FilterBar(props: FilterBarProps) {
 
       {/* Row 2: facet filters (desktop) */}
       <div className="mt-4 hidden flex-wrap items-center gap-2 lg:flex">
-        {controls}
+        {sharedFilters(false)}
         {/* When no filter is active, there's no chips line to share with the
             reset button below, so it stays here instead. */}
         {activeCount === 0 && (
@@ -134,7 +135,7 @@ export function FilterBar(props: FilterBarProps) {
           </SheetTrigger>
           <SheetContent>
             <SheetTitle>Filter</SheetTitle>
-            <div className="flex flex-col gap-3">{controls}</div>
+            <div className="flex flex-col gap-3">{sharedFilters(true)}</div>
             <Button
               variant="ghost"
               onClick={reset}

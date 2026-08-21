@@ -14,6 +14,7 @@ interface TourTypeFilterProps {
   onChangeTypes: (types: string[]) => void;
   onChangeDifficulties: (map: Record<string, string[]>) => void;
   countTours: Tour[];
+  inline?: boolean;
 }
 
 export function TourTypeFilter({
@@ -22,6 +23,7 @@ export function TourTypeFilter({
   onChangeTypes,
   onChangeDifficulties,
   countTours,
+  inline = false,
 }: TourTypeFilterProps) {
   // Count available tours per sub-type label
   const countBySubType = useMemo(() => {
@@ -33,11 +35,25 @@ export function TourTypeFilter({
     }
     return map;
   }, [countTours]);
+  const difficultiesFor = (label: string): string[] => {
+    for (const d of DISCIPLINES) {
+      for (const st of d.subTypes) {
+        if (st.label === label) return st.difficulties;
+      }
+    }
+    return [];
+  };
+
   const toggleHauptKategorie = (subTypeLabels: string[], state: CheckedState) => {
     if (state === true) {
       const next = new Set(selectedTypes);
       subTypeLabels.forEach((l) => next.add(l));
       onChangeTypes([...next]);
+      const nextDiff = { ...difficultiesBySubType };
+      subTypeLabels.forEach((l) => {
+        if (!nextDiff[l]) nextDiff[l] = difficultiesFor(l);
+      });
+      onChangeDifficulties(nextDiff);
     } else {
       onChangeTypes(selectedTypes.filter((t) => !subTypeLabels.includes(t)));
       const next = { ...difficultiesBySubType };
@@ -49,6 +65,9 @@ export function TourTypeFilter({
   const toggleSubType = (label: string, checked: boolean) => {
     if (checked) {
       onChangeTypes([...selectedTypes, label]);
+      if (!difficultiesBySubType[label]) {
+        onChangeDifficulties({ ...difficultiesBySubType, [label]: difficultiesFor(label) });
+      }
     } else {
       onChangeTypes(selectedTypes.filter((t) => t !== label));
       const { [label]: _removed, ...rest } = difficultiesBySubType;
@@ -70,6 +89,8 @@ export function TourTypeFilter({
       icon={<Mountain className="h-4 w-4 text-muted-foreground" />}
       count={selectedTypes.length}
       onReset={reset}
+      contentClassName="w-[28rem]"
+      inline={inline}
     >
       <div className="flex max-h-[26rem] flex-col overflow-y-auto">
         {DISCIPLINES.map((d, di) => {
