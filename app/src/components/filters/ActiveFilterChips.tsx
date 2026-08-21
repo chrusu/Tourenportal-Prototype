@@ -2,10 +2,13 @@ import { X } from "lucide-react";
 import type { TourFilterState } from "@/lib/filter";
 import { formatDate } from "@/lib/format";
 import { REGISTRATION_STATUS_OPTIONS } from "@/lib/status";
+import { subTypeFor } from "@/lib/disciplines";
 
 interface Chip {
   key: string;
   label: string;
+  /** Optional smaller second line, e.g. the full list of selected difficulty grades. */
+  subLabel?: string;
   onRemove: () => void;
 }
 
@@ -46,10 +49,18 @@ export function ActiveFilterChips({ filters, setFilters }: ActiveFilterChipsProp
         setFilters((p) => ({ ...p, groups: p.groups.filter((x) => x !== g) })),
     })
   );
-  filters.tourTypes.forEach((t) =>
+  filters.tourTypes.forEach((t) => {
+    const grades = filters.difficultiesBySubType[t] ?? [];
+    let subLabel: string | undefined;
+    if (grades.length > 0) {
+      const order = subTypeFor(t)?.difficulties ?? [];
+      const sorted = [...grades].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+      subLabel = sorted.join(", ");
+    }
     chips.push({
       key: `t-${t}`,
       label: t,
+      subLabel,
       onRemove: () => {
         const { [t]: _removed, ...rest } = filters.difficultiesBySubType;
         setFilters((p) => ({
@@ -58,8 +69,8 @@ export function ActiveFilterChips({ filters, setFilters }: ActiveFilterChipsProp
           difficultiesBySubType: rest,
         }));
       },
-    })
-  );
+    });
+  });
   filters.physicalDifficulties.forEach((c) =>
     chips.push({
       key: `c-${c}`,
@@ -108,10 +119,17 @@ export function ActiveFilterChips({ filters, setFilters }: ActiveFilterChipsProp
           key={chip.key}
           type="button"
           onClick={chip.onRemove}
-          className="inline-flex items-center gap-1 rounded-full bg-sac-gray-light px-3 py-1 text-xs text-foreground transition-colors hover:bg-sac-gray"
+          className="inline-flex items-center gap-1.5 rounded-full bg-sac-gray-light px-3 py-1 text-xs text-foreground transition-colors hover:bg-sac-gray"
         >
-          {chip.label}
-          <X className="h-3 w-3" />
+          {chip.subLabel ? (
+            <span className="flex flex-col items-start py-0.5 text-left">
+              <span>{chip.label}</span>
+              <span className="text-[10px] leading-tight text-muted-foreground">{chip.subLabel}</span>
+            </span>
+          ) : (
+            chip.label
+          )}
+          <X className="h-3 w-3 shrink-0" />
         </button>
       ))}
     </div>

@@ -3,7 +3,6 @@ import { Calendar, Clock, Gauge, Tag, User, Users } from "lucide-react";
 import type { Tour } from "@/types/tour";
 import { TourStatusIcon } from "./TourStatusIcon";
 import { TourActivityTypes } from "./TourActivityTypes";
-import { FavoriteButton } from "./FavoriteButton";
 import { ParticipantsTooltip } from "./ParticipantsTooltip";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@/components/ui/tooltip";
 import { EmptyState } from "./EmptyState";
@@ -73,16 +72,18 @@ export function TourTableView({ tours, onReset }: TourTableViewProps) {
                 </td>
                 <td className={cell}>
                   <span className={cellLabel}>Aktivität</span>
-                  <div className={`${cellValue} flex-col items-start gap-1`}>
-                    <span className="flex items-center gap-1.5">
-                      <FavoriteButton tourId={tour.id} size="sm" />
-                      <Link
-                        to={detailHref}
-                        className="min-w-0 font-bold underline-offset-2 hover:underline hover:text-sac-red"
-                      >
-                        {tour.title}
-                      </Link>
-                    </span>
+                  <div className={`${cellValue} items-center`}>
+                    <Link
+                      to={detailHref}
+                      className="min-w-0 font-bold underline-offset-2 hover:underline hover:text-sac-red"
+                    >
+                      {tour.title}
+                    </Link>
+                  </div>
+                </td>
+                <td className={cell}>
+                  <span className={cellLabel}>Typ</span>
+                  <div className={`${cellValue} items-center`}>
                     <TourActivityTypes
                       tourType={tour.tourType}
                       size="sm"

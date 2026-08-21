@@ -99,14 +99,6 @@ export function TourOverviewPage() {
                 count={appliedIds.length}
                 onToggle={setMyActivitiesOnly}
               />
-              <TabsList>
-                <TabsTrigger value="list">
-                  <LayoutList /> Liste
-                </TabsTrigger>
-                <TabsTrigger value="table">
-                  <Table2 /> Tabelle
-                </TabsTrigger>
-              </TabsList>
               <Button
                 variant="outline"
                 size="sm"
@@ -115,6 +107,14 @@ export function TourOverviewPage() {
               >
                 <Download className="h-4 w-4" /> CSV exportieren
               </Button>
+              <TabsList>
+                <TabsTrigger value="list">
+                  <LayoutList /> Liste
+                </TabsTrigger>
+                <TabsTrigger value="table">
+                  <Table2 /> Tabelle
+                </TabsTrigger>
+              </TabsList>
             </div>
           </div>
 
